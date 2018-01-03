@@ -1,0 +1,21 @@
+﻿.main {background: #FCFCFC;color:#5E5E5E;margin:20px auto}
+h1, h2, h3, h4, h5, h6{color:#26A0C4}
+h1 a, h2 a, h3 a, h4 a, h5 a, h6 a,label {
+    color: #6A6D6D;
+}
+::-webkit-input-placeholder {
+   color: red;
+}
+:-moz-placeholder { /* Firefox 18- */
+   color: red;  
+}
+::-moz-placeholder {  /* Firefox 19+ */
+   color: red;  
+}
+:-ms-input-placeholder {  
+   color: red;  
+}
+.radio-inline, .checkbox-inline {
+    padding-right: 20px;
+}
+.radio input[type="radio"], .radio-inline input[type="radio"], .checkbox input[type="checkbox"], .checkbox-inline input[type="checkbox"] {margin-right: -20px;}

@@ -1,0 +1,129 @@
+﻿.wrap-pad {
+    padding: 10px;
+}
+
+.container {
+    background: #fff;
+    max-width: 960px;
+}
+
+strong {
+    font-size: 13.5px;
+}
+
+body, body:before {
+    background: #525659;
+}
+
+.form-actions {
+    margin: 0;
+    padding: 9px 17px 9px;
+}
+
+.table th, .table td {
+    border-top: 1px solid #dce0a4;
+}
+
+.well {
+    border: 1px solid #dce0a4 !important;
+    background-color: #fbfbef;
+    padding:10px;
+}
+
+    .well table.car-info {
+        background-color: #fff;
+    }
+
+    .well .col-bg {
+        background-color: #f1eee9;
+    }
+
+.invoice-body.well {
+    padding: 0;
+}
+
+#client-signature, .kbw-signature {
+    min-height: 188px;
+    overflow: hidden;
+}
+
+    .kbw-signature canvas {
+        width: 100%;
+    }
+
+.widget-main.padding-6 {
+    padding-bottom: 2px;
+}
+
+.bigger-150 {
+    font-size: 25px;
+}
+
+.thumbnail {
+    border: none;
+}
+
+.invoice-body table {
+    margin-bottom: 0;
+}
+
+    .invoice-body table tr:first-child td {
+        border-top: 0;
+    }
+
+    .invoice-body table tr td {
+        padding: 6pt;
+    }
+
+.invoice-head td {
+    padding: 1px 2px;
+}
+
+.stickyFooter input {
+    border: 1px solid red;
+}
+
+input[type=text].form-control {
+    height: 27px;
+}
+
+@media (max-width: 767px) {
+    .row-fluid .span6 {
+        display: block;
+        float: right;
+        width: 49%;
+        margin-right: 10px;
+    }
+
+    .ace-thumbnails li {
+        width: 47%;
+    }
+
+        .ace-thumbnails li img {
+            width: 100%;
+            height: auto;
+        }
+}
+
+@media print {
+    body, body:before {
+        background: #fff !important;
+    }
+
+    #sig svg {
+        max-height: 200px;
+        width: 500px;
+    }
+
+    .print-footer {
+        bottom: 5px;
+        right: 0;
+        position: fixed;
+        display: block;
+    }
+
+    .col-bg {
+        background-color: #f1eee9 !important;
+    }
+    .container{width:100%}
+}

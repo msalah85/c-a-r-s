@@ -1,0 +1,6 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="SiteAr2.master.cs" Inherits="SiteAr2" ViewStateMode="Disabled" EnableViewState="false" EnableTheming="false" %>
+
+<head runat="server" />
+<asp:contentplaceholder id="head" runat="server" />
+<asp:contentplaceholder id="ContentBanner" runat="server" />
+<asp:contentplaceholder id="ContentMain" runat="server" />

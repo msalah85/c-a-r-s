@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{665A09FA-659C-4FA1-A8B1-6ED3F6BADBFC}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Aliraqcars.Domain</RootNamespace>
+    <AssemblyName>Aliraqcars.Domain</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Business\AuctionsManager.cs" />
+    <Compile Include="Business\AuctionTypeManager.cs" />
+    <Compile Include="Business\BuyersManager.cs" />
+    <Compile Include="Business\CarsManager.cs" />
+    <Compile Include="Business\ClientsManager.cs" />
+    <Compile Include="Business\CarsDataManager.cs" />
+    <Compile Include="Business\CarsSaleInvoiceManager.cs" />
+    <Compile Include="Business\CarExpensesManager.cs" />
+    <Compile Include="Business\CarSaleCommissionsManager.cs" />
+    <Compile Include="Business\ClientBuyersManager.cs" />
+    <Compile Include="Business\CustomsInvoicesManager.cs" />
+    <Compile Include="Business\CustomsExpensesManager.cs" />
+    <Compile Include="Business\CustomsCompaniesManager.cs" />
+    <Compile Include="Business\ColorsManager.cs" />
+    <Compile Include="Business\ShippInvoicesManager.cs" />
+    <Compile Include="Business\TowingExpensesManager.cs" />
+    <Compile Include="Business\ShipperExpensesManager.cs" />
+    <Compile Include="Business\ShippingCompaniesManager.cs" />
+    <Compile Include="Business\ServiceTypesManager.cs" />
+    <Compile Include="Business\ExpenseTypesManager.cs" />
+    <Compile Include="Business\ShippingMainCompaniesManager.cs" />
+    <Compile Include="Business\RegionsManager.cs" />
+    <Compile Include="Business\ExchangeCompaniesManager.cs" />
+    <Compile Include="Business\DistnationsManager.cs" />
+    <Compile Include="Business\ModelsManager.cs" />
+    <Compile Include="Business\MakersManager.cs" />
+    <Compile Include="Business\UsersManager.cs" />
+    <Compile Include="Concrete\ICarToSale.cs" />
+    <Compile Include="Concrete\ICarDetails.cs" />
+    <Compile Include="Concrete\ICarSaleInvoiceProperties.cs" />
+    <Compile Include="Concrete\IClientBuyerProperties.cs" />
+    <Compile Include="Concrete\IContainerNo.cs" />
+    <Compile Include="Concrete\ICustomInvoices.cs" />
+    <Compile Include="Concrete\IShippInvoiceProperties.cs" />
+    <Compile Include="Concrete\ICarsDataProperties.cs" />
+    <Compile Include="Concrete\IExpensePropertes.cs" />
+    <Compile Include="Concrete\IBuyerAssest.cs" />
+    <Compile Include="Data\Writer.cs">
+      <DependentUpon>Writer.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Writer.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Writer.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Data\Writer.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>Writer.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Data\Writer.dbml.layout">
+      <DependentUpon>Writer.dbml</DependentUpon>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

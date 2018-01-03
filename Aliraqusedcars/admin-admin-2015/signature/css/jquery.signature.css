@@ -1,0 +1,31 @@
+.kbw-signature {
+    display: inline-block;
+    border: 1px solid rgb(239, 233, 233);
+    -ms-touch-action: none;
+}
+
+.unstyled {
+    list-style: none;
+}
+
+.invoice-logo-info {
+    font-size: 12px;
+}
+#header {
+    margin-top: 10px;
+}
+
+.reexport-table {
+    width: 270px;
+    float: left;
+    border: 0;
+    background-color: beige;
+}
+
+    .reexport-table td {
+        font-size: 12px;
+    }
+
+        .reexport-table td input {
+            width: 143px;
+        }

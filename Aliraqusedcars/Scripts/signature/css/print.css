@@ -1,0 +1,36 @@
+#hiderow,
+.delete {
+    display: none;
+}
+
+@media print {
+    .footer {
+        bottom: 15px;
+        right: 0;
+        position: fixed;
+        display: block;
+    }
+
+    body {
+        background: #fff !important;
+    }
+
+    #page-wrap {
+        margin: 0;
+    }
+    #CarPaperTypeID {
+        border: none;
+        appearance: none; /*hide arrow*/
+        -moz-appearance: none; /* Firefox */
+        -webkit-appearance: none; /* Safari and Chrome */
+        font-family: Tahoma;
+        float: left;
+        text-align: left;
+    }
+    /*#CarPaperTypeID,*/ .hidden-print {
+        display: none;
+    }
+a{
+    text-decoration:none;
+}
+}

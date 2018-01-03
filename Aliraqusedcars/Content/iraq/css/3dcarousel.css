@@ -1,0 +1,184 @@
+
+.carousel {
+	position:relative;
+	margin:0px;
+	padding:0px;
+	-moz-user-select:none;
+	-webkit-user-select:none;
+}
+.carousel .carousel-item {
+
+	background-color:#FFF;
+	position:absolute;
+	cursor:pointer;
+}
+.carousel .out {
+	border:#DDD 2px solid;
+}
+.carousel .over {
+	border:#DDD 2px solid;
+	-moz-box-shadow:0px 0px 10px #000;
+	-webkit-box-shadow:0px 0px 10px #000;
+	box-shadow:0px 0px 10px #000;
+	-ms-filter:"progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=130, Color='#000000')";
+}
+.carousel .click {
+	border:#DDD 2px solid;
+	-moz-box-shadow:0px 0px 10px #000;
+	-webkit-box-shadow:0px 0px 10px #000;
+	box-shadow:0px 0px 10px #000;
+	-ms-filter:"progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=130, Color='#000000')";
+}
+.carousel .select {
+	border:#DDD 2px solid;
+	-moz-box-shadow:0px 0px 10px #000;
+	-webkit-box-shadow:0px 0px 10px #000;
+	box-shadow:0px 0px 10px #000;
+	-ms-filter:"progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=130, Color='#000000')";
+}
+.carousel .tooltip {
+	position:absolute;
+	z-index:9999;
+	background-color:#DDD;
+	margin-bottom:20px;
+	border:#EEE solid 4px;
+	border-radius:8px;
+	-moz-border-radius:8px;
+	-webkit-border-radius:8px;
+}
+.carousel .tooltip p {
+	color:#999;
+	padding:10px;
+	margin:0px;
+}
+.carousel .scrollbar {
+	width:340px;
+	position:absolute;
+	margin-top:100px;
+}
+.carousel .scrollbar .track {
+	background-image:url(http://bqworks.com/products/3d-carousel/css/carousel-assets/images/track.png);
+	width:300px;
+	height:20px;
+	position:absolute;
+	left:20px;
+}
+.carousel .scrollbar .thumb {
+	background-image:url(http://bqworks.com/products/3d-carousel/css/carousel-assets/images/thumb.png);
+	width:70px;
+	height:20px;
+	position:absolute;
+	cursor:pointer;
+}
+.carousel .scrollbar .left {
+	background-image:url(http://bqworks.com/products/3d-carousel/css/carousel-assets/images/left.png);
+	width:20px;
+	height:20px;
+	position:absolute;
+	cursor:pointer;
+	left:0px;
+}
+.carousel .scrollbar .right {
+	background-image:url(http://bqworks.com/products/3d-carousel/css/carousel-assets/images/right.png);
+	width:20px;
+	height:20px;
+	position:absolute;
+	cursor:pointer;
+	right:0px;
+}
+#wide-wrapper {
+	
+}
+#header {
+	width:280px;
+	margin:0px auto;
+	padding-top:75px;
+}
+#carousel {
+	width:870px;
+	height:450px;
+	margin:0px auto;
+	padding:0px;
+}/**/
+#carousel {
+	list-style:none;
+	padding:0px;
+}
+#carousel li {
+	float:left;
+}
+#carousel .tooltip, #carousel .bigImage, #carousel .title, #carousel .description {
+	position:absolute;
+	left:-9999px;
+}
+#text {
+	width:650px;
+	margin:0px auto;
+	margin-top:-20px;
+}
+#text p {
+	padding:5px 10px;
+}
+#text #selected-title {
+	width:80px;
+	background-color:#111;
+	font-style:italic;
+}
+#text #selected-description {
+	background-color:#111;
+}
+#controls {
+	width:234px;
+	margin:0px auto;
+}
+#controls a {
+	margin:0px 20px;
+	cursor:pointer;
+}
+#controls #left {
+	background:url(http://bqworks.com/products/3d-carousel/css/example_assets/arrows.png);
+	width:38px;
+	height:38px;
+	float:left;
+}
+#controls #right {
+	background:url(http://bqworks.com/products/3d-carousel/css/example_assets/arrows.png) -38px 0px;
+	width:38px;
+	height:38px;
+	float:left;
+}
+#controls #auto-scroll {
+	background:url(http://bqworks.com/products/3d-carousel/css/example_assets/playpause.png);
+	width:38px;
+	height:38px;
+	float:left;
+}
+#example-description {
+	margin:0px;
+	padding:0px;
+	background-color:#DDD;
+	border-top:solid 1px #CCC;
+	border-bottom:solid 1px #CCC;
+}
+#example-description p {
+	color:#666;
+	font-style:italic;
+	width:750px;
+	margin:0px auto;
+	padding:10px 0px;
+}
+#example-description #navigation {
+	width:300px;
+	height:25px;
+	margin:10px auto 0px;
+}
+#example-description #navigation a {
+	background-color:#F1F1F1;
+	text-decoration:none;
+	color:#666;
+	padding:5px 10px;
+	margin:0px 5px;
+	border:#CCC solid 1px;
+}
+
+.tooltip{display:none;}

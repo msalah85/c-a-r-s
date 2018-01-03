@@ -1,0 +1,2034 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="ALIRAQCARS_ADMDB_2017" Class="WriterDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=.\SQLEXPRESS;Initial Catalog=ALIRAQCARS_ADMDB_2017;Persist Security Info=True;User ID=sa;Pooling=True;Max Pool Size=1024" SettingsObjectName="Aliraqcars.Domain.Properties.Settings" SettingsPropertyName="ALIRAQCARS_ADMDB_2017ConnectionString1" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.ExpenseTypes" Member="ExpenseTypes">
+    <Type Name="ExpenseType">
+      <Column Name="ExpenseTypeID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ExpenseTypeNameEn" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="ExpenseTypeNameAr" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="CurrencyUsed" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="GroupName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="ExpenseType_CustomsExpense" Member="CustomsExpenses" ThisKey="ExpenseTypeID" OtherKey="ExpenseTypeID" Type="CustomsExpense" />
+      <Association Name="ExpenseType_CustomsInvoicesDetail" Member="CustomsInvoicesDetails" ThisKey="ExpenseTypeID" OtherKey="ExpenseTypeID" Type="CustomsInvoicesDetail" />
+      <Association Name="ExpenseType_ShipperExpense" Member="ShipperExpenses" ThisKey="ExpenseTypeID" OtherKey="ExpenseTypeID" Type="ShipperExpense" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Distinations" Member="Distinations">
+    <Type Name="Distination">
+      <Column Name="DistinationID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="DistinationNameEn" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="DistinationNameAr" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Active" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Association Name="Distination_CustomsCompany" Member="CustomsCompanies" ThisKey="DistinationID" OtherKey="DistinationID" Type="CustomsCompany" />
+      <Association Name="Distination_CarSaleCommission" Member="CarSaleCommissions" ThisKey="DistinationID" OtherKey="DistinationID" Type="CarSaleCommission" />
+      <Association Name="Distination_CarSaleInvoice" Member="CarSaleInvoices" ThisKey="DistinationID" OtherKey="DistinationID" Type="CarSaleInvoice" />
+      <Association Name="Distination_ShippInvoice" Member="ShippInvoices" ThisKey="DistinationID" OtherKey="DistinationID" Type="ShippInvoice" />
+      <Association Name="Distination_ShipperExpense" Member="ShipperExpenses" ThisKey="DistinationID" OtherKey="DistinationID" Type="ShipperExpense" />
+      <Association Name="Distination_CarsData" Member="CarsDatas" ThisKey="DistinationID" OtherKey="DistinationID" Type="CarsData" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CarsMaker" Member="CarsMakers">
+    <Type Name="CarsMaker">
+      <Column Name="MakerID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="MakerNameEn" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="MakerNameAr" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Priority" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Active" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="CarsMaker_CarsModel" Member="CarsModels" ThisKey="MakerID" OtherKey="MakerID" Type="CarsModel" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AuctionsTypes" Member="AuctionsTypes">
+    <Type Name="AuctionsType">
+      <Column Name="AuctionTypeID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="AuctionTypeName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="AuctionCharge" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Active" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="AuctionsType_Auction" Member="Auctions" ThisKey="AuctionTypeID" OtherKey="AuctionTypeID" Type="Auction" />
+      <Association Name="AuctionsType_ClientBuyer" Member="ClientBuyers" ThisKey="AuctionTypeID" OtherKey="AuctionTypeID" Type="ClientBuyer" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Auctions" Member="Auctions">
+    <Type Name="Auction">
+      <Column Name="AuctionID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="AuctionTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="AuctionName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="AuctionNameAr" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="AuctionEmail" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="AuctionPhone" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="TypeOfAuction" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Active" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="Auction_ClientBuyer" Member="ClientBuyers" ThisKey="AuctionID" OtherKey="AuctionID" Type="ClientBuyer" />
+      <Association Name="Auction_AuctionCommission" Member="AuctionCommissions" ThisKey="AuctionID" OtherKey="AuctionID" Type="AuctionCommission" />
+      <Association Name="AuctionsType_Auction" Member="AuctionsType" ThisKey="AuctionTypeID" OtherKey="AuctionTypeID" Type="AuctionsType" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ServiceTypes" Member="ServiceTypes">
+    <Type Name="ServiceType">
+      <Column Name="ServiceTypeID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ServiceTypeNameEn" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="ServiceTypeNameAr" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="CurrencyUsed" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Association Name="ServiceType_ShipperExpense" Member="ShipperExpenses" ThisKey="ServiceTypeID" OtherKey="ServiceTypeID" Type="ShipperExpense" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ShippingCompanies" Member="ShippingCompanies">
+    <Type Name="ShippingCompany">
+      <Column Name="ShipCompanyID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ShipMainCompanyID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ShipCompanyNameEn" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="ShipCompanyNameAr" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="ShipCompanyEmail" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="ShipCompanyPhone" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="ShipCompanyAddress" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="Active" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="OpeningBalance" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="ShippingCompany_TowingExpense" Member="TowingExpenses" ThisKey="ShipCompanyID" OtherKey="ShipCompanyID" Type="TowingExpense" />
+      <Association Name="ShippingCompany_ShippInvoice" Member="ShippInvoices" ThisKey="ShipCompanyID" OtherKey="ShipperID" Type="ShippInvoice" />
+      <Association Name="ShippingCompany_CarsData" Member="CarsDatas" ThisKey="ShipCompanyID" OtherKey="ShipperID" Type="CarsData" />
+      <Association Name="ShippingMainCompany_ShippingCompany" Member="ShippingMainCompany" ThisKey="ShipMainCompanyID" OtherKey="ShipMainCompanyID" Type="ShippingMainCompany" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ShippingMainCompanies" Member="ShippingMainCompanies">
+    <Type Name="ShippingMainCompany">
+      <Column Name="ShipMainCompanyID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ShipMainCompanyNameEn" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="ShipMainCompanyNameAr" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Active" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="ShippingMainCompany_ShippingCompany" Member="ShippingCompanies" ThisKey="ShipMainCompanyID" OtherKey="ShipMainCompanyID" Type="ShippingCompany" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CustomsCompanies" Member="CustomsCompanies">
+    <Type Name="CustomsCompany">
+      <Column Name="CustomsCompanyID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="DistinationID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CustomsCompanyNameEn" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="CustomsCompanyNameAr" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Active" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="OpeningBalance" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="CustomsCompany_CustomsExpense" Member="CustomsExpenses" ThisKey="CustomsCompanyID" OtherKey="CustomsCompanyID" Type="CustomsExpense" />
+      <Association Name="CustomsCompany_CustomsInvoice" Member="CustomsInvoices" ThisKey="CustomsCompanyID" OtherKey="CustomsCompanyID" Type="CustomsInvoice" />
+      <Association Name="Distination_CustomsCompany" Member="Distination" ThisKey="DistinationID" OtherKey="DistinationID" Type="Distination" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ClientBuyers" Member="ClientBuyers">
+    <Type Name="ClientBuyer">
+      <Column Name="ClientBuyerID" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ClientID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="BuyerID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="AuctionID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="AuctionTypeID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Active" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="StartDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="EndDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="ClientBuyer_CarsData" Member="CarsDatas" ThisKey="ClientBuyerID" OtherKey="BuyerID" Type="CarsData" />
+      <Association Name="Auction_ClientBuyer" Member="Auction" ThisKey="AuctionID" OtherKey="AuctionID" Type="Auction" IsForeignKey="true" />
+      <Association Name="AuctionsType_ClientBuyer" Member="AuctionsType" ThisKey="AuctionTypeID" OtherKey="AuctionTypeID" Type="AuctionsType" IsForeignKey="true" />
+      <Association Name="Buyer_ClientBuyer" Member="Buyer" ThisKey="BuyerID" OtherKey="BuyerID" Type="Buyer" IsForeignKey="true" />
+      <Association Name="Client_ClientBuyer" Member="Client" ThisKey="ClientID" OtherKey="ClientID" Type="Client" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Colors" Member="Colors">
+    <Type Name="Color">
+      <Column Name="ColorID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ColorNameEn" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="ColorNameAr" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Priority" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Active" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="Color_CarsData" Member="CarsDatas" ThisKey="ColorID" OtherKey="ColorID" Type="CarsData" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Users" Member="Users">
+    <Type Name="User">
+      <Column Name="UserID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserFullName" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="Phone" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="Username" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="Password" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="JobID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Mobile" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="JoinDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Nationality" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="EmpID" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="User_AuctionCommission" Member="AuctionCommissions" ThisKey="UserID" OtherKey="UserID" Type="AuctionCommission" />
+      <Association Name="User_CarSaleInvoice" Member="CarSaleInvoices" ThisKey="UserID" OtherKey="UserID" Type="CarSaleInvoice" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ExchangeCompanies" Member="ExchangeCompanies">
+    <Type Name="ExchangeCompany">
+      <Column Name="ExchangeCompanyID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ExchangeCompanyNameEn" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="ExchangeCompanyNameAr" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Rate" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Association Name="ExchangeCompany_ClientsPayment" Member="ClientsPayments" ThisKey="ExchangeCompanyID" OtherKey="ExchangeCompanyID" Type="ClientsPayment" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ClientsPayments" Member="ClientsPayments">
+    <Type Name="ClientsPayment">
+      <Column Name="ClientPaymentsID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ClientID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PaymentsDates" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ExchangeCompanyID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CheckNo" Type="System.String" DbType="NVarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="Amount" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="ReciverName" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="Details" Type="System.String" DbType="NVarChar(350)" CanBeNull="true" />
+      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="UserId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IP" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Year" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="AmountDhs" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Association Name="ExchangeCompany_ClientsPayment" Member="ExchangeCompany" ThisKey="ExchangeCompanyID" OtherKey="ExchangeCompanyID" Type="ExchangeCompany" IsForeignKey="true" />
+      <Association Name="Client_ClientsPayment" Member="Client" ThisKey="ClientID" OtherKey="ClientID" Type="Client" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ClientInstallments" Member="ClientInstallments">
+    <Type Name="ClientInstallment">
+      <Column Name="InstallmentID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ClientID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CarID" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="Amount" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="InstallmentDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Deleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="InstallmentTypeID" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="PaidOut" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="Client_ClientInstallment" Member="Client" ThisKey="ClientID" OtherKey="ClientID" Type="Client" IsForeignKey="true" />
+      <Association Name="CarsData_ClientInstallment" Member="CarsData" ThisKey="CarID" OtherKey="CarID" Type="CarsData" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ClientCommissons" Member="ClientCommissons">
+    <Type Name="ClientCommisson">
+      <Column Name="ClientID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CommissionID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ExtraCash" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="ExtraCredit" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="ClientCommID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Association Name="CarSaleCommission_ClientCommisson" Member="CarSaleCommission" ThisKey="CommissionID" OtherKey="CommissionID" Type="CarSaleCommission" IsForeignKey="true" />
+      <Association Name="Client_ClientCommisson" Member="Client" ThisKey="ClientID" OtherKey="ClientID" Type="Client" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CarSaleCommission" Member="CarSaleCommissions">
+    <Type Name="CarSaleCommission">
+      <Column Name="CommissionID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="DistinationID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CommissionCash" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="CommissionCredit" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Association Name="CarSaleCommission_ClientCommisson" Member="ClientCommissons" ThisKey="CommissionID" OtherKey="CommissionID" Type="ClientCommisson" />
+      <Association Name="Distination_CarSaleCommission" Member="Distination" ThisKey="DistinationID" OtherKey="DistinationID" Type="Distination" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CarShopExpenses" Member="CarShopExpenses">
+    <Type Name="CarShopExpense">
+      <Column Name="CarShopExpenseID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CarID" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="UnitPrice" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="UnitsCount" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TotalPrice" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="ExpenseDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="ExpenseSubject" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="ExpenseDetails" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
+      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="UserID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IP" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="CarsData_CarShopExpense" Member="CarsData" ThisKey="CarID" OtherKey="CarID" Type="CarsData" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CarShippExpenses" Member="CarShippExpenses">
+    <Type Name="CarShippExpense">
+      <Column Name="ExpenseID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CarID" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="CarShippExpenseTypeID" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="ExpenseCost" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="ExpenseDetails" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
+      <Column Name="ExpenseDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="UserID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IP" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="CarsData_CarShippExpense" Member="CarsData" ThisKey="CarID" OtherKey="CarID" Type="CarsData" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AuctionCommissions" Member="AuctionCommissions">
+    <Type Name="AuctionCommission">
+      <Column Name="AuctionCommID" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="AuctionID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="InvoiceDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="AuctionCommTotal" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="UserID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IP" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="AuctionCommission_AuctionCommissionsDetail" Member="AuctionCommissionsDetails" ThisKey="AuctionCommID" OtherKey="AuctionCommID" Type="AuctionCommissionsDetail" />
+      <Association Name="AuctionCommission_AuctionCommPayment" Member="AuctionCommPayments" ThisKey="AuctionCommID" OtherKey="AuctionCommID" Type="AuctionCommPayment" />
+      <Association Name="Auction_AuctionCommission" Member="Auction" ThisKey="AuctionID" OtherKey="AuctionID" Type="Auction" IsForeignKey="true" />
+      <Association Name="User_AuctionCommission" Member="User" ThisKey="UserID" OtherKey="UserID" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AuctionCommissionsDetails" Member="AuctionCommissionsDetails">
+    <Type Name="AuctionCommissionsDetail">
+      <Column Name="AuctionCommDetailsID" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="AuctionCommID" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="CarID" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="BuyerFee" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="AuctionCommCost" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="ACDetailsTotal" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Association Name="AuctionCommission_AuctionCommissionsDetail" Member="AuctionCommission" ThisKey="AuctionCommID" OtherKey="AuctionCommID" Type="AuctionCommission" IsForeignKey="true" />
+      <Association Name="CarsData_AuctionCommissionsDetail" Member="CarsData" ThisKey="CarID" OtherKey="CarID" Type="CarsData" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AuctionCommPayments" Member="AuctionCommPayments">
+    <Type Name="AuctionCommPayment">
+      <Column Name="ACommPaymentID" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="AuctionCommID" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="ACommPaymentDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="ACommAmount" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="ACommAmountDhs" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="CheckNo" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Notes" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="ExchangeCompanyID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="AuctionCommission_AuctionCommPayment" Member="AuctionCommission" ThisKey="AuctionCommID" OtherKey="AuctionCommID" Type="AuctionCommission" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Regions" Member="Regions">
+    <Type Name="Region">
+      <Column Name="RegionID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="RegionEn" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="RegionAr" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="CostforRegion" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="RegionDescEn" Type="System.String" DbType="NVarChar(2000)" CanBeNull="true" />
+      <Column Name="RegionDescAr" Type="System.String" DbType="NVarChar(2000)" CanBeNull="true" />
+      <Column Name="Priority" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Active" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="RegionCommissionJor" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Association Name="Region_TowingExpense" Member="TowingExpenses" ThisKey="RegionID" OtherKey="RegionID" Type="TowingExpense" />
+      <Association Name="Region_CarsData" Member="CarsDatas" ThisKey="RegionID" OtherKey="RegionID" Type="CarsData" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CustomsExpenses" Member="CustomsExpenses">
+    <Type Name="CustomsExpense">
+      <Column Name="CustomsExpenseID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CustomsCompanyID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ExpenseTypeID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ExpensesCharge" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="CustomsCompany_CustomsExpense" Member="CustomsCompany" ThisKey="CustomsCompanyID" OtherKey="CustomsCompanyID" Type="CustomsCompany" IsForeignKey="true" />
+      <Association Name="ExpenseType_CustomsExpense" Member="ExpenseType" ThisKey="ExpenseTypeID" OtherKey="ExpenseTypeID" Type="ExpenseType" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CustomsInvoices" Member="CustomsInvoices">
+    <Type Name="CustomsInvoice">
+      <Column Name="CustomsInvoiceID" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="InvoiceDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CustomsCompanyID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CustomsPrice" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="InvoiceNo" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="ContainerNo" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="Notes" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="TotalCustoms" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="TotalExpenses" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="TotalAmount" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Association Name="CustomsInvoice_CustomsInvoicesDetail" Member="CustomsInvoicesDetails" ThisKey="CustomsInvoiceID" OtherKey="CustomsInvoiceID" Type="CustomsInvoicesDetail" />
+      <Association Name="CustomsCompany_CustomsInvoice" Member="CustomsCompany" ThisKey="CustomsCompanyID" OtherKey="CustomsCompanyID" Type="CustomsCompany" IsForeignKey="true" />
+      <Association Name="ShippInvoice_CustomsInvoice" Member="ShippInvoice" ThisKey="ContainerNo" OtherKey="ContainerNo" Type="ShippInvoice" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CustomsInvoicesDetails" Member="CustomsInvoicesDetails">
+    <Type Name="CustomsInvoicesDetail">
+      <Column Name="CustomsDetailsID" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CustomsInvoiceID" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="ExpenseTypeID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CustomsExpenseValue" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="CarsNo" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="TotalExpensesValue" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Association Name="CustomsInvoice_CustomsInvoicesDetail" Member="CustomsInvoice" ThisKey="CustomsInvoiceID" OtherKey="CustomsInvoiceID" Type="CustomsInvoice" IsForeignKey="true" />
+      <Association Name="ExpenseType_CustomsInvoicesDetail" Member="ExpenseType" ThisKey="ExpenseTypeID" OtherKey="ExpenseTypeID" Type="ExpenseType" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TowingExpenses" Member="TowingExpenses">
+    <Type Name="TowingExpense">
+      <Column Name="TowingExpenseID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ShipCompanyID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="RegionID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ServiceTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ExpensesCharge" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Region_TowingExpense" Member="Region" ThisKey="RegionID" OtherKey="RegionID" Type="Region" IsForeignKey="true" />
+      <Association Name="ShippingCompany_TowingExpense" Member="ShippingCompany" ThisKey="ShipCompanyID" OtherKey="ShipCompanyID" Type="ShippingCompany" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Buyers" Member="Buyers">
+    <Type Name="Buyer">
+      <Column Name="BuyerID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="BuyerName" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="BuyeNo" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="BuyerDesc" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
+      <Column Name="Active" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="BuyerCredit" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="BuyerDebit" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="BuyerFee" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Username" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Password" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Puse" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="Buyer_ClientBuyer" Member="ClientBuyers" ThisKey="BuyerID" OtherKey="BuyerID" Type="ClientBuyer" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CarsModel" Member="CarsModels">
+    <Type Name="CarsModel">
+      <Column Name="ModelID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="MakerID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TypeNameEn" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="TypeNameAr" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="CarSizeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Active" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="CarsModel_CarsData" Member="CarsDatas" ThisKey="ModelID" OtherKey="ModelID" Type="CarsData" />
+      <Association Name="CarsMaker_CarsModel" Member="CarsMaker" ThisKey="MakerID" OtherKey="MakerID" Type="CarsMaker" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CarSaleInvoices" Member="CarSaleInvoices">
+    <Type Name="CarSaleInvoice">
+      <Column Name="SaleInvoiceID" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="InvoiceDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="ClientID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CarID" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="SaleTypeID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DistinationID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ArrivalDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="PayPrice" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="SalePrice" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="PayCalcTypeCost" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="CarSizeCost" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="ExtraCost" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="CarFinalPrice" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="Notes" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="IP" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="UserID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CarRetainer" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="CarDelayed" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="CarDiscount" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="DeleteUserID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DeleteDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="DeleteIP" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CarMoreCost" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Association Name="Distination_CarSaleInvoice" Member="Distination" ThisKey="DistinationID" OtherKey="DistinationID" Type="Distination" IsForeignKey="true" />
+      <Association Name="User_CarSaleInvoice" Member="User" ThisKey="UserID" OtherKey="UserID" Type="User" IsForeignKey="true" />
+      <Association Name="Client_CarSaleInvoice" Member="Client" ThisKey="ClientID" OtherKey="ClientID" Type="Client" IsForeignKey="true" />
+      <Association Name="CarsData_CarSaleInvoice" Member="CarsData" ThisKey="CarID" OtherKey="CarID" Type="CarsData" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ShippInvoices" Member="ShippInvoices">
+    <Type Name="ShippInvoice">
+      <Column Name="ShippInvoiceID" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="InvoiceDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ShippPrice" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="DistinationID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ShipperID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ArrivalDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="InvoiceNo" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="ContainerNo" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="ContainerSize" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CarsNo" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Bol" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="TrxDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="LoadingPrice" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="TotalAmount" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="NavigationCoID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Arrived" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="ShippInvoiceNo" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="InvoicePrinted" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="TransportationPrice" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Notes" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Association Name="ShippInvoice_CustomsInvoice" Member="CustomsInvoices" ThisKey="ContainerNo" OtherKey="ContainerNo" Type="CustomsInvoice" />
+      <Association Name="ShippInvoice_ShippInvoicesDetail" Member="ShippInvoicesDetails" ThisKey="ShippInvoiceID" OtherKey="ShippInvoiceID" Type="ShippInvoicesDetail" />
+      <Association Name="Distination_ShippInvoice" Member="Distination" ThisKey="DistinationID" OtherKey="DistinationID" Type="Distination" IsForeignKey="true" />
+      <Association Name="ShippingCompany_ShippInvoice" Member="ShippingCompany" ThisKey="ShipperID" OtherKey="ShipCompanyID" Type="ShippingCompany" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ShippInvoicesDetails" Member="ShippInvoicesDetails">
+    <Type Name="ShippInvoicesDetail">
+      <Column Name="BillDetailsID" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CarID" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="ShippInvoiceID" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="Towing" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="SeaTrans" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Loading" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Partitioning" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Extra" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="TotalAmount" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Notes" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="Transportation" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Association Name="ShippInvoice_ShippInvoicesDetail" Member="ShippInvoice" ThisKey="ShippInvoiceID" OtherKey="ShippInvoiceID" Type="ShippInvoice" IsForeignKey="true" />
+      <Association Name="CarsData_ShippInvoicesDetail" Member="CarsData" ThisKey="CarID" OtherKey="CarID" Type="CarsData" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Clients" Member="Clients">
+    <Type Name="Client">
+      <Column Name="ClientID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="user_type" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="user_name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="user_password" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="full_name" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="country" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="phone" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="email" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="send_sms" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="send_email" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="active" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="date_entered" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="delete_result" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Credit" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Debit" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="countryCode" Type="System.String" DbType="NChar(5)" CanBeNull="true" />
+      <Column Name="phone2" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="countryCode2" Type="System.String" DbType="NChar(5)" CanBeNull="true" />
+      <Column Name="Notes" Type="System.String" DbType="NVarChar(1500)" CanBeNull="true" />
+      <Association Name="Client_ClientBuyer" Member="ClientBuyers" ThisKey="ClientID" OtherKey="ClientID" Type="ClientBuyer" />
+      <Association Name="Client_ClientsPayment" Member="ClientsPayments" ThisKey="ClientID" OtherKey="ClientID" Type="ClientsPayment" />
+      <Association Name="Client_ClientInstallment" Member="ClientInstallments" ThisKey="ClientID" OtherKey="ClientID" Type="ClientInstallment" />
+      <Association Name="Client_ClientCommisson" Member="ClientCommissons" ThisKey="ClientID" OtherKey="ClientID" Type="ClientCommisson" />
+      <Association Name="Client_CarSaleInvoice" Member="CarSaleInvoices" ThisKey="ClientID" OtherKey="ClientID" Type="CarSaleInvoice" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ShipperExpenses" Member="ShipperExpenses">
+    <Type Name="ShipperExpense">
+      <Column Name="ShipperExpenseID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ShowTypeID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ShipCompanyID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ExpenseTypeID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ServiceTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DistinationID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ExpensesCharge" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="ExpenseCalcType" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NavigationCoID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ContainerSize" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CarsNo" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="AddDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="CustomsCompanyID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Distination_ShipperExpense" Member="Distination" ThisKey="DistinationID" OtherKey="DistinationID" Type="Distination" IsForeignKey="true" />
+      <Association Name="ExpenseType_ShipperExpense" Member="ExpenseType" ThisKey="ExpenseTypeID" OtherKey="ExpenseTypeID" Type="ExpenseType" IsForeignKey="true" />
+      <Association Name="ServiceType_ShipperExpense" Member="ServiceType" ThisKey="ServiceTypeID" OtherKey="ServiceTypeID" Type="ServiceType" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CarsData" Member="CarsDatas">
+    <Type Name="CarsData">
+      <Column Name="CarID" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ChassisNo" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="InvoiceDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="LotNo" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PayTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PayPrice" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="ShipperID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="RegionID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="BuyerID" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="ModelID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="WorkingStatusID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ColorID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Year" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Notes" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="IP" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="view_home" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="view_offer" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="view_website" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Arrived" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="DistinationID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TransmissionID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="OwnerID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="WesitePrice" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Visitors" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ShippingCalcID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Sold" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="MainPicture" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="RealArrivalDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ReceiveWithPaper" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="CarCredit" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="CarDebit" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="CarTitle" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="CarTitleDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CustomsOnCar" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="PayInvTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="AddDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="UserID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CarTitleAmrica" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="TitleAmricaDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="AccidentStatusID" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="AuctionID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SaleTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NotDefaultSaleClient" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="ToSaleClientID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="WithoutShipping" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="PayReceiptID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IsGulfOldCars" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="view_website_date" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="SalePriceDemand" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="CarsData_ClientInstallment" Member="ClientInstallments" ThisKey="CarID" OtherKey="CarID" Type="ClientInstallment" />
+      <Association Name="CarsData_CarShopExpense" Member="CarShopExpenses" ThisKey="CarID" OtherKey="CarID" Type="CarShopExpense" />
+      <Association Name="CarsData_CarShippExpense" Member="CarShippExpenses" ThisKey="CarID" OtherKey="CarID" Type="CarShippExpense" />
+      <Association Name="CarsData_AuctionCommissionsDetail" Member="AuctionCommissionsDetails" ThisKey="CarID" OtherKey="CarID" Type="AuctionCommissionsDetail" />
+      <Association Name="CarsData_CarSaleInvoice" Member="CarSaleInvoices" ThisKey="CarID" OtherKey="CarID" Type="CarSaleInvoice" />
+      <Association Name="CarsData_ShippInvoicesDetail" Member="ShippInvoicesDetails" ThisKey="CarID" OtherKey="CarID" Type="ShippInvoicesDetail" />
+      <Association Name="CarsModel_CarsData" Member="CarsModel" ThisKey="ModelID" OtherKey="ModelID" Type="CarsModel" IsForeignKey="true" />
+      <Association Name="ClientBuyer_CarsData" Member="ClientBuyer" ThisKey="BuyerID" OtherKey="ClientBuyerID" Type="ClientBuyer" IsForeignKey="true" />
+      <Association Name="Color_CarsData" Member="Color" ThisKey="ColorID" OtherKey="ColorID" Type="Color" IsForeignKey="true" />
+      <Association Name="Distination_CarsData" Member="Distination" ThisKey="DistinationID" OtherKey="DistinationID" Type="Distination" IsForeignKey="true" />
+      <Association Name="Region_CarsData" Member="Region" ThisKey="RegionID" OtherKey="RegionID" Type="Region" IsForeignKey="true" />
+      <Association Name="ShippingCompany_CarsData" Member="ShippingCompany" ThisKey="ShipperID" OtherKey="ShipCompanyID" Type="ShippingCompany" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Function Name="dbo.Clients_DeleteRow" Method="Clients_DeleteRow">
+    <Parameter Name="ClientID" Parameter="clientID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.Clients_SelectNames" Method="Clients_SelectNames">
+    <ElementType Name="Clients_SelectNamesResult">
+      <Column Name="ClientID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="full_name" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.CarsMaker_InsertUpdate" Method="CarsMaker_InsertUpdate">
+    <Parameter Name="MakerID" Parameter="makerID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="MakerNameEn" Parameter="makerNameEn" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="MakerNameAr" Parameter="makerNameAr" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="Priority" Parameter="priority" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Active" Parameter="active" Type="System.Boolean" DbType="Bit" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CarsMaker_SelectName" Method="CarsMaker_SelectName">
+    <ElementType Name="CarsMaker_SelectNameResult">
+      <Column Name="MakerID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="MakerNameEn" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.CarsMaker_SelectRow" Method="CarsMaker_SelectRow">
+    <Parameter Name="MakerID" Parameter="makerID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="CarsMaker_SelectRowResult">
+      <Column Name="MakerID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="MakerNameEn" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="MakerNameAr" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Priority" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Active" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.CarsModel_DeleteRow" Method="CarsModel_DeleteRow">
+    <Parameter Name="ModelID" Parameter="modelID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CarsMaker_DeleteRow" Method="CarsMaker_DeleteRow">
+    <Parameter Name="MakerID" Parameter="makerID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.Distinations_DeleteRow" Method="Distinations_DeleteRow">
+    <Parameter Name="DistinationID" Parameter="distinationID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.Distinations_InsertUpdate" Method="Distinations_InsertUpdate">
+    <Parameter Name="DistinationID" Parameter="distinationID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="DistinationNameEn" Parameter="distinationNameEn" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="DistinationNameAr" Parameter="distinationNameAr" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="Active" Parameter="active" Type="System.String" DbType="NChar(10)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.Distinations_SelectRow" Method="Distinations_SelectRow">
+    <Parameter Name="DistinationID" Parameter="distinationID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="Distinations_SelectRowResult">
+      <Column Name="DistinationID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DistinationNameEn" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="DistinationNameAr" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Active" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.ExchangeCompanies_DeleteRow" Method="ExchangeCompanies_DeleteRow">
+    <Parameter Name="ExchangeCompanyID" Parameter="exchangeCompanyID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.Users_DeleteRow" Method="Users_DeleteRow">
+    <Parameter Name="UserID" Parameter="userID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.Regions_DeleteRow" Method="Regions_DeleteRow">
+    <Parameter Name="RegionID" Parameter="regionID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.ServiceTypes_DeleteRow" Method="ServiceTypes_DeleteRow">
+    <Parameter Name="ServiceTypeID" Parameter="serviceTypeID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.ServiceTypes_InsertUpdate" Method="ServiceTypes_InsertUpdate">
+    <Parameter Name="ServiceTypeID" Parameter="serviceTypeID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ServiceTypeNameEn" Parameter="serviceTypeNameEn" Type="System.String" DbType="NVarChar(150)" />
+    <Parameter Name="ServiceTypeNameAr" Parameter="serviceTypeNameAr" Type="System.String" DbType="NVarChar(150)" />
+    <Parameter Name="CurrencyUsed" Parameter="currencyUsed" Type="System.String" DbType="NVarChar(20)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.ServiceTypes_SelectRow" Method="ServiceTypes_SelectRow">
+    <Parameter Name="ServiceTypeID" Parameter="serviceTypeID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="ServiceTypes_SelectRowResult">
+      <Column Name="ServiceTypeID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ServiceTypeNameEn" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="ServiceTypeNameAr" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="CurrencyUsed" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.ShippingMainCompanies_DeleteRow" Method="ShippingMainCompanies_DeleteRow">
+    <Parameter Name="ShipMainCompanyID" Parameter="shipMainCompanyID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.ShippingMainCompanies_InsertUpdate" Method="ShippingMainCompanies_InsertUpdate">
+    <Parameter Name="ShipMainCompanyID" Parameter="shipMainCompanyID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ShipMainCompanyNameEn" Parameter="shipMainCompanyNameEn" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="ShipMainCompanyNameAr" Parameter="shipMainCompanyNameAr" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="Active" Parameter="active" Type="System.Boolean" DbType="Bit" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.ShippingMainCompanies_SelectRow" Method="ShippingMainCompanies_SelectRow">
+    <Parameter Name="ShipMainCompanyID" Parameter="shipMainCompanyID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="ShippingMainCompanies_SelectRowResult">
+      <Column Name="ShipMainCompanyID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ShipMainCompanyNameEn" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="ShipMainCompanyNameAr" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Active" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.ExpenseTypes_DeleteRow" Method="ExpenseTypes_DeleteRow">
+    <Parameter Name="ExpenseTypeID" Parameter="expenseTypeID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.ExpenseTypes_InsertUpdate" Method="ExpenseTypes_InsertUpdate">
+    <Parameter Name="ExpenseTypeID" Parameter="expenseTypeID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ExpenseTypeNameEn" Parameter="expenseTypeNameEn" Type="System.String" DbType="NVarChar(150)" />
+    <Parameter Name="ExpenseTypeNameAr" Parameter="expenseTypeNameAr" Type="System.String" DbType="NVarChar(150)" />
+    <Parameter Name="CurrencyUsed" Parameter="currencyUsed" Type="System.String" DbType="NVarChar(20)" />
+    <Parameter Name="GroupName" Parameter="groupName" Type="System.String" DbType="NVarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.ExpenseTypes_SelectRow" Method="ExpenseTypes_SelectRow">
+    <Parameter Name="ExpenseTypeID" Parameter="expenseTypeID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="ExpenseTypes_SelectRowResult">
+      <Column Name="ExpenseTypeID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ExpenseTypeNameEn" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="ExpenseTypeNameAr" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="CurrencyUsed" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="GroupName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.ShipperExpenses_DeleteRow" Method="ShipperExpenses_DeleteRow">
+    <Parameter Name="ShipperExpenseID" Parameter="shipperExpenseID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.ShippingCompanies_DeleteRow" Method="ShippingCompanies_DeleteRow">
+    <Parameter Name="ShipCompanyID" Parameter="shipCompanyID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.TowingExpenses_DeleteRow" Method="TowingExpenses_DeleteRow">
+    <Parameter Name="TowingExpenseID" Parameter="towingExpenseID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CarsData_DeleteRow" Method="CarsData_DeleteRow">
+    <Parameter Name="CarID" Parameter="carID" Type="System.Int64" DbType="BigInt" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.ShippInvoices_DeleteRow" Method="ShippInvoices_DeleteRow">
+    <Parameter Name="ShippInvoiceID" Parameter="shippInvoiceID" Type="System.Int64" DbType="BigInt" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_Cars_getNewCarCode" Method="sp_Cars_getNewCarCode">
+    <ElementType Name="sp_Cars_getNewCarCodeResult">
+      <Column Name="NEWCODE" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.Cars_GetCarChassisNo" Method="Cars_GetCarChassisNo">
+    <Parameter Name="chassis_no" Type="System.String" DbType="NVarChar(50)" />
+    <ElementType Name="Cars_GetCarChassisNoResult">
+      <Column Name="chassis_no" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.ImagesResetMainImage" Method="ImagesResetMainImage">
+    <Parameter Name="car_case" Type="System.String" DbType="NVarChar(20)" />
+    <Parameter Name="main_picture" Type="System.String" DbType="NVarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CarSaleInvoices_DeleteRow" Method="CarSaleInvoices_DeleteRow">
+    <Parameter Name="SaleInvoiceID" Parameter="saleInvoiceID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CarExpeses_DeleteRow" Method="CarExpeses_DeleteRow">
+    <Parameter Name="ExpenseID" Parameter="expenseID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CarExpeses_SelectRow" Method="CarExpeses_SelectRow">
+    <Parameter Name="ExpenseID" Parameter="expenseID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="CarExpeses_SelectRowResult">
+      <Column Name="ExpenseID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="car_case" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ExpenseCost" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="ExpenseDetails" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
+      <Column Name="ExpenseDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="ExpenseTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ExpenseTypeNameAr" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.CarExpeses_Insert" Method="CarExpeses_Insert">
+    <Parameter Name="ExpenseID" Parameter="expenseID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="car_case" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ExpenseCost" Parameter="expenseCost" Type="System.Decimal" DbType="Decimal(18,0)" />
+    <Parameter Name="ExpenseDetails" Parameter="expenseDetails" Type="System.String" DbType="NVarChar(1000)" />
+    <Parameter Name="ExpenseDate" Parameter="expenseDate" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="IsDeleted" Parameter="isDeleted" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="ExpenseTypeID" Parameter="expenseTypeID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.ClientBuyers_DeleteRow" Method="ClientBuyers_DeleteRow">
+    <Parameter Name="ClientID" Parameter="clientID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="BuyerID" Parameter="buyerID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CarData_SelectMainPicture" Method="CarData_SelectMainPicture">
+    <Parameter Name="CarID" Parameter="carID" Type="System.Int64" DbType="BigInt" />
+    <ElementType Name="CarData_SelectMainPictureResult">
+      <Column Name="MainPicture" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.CustomsCompanies_DeleteRow" Method="CustomsCompanies_DeleteRow">
+    <Parameter Name="CustomsCompanyID" Parameter="customsCompanyID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CustomsExpenses_DeleteRow" Method="CustomsExpenses_DeleteRow">
+    <Parameter Name="CustomsExpenseID" Parameter="customsExpenseID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CustomsInvoices_DeleteRow" Method="CustomsInvoices_DeleteRow">
+    <Parameter Name="CustomsInvoiceID" Parameter="customsInvoiceID" Type="System.Int64" DbType="BigInt" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CustomsInvoicesDetails_DeleteRow" Method="CustomsInvoicesDetails_DeleteRow">
+    <Parameter Name="CustomsDetailsID" Parameter="customsDetailsID" Type="System.Int64" DbType="BigInt" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CustomsInvoices_Properties" Method="CustomsInvoices_Properties">
+    <ElementType Name="CustomsInvoices_PropertiesResult">
+      <Column Name="CustomsCompanyID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CustomsCompanyNameAr" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.CustomsInvoicesDetails_Properties" Method="CustomsInvoicesDetails_Properties">
+    <Parameter Name="ContainerNo" Parameter="containerNo" Type="System.String" DbType="NVarChar(50)" />
+    <ElementType Name="CustomsInvoicesDetails_PropertiesResult">
+      <Column Name="ExpenseTypeID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ExpenseTypeNameAr" Type="System.String" DbType="NVarChar(173)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.CarsData_SelectFullCutType" Method="CarsData_SelectFullCutType">
+    <Parameter Name="CarID" Parameter="carID" Type="System.Int64" DbType="BigInt" />
+    <ElementType Name="CarsData_SelectFullCutTypeResult">
+      <Column Name="ShippingCalcID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ExpensesCharge" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.ShippInvoicesDetails_DeleteRow" Method="ShippInvoicesDetails_DeleteRow">
+    <Parameter Name="BillDetailsID" Parameter="billDetailsID" Type="System.Int64" DbType="BigInt" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CarSaleCommission_Delete" Method="CarSaleCommission_Delete">
+    <Parameter Name="CommissionID" Parameter="commissionID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.Colors_Save" Method="Colors_Save">
+    <Parameter Name="ColorID" Parameter="colorID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ColorNameEn" Parameter="colorNameEn" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="ColorNameAr" Parameter="colorNameAr" Type="System.String" DbType="NVarChar(100)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.Users_Save" Method="Users_Save">
+    <Parameter Name="UserID" Parameter="userID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="UserFullName" Parameter="userFullName" Type="System.String" DbType="NVarChar(150)" />
+    <Parameter Name="Phone" Parameter="phone" Type="System.String" DbType="NVarChar(150)" />
+    <Parameter Name="Email" Parameter="email" Type="System.String" DbType="NVarChar(150)" />
+    <Parameter Name="Username" Parameter="username" Type="System.String" DbType="NVarChar(150)" />
+    <Parameter Name="Password" Parameter="password" Type="System.String" DbType="NVarChar(150)" />
+    <Parameter Name="IsActive" Parameter="isActive" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="JobID" Parameter="jobID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Mobile" Parameter="mobile" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="JoinDate" Parameter="joinDate" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="Nationality" Parameter="nationality" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="EmpID" Parameter="empID" Type="System.String" DbType="NVarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.Jobs_Select" Method="Jobs_Select">
+    <ElementType Name="Jobs_SelectResult">
+      <Column Name="JobID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="JobName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.Auctions_Delete" Method="Auctions_Delete">
+    <Parameter Name="AuctionID" Parameter="auctionID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.Auctions_InsertUpdate" Method="Auctions_InsertUpdate">
+    <Parameter Name="AuctionID" Parameter="auctionID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="AuctionName" Parameter="auctionName" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="AuctionNameAr" Parameter="auctionNameAr" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="AuctionEmail" Parameter="auctionEmail" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="AuctionPhone" Parameter="auctionPhone" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="TypeOfAuction" Parameter="typeOfAuction" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="Active" Parameter="active" Type="System.Boolean" DbType="Bit" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.Auctions_SelectList" Method="Auctions_SelectList">
+    <ElementType Name="Auctions_SelectListResult">
+      <Column Name="AuctionID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="AuctionName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="AuctionNameAr" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="AuctionEmail" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="AuctionPhone" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="TypeOfAuction" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Active" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.Auctions_SelectNames" Method="Auctions_SelectNames">
+    <ElementType Name="Auctions_SelectNamesResult">
+      <Column Name="AuctionID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="AuctionName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.Auctions_SelectRow" Method="Auctions_SelectRow">
+    <Parameter Name="AuctionID" Parameter="auctionID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="Auctions_SelectRowResult">
+      <Column Name="AuctionID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="AuctionName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="AuctionNameAr" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="AuctionEmail" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="AuctionPhone" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="TypeOfAuction" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Active" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.AuctionsTypes_Delete" Method="AuctionsTypes_Delete">
+    <Parameter Name="AuctionTypeID" Parameter="auctionTypeID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.AuctionsTypes_InsertUpdate" Method="AuctionsTypes_InsertUpdate">
+    <Parameter Name="AuctionTypeID" Parameter="auctionTypeID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="AuctionTypeName" Parameter="auctionTypeName" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="AuctionCharge" Parameter="auctionCharge" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Active" Parameter="active" Type="System.Boolean" DbType="Bit" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.AuctionsTypes_SelectNames" Method="AuctionsTypes_SelectNames">
+    <ElementType Name="AuctionsTypes_SelectNamesResult">
+      <Column Name="AuctionTypeID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="AuctionTypeName" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.AuctionsTypes_SelectRow" Method="AuctionsTypes_SelectRow">
+    <Parameter Name="AuctionTypeID" Parameter="auctionTypeID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="AuctionsTypes_SelectRowResult">
+      <Column Name="AuctionTypeID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="AuctionTypeName" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="AuctionCharge" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Active" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.Buyers_Delete" Method="Buyers_Delete">
+    <Parameter Name="BuyerID" Parameter="buyerID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.Buyers_SelectAuctionsClients" Method="Buyers_SelectAuctionsClients">
+    <ElementType Name="Buyers_SelectAuctionsClientsResult">
+      <Column Name="AuctionID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="AuctionName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.Buyers_SelectName" Method="Buyers_SelectName">
+    <Parameter Name="AuctionID" Parameter="auctionID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="Buyers_SelectNameResult">
+      <Column Name="BuyerID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="BuyerName" Type="System.String" DbType="NVarChar(303)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.Buyers_SelectName2" Method="Buyers_SelectName2">
+    <Parameter Name="AuctionID" Parameter="auctionID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="Buyers_SelectName2Result">
+      <Column Name="BuyerID" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="BuyerName" Type="System.String" DbType="NVarChar(303)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.CarSaleCommission_Save" Method="CarSaleCommission_Save">
+    <Parameter Name="CommissionID" Parameter="commissionID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="DistinationID" Parameter="distinationID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="CommissionCash" Parameter="commissionCash" Type="System.Decimal" DbType="Money" />
+    <Parameter Name="CommissionCredit" Parameter="commissionCredit" Type="System.Decimal" DbType="Money" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CarSaleCommission_SelectList" Method="CarSaleCommission_SelectList">
+    <Parameter Name="DisplayStart" Parameter="displayStart" Type="System.Int32" DbType="Int" />
+    <Parameter Name="DisplayLength" Parameter="displayLength" Type="System.Int32" DbType="Int" />
+    <Parameter Name="SearchParam" Parameter="searchParam" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="SortColumn" Parameter="sortColumn" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="SortDirection" Parameter="sortDirection" Type="System.String" DbType="NVarChar(50)" />
+    <ElementType Name="CarSaleCommission_SelectListResult">
+      <Column Name="CommissionID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DistinationID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DistinationNameAr" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CommissionCash" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="CommissionCredit" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="RowNo" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.CarSaleInvoices_SelectToEdit" Method="CarSaleInvoices_SelectToEdit">
+    <Parameter Name="SaleInvoiceID" Parameter="saleInvoiceID" Type="System.Int64" DbType="BigInt" />
+    <ElementType Name="CarSaleInvoices_SelectToEditResult">
+      <Column Name="SaleInvoiceID" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="InvoiceDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="ClientID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CarID" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="SaleTypeID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DistinationID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ArrivalDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="PayPrice" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="SalePrice" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="PayCalcTypeCost" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="CarSizeCost" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="ExtraCost" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="CarFinalPrice" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="Notes" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="IP" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="UserID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CarRetainer" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="CarDelayed" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="CarDiscount" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.CarsData_SelectCarsList" Method="CarsData_SelectCarsList">
+    <Parameter Name="DisplayStart" Parameter="displayStart" Type="System.Int32" DbType="Int" />
+    <Parameter Name="DisplayLength" Parameter="displayLength" Type="System.Int32" DbType="Int" />
+    <Parameter Name="SearchParam" Parameter="searchParam" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="Sold" Parameter="sold" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="SortColumn" Parameter="sortColumn" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="SortDirection" Parameter="sortDirection" Type="System.String" DbType="NVarChar(50)" />
+    <ElementType Name="CarsData_SelectCarsListResult">
+      <Column Name="RowNo" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="CarID" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="ChassisNo" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="LotNo" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Year" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="WorkingStatusName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="MakerNameEn" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="TypeNameEn" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="WesitePrice" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="DistinationNameAr" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Sold" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="MainPicture" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="DistinationNameEn" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="full_name" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="Arrived" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.CarsData_SelectList" Method="CarsData_SelectList">
+    <ElementType Name="CarsData_SelectListResult">
+      <Column Name="CarID" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="ChassisNo" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="InvoiceDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="LotNo" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PayTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PayPrice" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="ShipperID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="RegionID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="BuyerID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ModelID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="WorkingStatusID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ColorID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Year" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Notes" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="IP" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="RegionEn" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="PayTypeName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="WorkingStatusName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="TypeNameEn" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="MakerNameEn" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="ShipCompanyNameEn" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="BuyerName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="WesitePrice" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="DistinationNameAr" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="OwnerName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ShippingCalcName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.ClientBuyers_Save" Method="ClientBuyers_Save">
+    <Parameter Name="ClientBuyerID" Parameter="clientBuyerID" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="Active" Parameter="active" Type="System.Boolean" DbType="Bit" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.ClientBuyers_SelectList" Method="ClientBuyers_SelectList">
+    <Parameter Name="ClientID" Parameter="clientID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="ClientBuyers_SelectListResult">
+      <Column Name="ClientID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="BuyerID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Active" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="full_name" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="BuyerName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="AuctionName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="ClientBuyerID" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="AuctionID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="AuctionTypeName" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="AuctionTypeID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="StartDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="EndDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.ClientBuyers_SelectRow" Method="ClientBuyers_SelectRow">
+    <Parameter Name="ClientID" Parameter="clientID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="BuyerID" Parameter="buyerID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="ClientBuyers_SelectRowResult">
+      <Column Name="ClientID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="BuyerID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Active" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="full_name" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="BuyerName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.Clients_Save" Method="Clients_Save">
+    <Parameter Name="ClientID" Parameter="clientID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="user_name" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="user_password" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="full_name" Type="System.String" DbType="NVarChar(200)" />
+    <Parameter Name="email" Type="System.String" DbType="NVarChar(200)" />
+    <Parameter Name="country" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="phone" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="countryCode" Type="System.String" DbType="NChar(5)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.Clients_SelectRow" Method="Clients_SelectRow">
+    <Parameter Name="ClientID" Parameter="clientID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="Clients_SelectRowResult">
+      <Column Name="ClientID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="user_type" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="user_level" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="user_name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="user_password" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="full_name" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="country" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="phone" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="email" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="send_sms" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="send_email" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="active" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="date_entered" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="delete_result" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Credit" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Debit" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="countryCode" Type="System.String" DbType="NChar(5)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.CustomsCompanies_Save" Method="CustomsCompanies_Save">
+    <Parameter Name="CustomsCompanyID" Parameter="customsCompanyID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="DistinationID" Parameter="distinationID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="CustomsCompanyNameEn" Parameter="customsCompanyNameEn" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="CustomsCompanyNameAr" Parameter="customsCompanyNameAr" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="Active" Parameter="active" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="OpeningBalance" Parameter="openingBalance" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CustomsCompanies_SelectByDistination" Method="CustomsCompanies_SelectByDistination">
+    <Parameter Name="DistinationID" Parameter="distinationID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="CustomsCompanies_SelectByDistinationResult">
+      <Column Name="CustomsCompanyID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CustomsCompanyNameAr" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.CustomsCompanies_SelectList" Method="CustomsCompanies_SelectList">
+    <ElementType Name="CustomsCompanies_SelectListResult">
+      <Column Name="CustomsCompanyID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DistinationID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CustomsCompanyNameEn" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="CustomsCompanyNameAr" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Active" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="OpeningBalance" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DistinationNameAr" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.CustomsCompanies_SelectRow" Method="CustomsCompanies_SelectRow">
+    <Parameter Name="CustomsCompanyID" Parameter="customsCompanyID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="CustomsCompanies_SelectRowResult">
+      <Column Name="CustomsCompanyID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DistinationID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CustomsCompanyNameEn" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="CustomsCompanyNameAr" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Active" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="OpeningBalance" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DistinationNameAr" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.CustomsExpenses_Save" Method="CustomsExpenses_Save">
+    <Parameter Name="CustomsExpenseID" Parameter="customsExpenseID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="CustomsCompanyID" Parameter="customsCompanyID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ExpenseTypeID" Parameter="expenseTypeID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ExpensesCharge" Parameter="expensesCharge" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CustomsExpenses_SelectList" Method="CustomsExpenses_SelectList">
+    <ElementType Name="CustomsExpenses_SelectListResult">
+      <Column Name="CustomsExpenseID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CustomsCompanyID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ExpenseTypeID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ExpensesCharge" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CustomsCompanyNameAr" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="ExpenseTypeNameAr" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="DistinationID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DistinationNameAr" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.CustomsInvoices_Save" Method="CustomsInvoices_Save">
+    <Parameter Name="CustomsInvoiceID" Parameter="customsInvoiceID" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="InvoiceDate" Parameter="invoiceDate" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="CustomsCompanyID" Parameter="customsCompanyID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="CustomsPrice" Parameter="customsPrice" Type="System.Decimal" DbType="Money" />
+    <Parameter Name="InvoiceNo" Parameter="invoiceNo" Type="System.String" DbType="NVarChar(20)" />
+    <Parameter Name="ContainerNo" Parameter="containerNo" Type="System.String" DbType="NVarChar(20)" />
+    <Parameter Name="Notes" Parameter="notes" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="IsDeleted" Parameter="isDeleted" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="TotalCustoms" Parameter="totalCustoms" Type="System.Decimal" DbType="Money" />
+    <Parameter Name="TotalExpenses" Parameter="totalExpenses" Type="System.Decimal" DbType="Money" />
+    <Parameter Name="TotalAmount" Parameter="totalAmount" Type="System.Decimal" DbType="Money" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CustomsInvoices_SelectRow" Method="CustomsInvoices_SelectRow">
+    <Parameter Name="CustomsInvoiceID" Parameter="customsInvoiceID" Type="System.Int64" DbType="BigInt" />
+    <ElementType Name="CustomsInvoices_SelectRowResult">
+      <Column Name="CustomsInvoiceID" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="InvoiceDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CustomsCompanyID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CustomsPrice" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="InvoiceNo" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="ContainerNo" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="Notes" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="CustomsCompanyNameAr" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="TotalCustoms" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="TotalExpenses" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="TotalAmount" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Paid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IsEdit" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.CustomsInvoicesDetails_Save" Method="CustomsInvoicesDetails_Save">
+    <Parameter Name="CustomsDetailsID" Parameter="customsDetailsID" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="CustomsInvoiceID" Parameter="customsInvoiceID" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="ExpenseTypeID" Parameter="expenseTypeID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="CustomsExpenseValue" Parameter="customsExpenseValue" Type="System.Decimal" DbType="Money" />
+    <Parameter Name="IsDeleted" Parameter="isDeleted" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="CarsNo" Parameter="carsNo" Type="System.Byte" DbType="TinyInt" />
+    <Parameter Name="TotalExpensesValue" Parameter="totalExpensesValue" Type="System.Decimal" DbType="Money" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CustomsInvoicesDetails_SelectRow" Method="CustomsInvoicesDetails_SelectRow">
+    <Parameter Name="CustomsDetailsID" Parameter="customsDetailsID" Type="System.Int64" DbType="BigInt" />
+    <ElementType Name="CustomsInvoicesDetails_SelectRowResult">
+      <Column Name="CustomsDetailsID" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="CustomsInvoiceID" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="ExpenseTypeID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CustomsExpenseValue" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="ExpenseTypeNameAr" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="CarsNo" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="TotalExpensesValue" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.ExchangeCompanies_SelectRow" Method="ExchangeCompanies_SelectRow">
+    <Parameter Name="ExchangeCompanyID" Parameter="exchangeCompanyID" Type="System.Int64" DbType="BigInt" />
+    <ElementType Name="ExchangeCompanies_SelectRowResult">
+      <Column Name="ExchangeCompanyID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ExchangeCompanyNameEn" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="ExchangeCompanyNameAr" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Rate" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.ExchangeCompanies_InsertUpdate" Method="ExchangeCompanies_InsertUpdate">
+    <Parameter Name="ExchangeCompanyID" Parameter="exchangeCompanyID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ExchangeCompanyNameEn" Parameter="exchangeCompanyNameEn" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="ExchangeCompanyNameAr" Parameter="exchangeCompanyNameAr" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="Rate" Parameter="rate" Type="System.Decimal" DbType="Money" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.Regions_InsertUpdate" Method="Regions_InsertUpdate">
+    <Parameter Name="RegionID" Parameter="regionID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="RegionEn" Parameter="regionEn" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="RegionAr" Parameter="regionAr" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="CostforRegion" Parameter="costforRegion" Type="System.Decimal" DbType="Money" />
+    <Parameter Name="RegionDescEn" Parameter="regionDescEn" Type="System.String" DbType="NVarChar(2000)" />
+    <Parameter Name="RegionDescAr" Parameter="regionDescAr" Type="System.String" DbType="NVarChar(2000)" />
+    <Parameter Name="Priority" Parameter="priority" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Active" Parameter="active" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="RegionCommissionJor" Parameter="regionCommissionJor" Type="System.Decimal" DbType="Money" />
+    <ElementType Name="Regions_InsertUpdateResult">
+      <Column Name="" Member="Column1" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.Regions_SelectRow" Method="Regions_SelectRow">
+    <Parameter Name="RegionID" Parameter="regionID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="Regions_SelectRowResult">
+      <Column Name="RegionID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="RegionEn" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="RegionAr" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="CostforRegion" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="RegionDescEn" Type="System.String" DbType="NVarChar(2000)" CanBeNull="true" />
+      <Column Name="RegionDescAr" Type="System.String" DbType="NVarChar(2000)" CanBeNull="true" />
+      <Column Name="Priority" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Active" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="RegionCommissionJor" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.ShipperExpenses_SelectByShipperDistin" Method="ShipperExpenses_SelectByShipperDistin">
+    <Parameter Name="ShipperID" Parameter="shipperID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="DistinationID" Parameter="distinationID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="ShipperExpenses_SelectByShipperDistinResult">
+      <Column Name="ExpenseTypeID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ExpensesCharge" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.ShipperExpenses_SelectList" Method="ShipperExpenses_SelectList">
+    <Parameter Name="DisplayStart" Parameter="displayStart" Type="System.Int32" DbType="Int" />
+    <Parameter Name="DisplayLength" Parameter="displayLength" Type="System.Int32" DbType="Int" />
+    <Parameter Name="SearchParam" Parameter="searchParam" Type="System.String" DbType="NVarChar(20)" />
+    <Parameter Name="SortColumn" Parameter="sortColumn" Type="System.String" DbType="NVarChar(2)" />
+    <Parameter Name="SortDirection" Parameter="sortDirection" Type="System.String" DbType="NVarChar(4)" />
+    <ElementType Name="ShipperExpenses_SelectListResult">
+      <Column Name="ShipperExpenseID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ShipCompanyID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ExpenseTypeID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ServiceTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DistinationID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ExpensesCharge" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="ExpenseTypeNameAr" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="ServiceTypeNameAr" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="DistinationNameAr" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ShowTypeID" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="ExpenseShowTypeName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ShipCompanyNameAr" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="ContainerSize" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CarsNo" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ExpenseCalcType" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NavigationCoID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="RowNo" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.ShipperExpenses_SelectRow" Method="ShipperExpenses_SelectRow">
+    <Parameter Name="ShipperExpenseID" Parameter="shipperExpenseID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="ShipperExpenses_SelectRowResult">
+      <Column Name="ShipperExpenseID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ShowTypeID" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="ShipCompanyID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ExpenseTypeID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ServiceTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DistinationID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ExpensesCharge" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="ExpenseCalcType" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NavigationCoID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ContainerSize" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CarsNo" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.ShippingCompanies_InsertUpdate" Method="ShippingCompanies_InsertUpdate">
+    <Parameter Name="ShipCompanyID" Parameter="shipCompanyID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ShipMainCompanyID" Parameter="shipMainCompanyID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ShipCompanyNameEn" Parameter="shipCompanyNameEn" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="ShipCompanyNameAr" Parameter="shipCompanyNameAr" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="ShipCompanyEmail" Parameter="shipCompanyEmail" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="ShipCompanyPhone" Parameter="shipCompanyPhone" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="ShipCompanyAddress" Parameter="shipCompanyAddress" Type="System.String" DbType="NVarChar(500)" />
+    <Parameter Name="Active" Parameter="active" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="OpeningBalance" Parameter="openingBalance" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.ShippingCompanies_SelectRow" Method="ShippingCompanies_SelectRow">
+    <Parameter Name="ShipCompanyID" Parameter="shipCompanyID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="ShippingCompanies_SelectRowResult">
+      <Column Name="ShipCompanyID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ShipMainCompanyID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ShipCompanyNameEn" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="ShipCompanyNameAr" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="ShipCompanyEmail" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="ShipCompanyPhone" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="ShipCompanyAddress" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="Active" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="OpeningBalance" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.ShippingCompanies_SelectList" Method="ShippingCompanies_SelectList">
+    <ElementType Name="ShippingCompanies_SelectListResult">
+      <Column Name="ShipCompanyID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ShipMainCompanyID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ShipCompanyNameEn" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="ShipCompanyNameAr" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="ShipCompanyEmail" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="ShipCompanyPhone" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="ShipCompanyAddress" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="Active" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="OpeningBalance" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ShipMainCompanyNameAr" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.ShippInvoicesDetails_SelectRow" Method="ShippInvoicesDetails_SelectRow">
+    <Parameter Name="BillDetailsID" Parameter="billDetailsID" Type="System.Int64" DbType="BigInt" />
+    <ElementType Name="ShippInvoicesDetails_SelectRowResult">
+      <Column Name="ChassisNo" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="BillDetailsID" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="CarID" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="ShippInvoiceID" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="Towing" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="SeaTrans" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="Loading" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="Partitioning" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="Extra" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="TotalCost" Type="System.Decimal" DbType="Decimal(22,2)" CanBeNull="true" />
+      <Column Name="Year" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TypeNameEn" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="ContainerNo" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="LotNo" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PayPrice" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="MakerNameEn" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Bol" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="CarDistinationID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CarShipperID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ContainerSize" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="InvoiceNo" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="CustomsOnCar" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="ArrivalDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ShipCompanyNameEn" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="TrxDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="InvoiceDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="TotalAmount" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="Paid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="RegionEn" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="ShipCompanyID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Notes" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="IsEdit" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.TowingExpenses_InsertUpdate" Method="TowingExpenses_InsertUpdate">
+    <Parameter Name="TowingExpenseID" Parameter="towingExpenseID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ShipCompanyID" Parameter="shipCompanyID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="RegionID" Parameter="regionID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ServiceTypeID" Parameter="serviceTypeID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ExpensesCharge" Parameter="expensesCharge" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.TowingExpenses_SelectList" Method="TowingExpenses_SelectList">
+    <Parameter Name="DisplayStart" Parameter="displayStart" Type="System.Int32" DbType="Int" />
+    <Parameter Name="DisplayLength" Parameter="displayLength" Type="System.Int32" DbType="Int" />
+    <Parameter Name="SearchParam" Parameter="searchParam" Type="System.String" DbType="NVarChar(20)" />
+    <Parameter Name="SortColumn" Parameter="sortColumn" Type="System.String" DbType="NVarChar(2)" />
+    <Parameter Name="SortDirection" Parameter="sortDirection" Type="System.String" DbType="NVarChar(4)" />
+    <ElementType Name="TowingExpenses_SelectListResult">
+      <Column Name="TowingExpenseID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ShipCompanyID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="RegionID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ServiceTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ExpensesCharge" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ServiceTypeNameAr" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="ShipCompanyNameAr" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="ShipMainCompanyNameAr" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="RegionAr" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="RowNo" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.TowingExpenses_SelectRow" Method="TowingExpenses_SelectRow">
+    <Parameter Name="TowingExpenseID" Parameter="towingExpenseID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="TowingExpenses_SelectRowResult">
+      <Column Name="TowingExpenseID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ShipCompanyID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="RegionID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ServiceTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ExpensesCharge" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.Buyers_SelectList" Method="Buyers_SelectList">
+    <ElementType Name="Buyers_SelectListResult">
+      <Column Name="ClientBuyerID" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="ClientID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="BuyerID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="AuctionID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="AuctionTypeID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Active" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="StartDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="EndDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="BuyerName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="AuctionTypeName" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="AuctionNameAr" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="full_name" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="BuyerCredit" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="BuyerDebit" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="BuyerFee" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.CarSaleCommission_SelectRow" Method="CarSaleCommission_SelectRow">
+    <Parameter Name="ClientID" Parameter="clientID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="DistinationID" Parameter="distinationID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="CarSaleCommission_SelectRowResult">
+      <Column Name="ExtraCash" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="ExtraCredit" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="CommissionCash" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="CommissionCredit" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="user_type" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.Buyers_InsertUpdate" Method="Buyers_InsertUpdate">
+    <Parameter Name="BuyerID" Parameter="buyerID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="AuctionTypeID" Parameter="auctionTypeID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="AuctionID" Parameter="auctionID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ClientID" Parameter="clientID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="BuyerName" Parameter="buyerName" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="BuyeNo" Parameter="buyeNo" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="BuyerDesc" Parameter="buyerDesc" Type="System.String" DbType="NVarChar(1000)" />
+    <Parameter Name="Active" Parameter="active" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="BuyerCredit" Parameter="buyerCredit" Type="System.Decimal" DbType="Money" />
+    <Parameter Name="BuyerDebit" Parameter="buyerDebit" Type="System.Decimal" DbType="Money" />
+    <Parameter Name="BuyerFee" Parameter="buyerFee" Type="System.Decimal" DbType="Money" />
+    <Parameter Name="Username" Parameter="username" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="Password" Parameter="password" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="Puse" Parameter="puse" Type="System.Boolean" DbType="Bit" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.Buyers_SelectRow" Method="Buyers_SelectRow">
+    <Parameter Name="BuyerID" Parameter="buyerID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="Buyers_SelectRowResult">
+      <Column Name="BuyerID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="AuctionID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ClientID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="BuyerName" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="BuyeNo" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="BuyerDesc" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
+      <Column Name="Active" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="BuyerCredit" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="BuyerDebit" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="AuctionTypeID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="AuctionTypeName" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="AuctionNameAr" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="BuyerFee" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Username" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Password" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Puse" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.CarsModel_InsertUpdate" Method="CarsModel_InsertUpdate">
+    <Parameter Name="ModelID" Parameter="modelID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="MakerID" Parameter="makerID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="TypeNameEn" Parameter="typeNameEn" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="TypeNameAr" Parameter="typeNameAr" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="CarSizeID" Parameter="carSizeID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Active" Parameter="active" Type="System.Boolean" DbType="Bit" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CarsModel_SelectRow" Method="CarsModel_SelectRow">
+    <Parameter Name="ModelID" Parameter="modelID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="CarsModel_SelectRowResult">
+      <Column Name="ModelID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="MakerID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TypeNameEn" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="TypeNameAr" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="CarSizeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Active" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="MakerNameEn" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.CarSaleInvoices_SelectRow" Method="CarSaleInvoices_SelectRow">
+    <Parameter Name="SaleInvoiceID" Parameter="saleInvoiceID" Type="System.Int64" DbType="BigInt" />
+    <ElementType Name="CarSaleInvoices_SelectRowResult">
+      <Column Name="ChassisNo" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="LotNo" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="TypeNameEn" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="MakerNameEn" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Year" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="WorkingStatusName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="full_name" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="DistinationNameEn" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ArrivalDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="SalePrice" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="SaleInvoiceID" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="InvoiceDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="CarID" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="ClientID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="SaleTypeID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DistinationNameAr" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CarRetainer" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="CarDelayed" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="MainPicture" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="CarDiscount" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="DelayedAfterDisc" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="IsEdit" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="ColorNameAr" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="ColorNameEn" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="CarInstallments" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="PayPrice" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.Clients_SelectList" Method="Clients_SelectList">
+    <Parameter Name="DisplayStart" Parameter="displayStart" Type="System.Int32" DbType="Int" />
+    <Parameter Name="DisplayLength" Parameter="displayLength" Type="System.Int32" DbType="Int" />
+    <Parameter Name="SearchParam" Parameter="searchParam" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="SortColumn" Parameter="sortColumn" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="SortDirection" Parameter="sortDirection" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="Finished" Parameter="finished" Type="System.Byte" DbType="TinyInt" />
+    <ElementType Name="Clients_SelectListResult">
+      <Column Name="ClientID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="user_name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="full_name" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="user_password" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="country" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="phone" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="phone2" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="send_sms" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="countryCode" Type="System.String" DbType="NChar(5)" CanBeNull="true" />
+      <Column Name="countryCode2" Type="System.String" DbType="NChar(5)" CanBeNull="true" />
+      <Column Name="user_type" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Credit" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Debit" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="ClientRequired" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Contracts" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="RowNo" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.ShippInvoices_SelectRow" Method="ShippInvoices_SelectRow">
+    <Parameter Name="ShippInvoiceID" Parameter="shippInvoiceID" Type="System.Int64" DbType="BigInt" />
+    <ElementType Name="ShippInvoices_SelectRowResult">
+      <Column Name="ShippInvoiceID" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="InvoiceDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ShippPrice" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="DistinationID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ShipperID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ArrivalDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="InvoiceNo" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="ContainerNo" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="ContainerSize" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CarsNo" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="DistinationNameAr" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ShipCompanyNameAr" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="ShipMainCompanyNameAr" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="ShipMainCompanyID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Bol" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="LoadingPrice" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="TotalAmount" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="NavigationCoID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IsEdit" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="ShippInvoiceNo" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.ShippInvoices_InsertUpdate" Method="ShippInvoices_InsertUpdate">
+    <Parameter Name="ShippInvoiceID" Parameter="shippInvoiceID" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="InvoiceDate" Parameter="invoiceDate" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="ShippPrice" Parameter="shippPrice" Type="System.Decimal" DbType="Money" />
+    <Parameter Name="DistinationID" Parameter="distinationID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ShipperID" Parameter="shipperID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ArrivalDate" Parameter="arrivalDate" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="InvoiceNo" Parameter="invoiceNo" Type="System.String" DbType="NVarChar(20)" />
+    <Parameter Name="ContainerNo" Parameter="containerNo" Type="System.String" DbType="NVarChar(20)" />
+    <Parameter Name="ContainerSize" Parameter="containerSize" Type="System.Int32" DbType="Int" />
+    <Parameter Name="CarsNo" Parameter="carsNo" Type="System.Int32" DbType="Int" />
+    <Parameter Name="IsDeleted" Parameter="isDeleted" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="Bol" Parameter="bol" Type="System.String" DbType="NVarChar(20)" />
+    <Parameter Name="LoadingPrice" Parameter="loadingPrice" Type="System.Decimal" DbType="Money" />
+    <Parameter Name="TotalAmount" Parameter="totalAmount" Type="System.Decimal" DbType="Money" />
+    <Parameter Name="NavigationCoID" Parameter="navigationCoID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Notes" Parameter="notes" Type="System.String" DbType="NVarChar(500)" />
+    <Parameter Name="TransportationPrice" Parameter="transportationPrice" Type="System.Decimal" DbType="Money" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.ShippInvoicesDetails_InsertUpdate" Method="ShippInvoicesDetails_InsertUpdate">
+    <Parameter Name="BillDetailsID" Parameter="billDetailsID" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="CarID" Parameter="carID" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="ShippInvoiceID" Parameter="shippInvoiceID" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="Towing" Parameter="towing" Type="System.Decimal" DbType="Money" />
+    <Parameter Name="SeaTrans" Parameter="seaTrans" Type="System.Decimal" DbType="Money" />
+    <Parameter Name="Loading" Parameter="loading" Type="System.Decimal" DbType="Money" />
+    <Parameter Name="Partitioning" Parameter="partitioning" Type="System.Decimal" DbType="Money" />
+    <Parameter Name="Extra" Parameter="extra" Type="System.Decimal" DbType="Money" />
+    <Parameter Name="IsDeleted" Parameter="isDeleted" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="Notes" Parameter="notes" Type="System.String" DbType="NVarChar(500)" />
+    <Parameter Name="Transportation" Parameter="transportation" Type="System.Decimal" DbType="Money" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CarSaleInvoices_Save" Method="CarSaleInvoices_Save">
+    <Parameter Name="SaleInvoiceID" Parameter="saleInvoiceID" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="InvoiceDate" Parameter="invoiceDate" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="ClientID" Parameter="clientID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="CarID" Parameter="carID" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="SaleTypeID" Parameter="saleTypeID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="DistinationID" Parameter="distinationID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ArrivalDate" Parameter="arrivalDate" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="PayPrice" Parameter="payPrice" Type="System.Decimal" DbType="Money" />
+    <Parameter Name="SalePrice" Parameter="salePrice" Type="System.Decimal" DbType="Money" />
+    <Parameter Name="PayCalcTypeCost" Parameter="payCalcTypeCost" Type="System.Decimal" DbType="Money" />
+    <Parameter Name="CarSizeCost" Parameter="carSizeCost" Type="System.Decimal" DbType="Money" />
+    <Parameter Name="ExtraCost" Parameter="extraCost" Type="System.Decimal" DbType="Money" />
+    <Parameter Name="CarFinalPrice" Parameter="carFinalPrice" Type="System.Decimal" DbType="Money" />
+    <Parameter Name="Notes" Parameter="notes" Type="System.String" DbType="NVarChar(500)" />
+    <Parameter Name="IP" Parameter="iP" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="IsDeleted" Parameter="isDeleted" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="UserID" Parameter="userID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="PayTypeID" Parameter="payTypeID" Type="System.Byte" DbType="TinyInt" />
+    <Parameter Name="CarDiscount" Parameter="carDiscount" Type="System.Decimal" DbType="Money" />
+    <Parameter Name="CarMoreCost" Parameter="carMoreCost" Type="System.Decimal" DbType="Money" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.Users_SelectRow" Method="Users_SelectRow">
+    <Parameter Name="UserID" Parameter="userID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="Users_SelectRowResult">
+      <Column Name="UserID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="UserFullName" Type="System.String" DbType="NVarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="Phone" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="Username" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="Password" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="JobID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Mobile" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="JoinDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Nationality" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="EmpID" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="JobName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="AdvancesBalance" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="Sig" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.ShipperExpenses_InsertUpdate" Method="ShipperExpenses_InsertUpdate">
+    <Parameter Name="ShipperExpenseID" Parameter="shipperExpenseID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ShowTypeID" Parameter="showTypeID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ShipCompanyID" Parameter="shipCompanyID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ExpenseTypeID" Parameter="expenseTypeID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ServiceTypeID" Parameter="serviceTypeID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="DistinationID" Parameter="distinationID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ExpensesCharge" Parameter="expensesCharge" Type="System.Decimal" DbType="Money" />
+    <Parameter Name="ExpenseCalcType" Parameter="expenseCalcType" Type="System.Int32" DbType="Int" />
+    <Parameter Name="NavigationCoID" Parameter="navigationCoID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ContainerSize" Parameter="containerSize" Type="System.Int32" DbType="Int" />
+    <Parameter Name="CarsNo" Parameter="carsNo" Type="System.Int32" DbType="Int" />
+    <Parameter Name="CustomsCompanyID" Parameter="customsCompanyID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.Users_Login" Method="Users_Login">
+    <Parameter Name="Username" Parameter="username" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="Password" Parameter="password" Type="System.String" DbType="NVarChar(50)" />
+    <ElementType Name="Users_LoginResult">
+      <Column Name="UserID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="UserFullName" Type="System.String" DbType="NVarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="PermID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.ExpensesOnCarReportPrint_FillReport" Method="ExpensesOnCarReportPrint_FillReport">
+    <Parameter Name="DisplayStart" Parameter="displayStart" Type="System.Int32" DbType="Int" />
+    <Parameter Name="DisplayLength" Parameter="displayLength" Type="System.Int32" DbType="Int" />
+    <Parameter Name="SortColumn" Parameter="sortColumn" Type="System.String" DbType="NVarChar(4)" />
+    <Parameter Name="SortDirection" Parameter="sortDirection" Type="System.String" DbType="NVarChar(4)" />
+    <Parameter Name="From" Parameter="from" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="To" Parameter="to" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="AuctionID" Parameter="auctionID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="BuyerID" Parameter="buyerID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ChassisNo" Parameter="chassisNo" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="MainShippID" Parameter="mainShippID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="ExpensesOnCarReportPrint_FillReportResult">
+      <Column Name="RowNo" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="CarID" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="ChassisNo" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="InvoiceDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="MakerNameAr" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="TypeNameAr" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Year" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ContainerNo" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="PayPrice" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="PayPayments" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="AuctionCommCost" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="LoadingShippingCosts" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="CustomOnCar" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="CustomExpensesOnCar" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="ShippExpensesCost" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="ShopExpensesCost" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="ExchangeFeeOnCar" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="Towing" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="ShippingExtra" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="DiscountAmount" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="Transportation" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Partitioning" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="SalePrice" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="TotalOnCar" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.CarSaleInvoices_PrintAfterSale" Method="CarSaleInvoices_PrintAfterSale">
+    <Parameter Name="CarID" Parameter="carID" Type="System.Int64" DbType="BigInt" />
+    <ElementType Name="CarSaleInvoices_PrintAfterSaleResult">
+      <Column Name="SaleInvoiceID" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="CarID" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="MakerNameEn" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="TypeNameEn" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="ChassisNo" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="LotNo" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="PayPrice" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="Year" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ArrivalDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ContainerNo" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="ColorNameEn" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="ClientID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="full_name" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="Notes" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="MainPicture" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="DistinationNameEn" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="TransmissionNameEn" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="WesitePrice" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="phone" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Expr1" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="WorkingStatusName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="AccidentType" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="ClientSignature" Type="System.String" DbType="NVarChar(3000)" CanBeNull="true" />
+      <Column Name="InvoiceDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="SaleTypeName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="DeleteReason" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.CarsData_InsertUpdate" Method="CarsData_InsertUpdate">
+    <Parameter Name="CarID" Parameter="carID" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="ChassisNo" Parameter="chassisNo" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="InvoiceDate" Parameter="invoiceDate" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="LotNo" Parameter="lotNo" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="PayTypeID" Parameter="payTypeID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="PayPrice" Parameter="payPrice" Type="System.Decimal" DbType="Money" />
+    <Parameter Name="ShipperID" Parameter="shipperID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="RegionID" Parameter="regionID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="BuyerID" Parameter="buyerID" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="ModelID" Parameter="modelID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="WorkingStatusID" Parameter="workingStatusID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ColorID" Parameter="colorID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Year" Parameter="year" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Notes" Parameter="notes" Type="System.String" DbType="NVarChar(500)" />
+    <Parameter Name="IP" Parameter="iP" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="IsDeleted" Parameter="isDeleted" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="view_home" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="view_offer" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="view_website" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="Arrived" Parameter="arrived" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="DistinationID" Parameter="distinationID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="TransmissionID" Parameter="transmissionID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="OwnerID" Parameter="ownerID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="WesitePrice" Parameter="wesitePrice" Type="System.Decimal" DbType="Money" />
+    <Parameter Name="Visitors" Parameter="visitors" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ShippingCalcID" Parameter="shippingCalcID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="PayInvTypeID" Parameter="payInvTypeID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="UserID" Parameter="userID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="AccidentStatusID" Parameter="accidentStatusID" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="AuctionID" Parameter="auctionID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="SaleTypeID" Parameter="saleTypeID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ToSaleClientID" Parameter="toSaleClientID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="WithoutShipping" Parameter="withoutShipping" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="IsGulfOldCars" Parameter="isGulfOldCars" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="SalePriceDemand" Parameter="salePriceDemand" Type="System.Boolean" DbType="Bit" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CarsData_SelectRow" Method="CarsData_SelectRow">
+    <Parameter Name="CarID" Parameter="carID" Type="System.Int64" DbType="BigInt" />
+    <ElementType Name="CarsData_SelectRowResult">
+      <Column Name="CarID" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="ChassisNo" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="InvoiceDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="LotNo" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PayTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PayPrice" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="ShipperID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="RegionID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="BuyerID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ModelID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="WorkingStatusID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ColorID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Year" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Notes" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="IP" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="RegionEn" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="PayTypeName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="WorkingStatusName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="TypeNameEn" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="MakerNameEn" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="ShipCompanyNameEn" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="BuyerName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="WesitePrice" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="DistinationNameAr" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="OwnerName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ShippingCalcName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Sold" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Arrived" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="MainPicture" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="ClientID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="AuctionID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MakerID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DistinationID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="OwnerID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TransmissionID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="view_website" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="view_offer" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="view_home" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="ShippingCalcID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Visitors" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TypeNameAr" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="MakerNameAr" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="ColorNameEn" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="ColorNameAr" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="DistinationNameEn" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="full_name" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="ReceiveWithPaper" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="TransmissionNameEn" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="TransmissionNameAr" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="CarCredit" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="CarDebit" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="CarTitle" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="CarTitleDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="RealArrivalDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="AuctionName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="CustomsOnCar" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Paid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PayInvTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ClientBuyerID" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="AddDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="AccidentStatusID" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="AccidentType" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="CarTitleAmrica" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="IsEdit" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="PayInvoicePaymentsID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IsShippingCarPaid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SaleTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SaleClientName" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="SaleClientID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="phone" Type="System.String" DbType="NVarChar(55)" CanBeNull="true" />
+      <Column Name="ToSaleClientID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="WithoutShipping" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="PayReceiptID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IsGulfOldCars" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="SaleClientName1" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="Bol" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="ShippInvoiceNo" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="SalePriceDemand" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.CarSaleInvoices_SelectCarToSale" Method="CarSaleInvoices_SelectCarToSale">
+    <Parameter Name="CarID" Parameter="carID" Type="System.Int64" DbType="BigInt" />
+    <ElementType Name="CarSaleInvoices_SelectCarToSaleResult">
+      <Column Name="CarID" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="MakerNameEn" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="TypeNameEn" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="ChassisNo" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="LotNo" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PayPrice" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Year" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DistinationID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ArrivalDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ContainerNo" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="ClientID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="full_name" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="PayTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="RegionCommissionJor" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="user_type" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ColorNameAr" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="SaleTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CarSizeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ToSaleClientID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="RegionEn" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="ShipCompanyNameEn" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="ShippingCalcID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PayInvTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SalePriceDemand" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.Clients_InsertUpdate" Method="Clients_InsertUpdate">
+    <Parameter Name="ClientID" Parameter="clientID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="user_name" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="user_password" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="full_name" Type="System.String" DbType="NVarChar(200)" />
+    <Parameter Name="email" Type="System.String" DbType="NVarChar(200)" />
+    <Parameter Name="country" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="phone" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="phone2" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="send_sms" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="send_email" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="active" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="delete_result" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="countryCode" Type="System.String" DbType="NChar(5)" />
+    <Parameter Name="countryCode2" Type="System.String" DbType="NChar(5)" />
+    <Parameter Name="user_type" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Notes" Parameter="notes" Type="System.String" DbType="NVarChar(1500)" />
+    <Parameter Name="MasterID" Parameter="masterID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.CarsData_SelectDetails" Method="CarsData_SelectDetails">
+    <Parameter Name="CarID" Parameter="carID" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="LotNo" Parameter="lotNo" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="Any" Parameter="any" Type="System.Int32" DbType="Int" />
+    <ElementType Name="CarsData_SelectDetailsResult">
+      <Column Name="CarID" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="ChassisNo" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="InvoiceDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="LotNo" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PayPrice" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Year" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DistinationID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Notes" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="IP" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="RegionEn" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="PayTypeName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="WorkingStatusName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ShipperID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ShipCompanyNameEn" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="BuyerName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="WesitePrice" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="DistinationNameAr" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="OwnerName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="ShippingCalcName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Sold" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Arrived" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="MainPicture" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="view_website" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="view_offer" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="view_home" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="ShippingCalcID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Visitors" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TypeNameAr" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="MakerNameAr" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="ColorNameAr" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="full_name" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="ReceiveWithPaper" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="SoldClientName" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="SalePrice" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="SaleInvoiceID" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="CarCredit" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="CarDebit" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="CarTitle" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="CarTitleDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="RealArrivalDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="AuctionName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Bol" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="ShippInvoiceNo" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="ContainerNo" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="ArrivalDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="PayInvTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="AddDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="TransmissionNameEn" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="AccidentType" Type="System.String" DbType="VarChar(1) NOT NULL" CanBeNull="false" />
+      <Column Name="CarTitleAmrica" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="PayInvoicePaymentsID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IsShippingCarPaid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PayClientID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SaleClientID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IsGulfOldCars" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="WithoutShipping" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="CarPaper" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="NextID" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="SaleInvoiceDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="PrevID" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="SaleTypeName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="SalePriceDemand" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="DeleteReason" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+</Database>

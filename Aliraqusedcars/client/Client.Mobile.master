@@ -1,0 +1,23 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Client.Mobile.master.cs" Inherits="client_Client_Mobile" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+    <title><%: Page.Title %> شركة العراق لتجارة السيارات</title>
+    <link rel="stylesheet" href="//fonts.googleapis.com/earlyaccess/droidarabickufi.css" />
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="/Content/iraq/iraq-styles.min.css?v=1.5" rel="stylesheet" />
+    <link href="/App_Themes/client/css/main.min.css" rel="stylesheet" />
+    <link href="/App_Themes/client/css/mobile.min.css" rel="stylesheet" />
+    <script src="/Scripts/app.min.js?v=1.8"></script>
+    <asp:ContentPlaceHolder ID="head" runat="server" />
+</head>
+<body>
+    <asp:ContentPlaceHolder ID="ContentBanner" runat="server" />
+    <asp:ContentPlaceHolder ID="ContentMain" runat="server" />
+    <script src="/Scripts/plugins/iraqcars-login.min.js?v=1.1"></script>
+</body>
+</html>

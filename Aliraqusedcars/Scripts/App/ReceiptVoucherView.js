@@ -1,0 +1,198 @@
+﻿var
+    ReceiptVoucher = function () {
+        var
+            searchParm = {
+                cid: '',
+                BankID: '',
+                from: '',
+                to: '',
+                groupID: ''
+            },
+
+            Init = function () {
+                filllistItems();
+
+                pageEvents();
+            },
+
+            pageEvents = function () {
+                $('#SearchAll').on('click', function (e) {
+                    e.preventDefault();
+
+                    // get search parameters
+                    searchParm.cid = $('#ClientID').val();
+                    searchParm.BankID = $('#BankID').val() != '' ? $('#BankID').val() : '';
+                    searchParm.from = commonManger.dateFormat($('#From').val()) != '' ? commonManger.dateFormat($('#From').val()) : '';
+                    searchParm.to = commonManger.dateFormat($('#To').val()) != '' ? commonManger.dateFormat($('#To').val()) : '';
+                    searchParm.groupID = $('#ExpenseTypeGroupID').val();
+
+                    updateGrid();
+                });
+
+                // apply cancellation
+                $('#cancelModal .modal-footer .btn-danger').on('click', function (e) {
+                    e.preventDefault();
+                    var _payID = $('#ReceiptID').val(), reason = $('#DeleteReason').val();
+
+                    if (_payID && reason != '') { // not empty
+                        // delete parameters
+                        var names = ['ReceiptID', 'DeleteReason'], values = [_payID, reason],
+                            functionName = "ReceiptVouchers_Delete", DTO = { 'actionName': functionName, 'names': names, 'values': values };
+                        dataService.callAjax('Post', JSON.stringify(DTO), sUrl + 'saveData', successDelete, commonManger.errorException);
+                    } else {
+                        commonManger.showMessage('حقول مطلوبة', 'يرجي ادخال سبب الإلغاء أولاً.');
+                        $('#DeleteReason').focus();
+                    }
+                });
+            },
+
+            successDelete = function (data) {
+                data = data.d;
+                $('.modal').modal('hide');
+                commonManger.showMessage('تم تنفيذ الإجراء بنجاح.', data.message);
+                if (data.Status) {
+                    updateGrid();
+                }
+            },
+            delButton = function () {
+                var _delBtn = '<button class="btn btn-minier btn-danger remove" data-rel="tooltip" data-placement="top" data-original-title="حــذف"><i class="icon-remove"></i></button> ', deleteMe = commonManger.fullRoles();
+                return deleteMe ? _delBtn : '';
+            },
+            updateGrid = function () {
+                $('#listItems').DataTable().draw();
+            },
+            filllistItems = function () {
+                var pTable = $('#listItems').DataTable({
+                    "sDom": "<'row-fluid'<'span6'l><'span6 lft-pane'BT>r>t<'row-fluid'<'span6'i><'span6'p>>",
+                    buttons: [{ extend: 'csv', text: 'تصدير إكسيل' },
+                    {
+                        text: 'طباعة',
+                        action: function (e, dt, node, config) {
+                            $('.dataTables_length,.form-horizontal').closest('div.row-fluid').addClass('hidden-print');
+                            window.print();
+                        }
+                    }
+                    ],
+                    "bDestroy": true,
+                    "bServerSide": true, responsive: true, stateSave: true,
+                    "sAjaxSource": sUrl + "LoadDataTablesXML",
+                    "fnServerParams": function (aoData) {
+                        var filterVals = searchParm.cid + '~' + searchParm.BankID + '~' +
+                            searchParm.from + '~' + searchParm.to + '~' + searchParm.groupID;
+
+                        aoData.push({ "name": "funName", "value": 'ReceiptVouchers_SelectList' },
+                            { "name": "names", "value": 'ClientID~BankID~From~To~GroupID' },
+                            { "name": "values", "value": filterVals });
+                    },
+                    "fnServerData": function (sSource, aoData, fnCallback) {
+                        dataService.callAjax('GET', aoData, sSource, function (data) { // get data as json format from xml
+                            commonManger.setData2Grid(data, aoData.sEcho, fnCallback);
+                        }, commonManger.errorException);
+                    },
+                    "fnFooterCallback": function (nFoot, aData, iStart, iEnd, aiDisplay) {
+                        var tot = 0;
+                        for (var i = 0; i < aData.length; i++) {
+                            tot += aData[i]["Amount"] * 1;
+                        }
+                        $('strong.debit').text(numeral(tot).format('0,0'));
+                    },
+                    "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+                        if (aData.DeleteFromClientBalance === 'true')
+                            $(nRow).addClass("warning").attr('title', 'ملغي من رصيد العميل');
+
+                        if (aData.HideClientBalance === 'false' && aData.full_name)
+                            $(nRow).find('td:eq(2)').append("<i title='لم يعتمد فى رصيد العميل' class='icon-exclamation-sign blue pull-left'></i>");
+                    },
+                    "aaSorting": [],
+                    "iDisplayLength": 50,
+                    "aoColumns": [
+                        {
+                            "mDataProp": "ReceiptID",
+                            "bSortable": true,
+                            "type": 'number'
+                        }, {
+                            "mDataProp": "AddDate",
+                            "bSortable": true,
+                            "mData": function (data) {
+                                return commonManger.formatJSONDateCal(data.AddDate);
+                            }
+                        }, {
+                            "mDataProp": "RecieptTypeName",
+                            "bSortable": true,
+                            "mData": function (d) {
+                                return d.RecieptTypeName ? d.RecieptTypeName : '';
+                            }
+                        },
+                        {
+                            "mDataProp": "FromName",
+                            "bSortable": true,
+                            "mData": function (data) {
+                                return (data.full_name ? data.full_name : data.FromName) +
+                                    (data.IsSig === '1' ? '<i data-rel="tooltip" title="تم التوقيع" class="pull-left orange icon-pencil"></i>' : '') + (data.PayTypeID === '3' ? '<i data-rel="tooltip" title="حـوالــة" class="pull-left icon-briefcase"></i>' : '');
+                            }
+                        },
+                        {
+                            "mDataProp": "BankCheckNo",
+                            "bSortable": false,
+                            "mData": function (d) {
+                                return d.BankCheckNo ? d.BankCheckNo : '';
+                            }
+                        },
+                        {
+                            "mDataProp": "BankName",
+                            "bSortable": false,
+                            "mData": function (d) {
+                                return d.BankName ? d.BankName : '';
+                            }
+                        },
+                        {
+                            "mDataProp": "Amount",
+                            "bSortable": false,
+                            "mData": function (d) {
+                                return numeral(d.Amount).format('0,0');
+                            }
+                        },
+                        {
+                            "mDataProp": "AmountDhs",
+                            "bSortable": false,
+                            "mData": function (d) {
+                                return numeral(d.AmountDhs).format('0,0.00');
+                            }
+                        },
+                        {
+                            "sClass": 'hidden-print',
+                            "bSortable": false,
+                            "mData": function (oObj) {
+                                var revised = '';
+                                if (oObj.Revised === 'false' && oObj.HideClientBalance === 'false') {
+                                    revised = '<a class="btn btn-minier btn-info" href="ReceiptVoucherAdd.aspx?id=' + oObj.ReceiptID + '" title="تعديل"><i class="icon-edit"></i></a> ' +
+                                        delButton();
+                                }
+                                
+                                return revised +
+                                    '<a href="ReceiptVoucherPrint.aspx?id=' + oObj["ReceiptID"] + '" class="btn btn-minier btn-success" data-rel="tooltip" title="طباعة" data-original-title="طباعة"><i class="icon-print"></i></a>';
+                            }
+                        }
+                    ]
+                });
+
+                $("#listItems tbody").delegate("tr button", "click", function (e) {
+                    e.preventDefault();
+                    var self = $(this), pos = self.closest('tr').index(), aData;
+                    if (pos != null) {
+                        if (self.hasClass('remove')) {
+                            var title = "إلغاء إيداع عميل", modalDialog = 'cancelModal';
+                            aData = pTable.row(pos).data(); //get data of the clicked row
+                            $('#ReceiptID').val(aData['ReceiptID']);
+                            $('#AddDate').val(commonManger.formatJSONDateCal(aData['AddDate']));
+                            $('#Amount').val(aData['Amount']);
+                            commonManger.showPopUpDialog(title, '', modalDialog);
+                        }
+                    }
+                });
+            };
+
+        return {
+            Init: Init
+        };
+    }();

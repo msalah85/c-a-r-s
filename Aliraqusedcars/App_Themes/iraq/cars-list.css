@@ -1,0 +1,11 @@
+﻿td img {
+            height: 25px !important;
+        }
+        @media print {
+            .table th, .table td {
+                padding: 5px;
+            }
+            .table tbody td {
+                font-size: 12px !important;
+            }
+        }

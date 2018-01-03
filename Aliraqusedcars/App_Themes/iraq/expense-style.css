@@ -1,0 +1,48 @@
+﻿.editable-input input {
+            width: 85px !important;
+            direction: ltr;
+        }
+
+        .editable-buttons .btn {
+            padding: 0 3px 1px;
+            line-height: 19px;
+        }
+
+        .margin-bottom-5 {
+            margin-bottom: 10px;
+        }
+
+        form {
+            margin: 0 0 1px;
+        }
+
+        #listItems tbody td form {
+            display: inline;
+            float: left;
+        }
+
+        #listItems tbody td strong {
+            vertical-align: text-bottom;
+            line-height: 31px;
+        }
+
+        #listItems tbody .input-medium {
+            font-family: Tahoma;
+        }
+
+        .alert-success form select, .alert-success form input[type=text] {
+            color: #468847;
+            border: 1px solid rgba(135, 173, 120, 0.52);
+        }
+
+        a[data-action="collapse"] {
+            color: #e2e2e2;
+        }
+
+        a[data-action="collapse"] {
+            text-shadow: 0 1px 1px rgba(0,0,0,0.2);
+        }
+
+            a[data-action="collapse"]:hover {
+                text-decoration: none;
+            }

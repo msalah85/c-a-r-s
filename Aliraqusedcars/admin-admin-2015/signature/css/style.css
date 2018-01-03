@@ -1,0 +1,250 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font: 17px/1.5 tahoma, serif;
+    direction: rtl;
+    color: rgba(103, 114, 115, 0.93);
+    background: #808080;
+}
+
+#page-wrap {
+    width: 820px;
+    margin: 3px auto 10px auto;
+    background: #fff;
+}
+
+.wrap-padding {
+    padding: 0 20px 20px 20px;
+}
+
+.logo, .footer {
+    width: 100%;
+}
+
+textarea {
+    border: 0;
+    font: 14px tahoma, Serif;
+    overflow: hidden;
+    resize: none;
+    line-height: 25px;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+    table td, table th {
+        border: 1px solid #DDD;
+        padding: 5px;
+    }
+
+.logo-table td {
+    padding: 0;
+    width: 100%;
+    border: 0;
+}
+
+#header {
+    height: 15px;
+    width: 100%;
+    margin: 20px 0;
+    background: #eee;
+    text-align: center;
+    font: bold 18px Helvetica, Sans-Serif;
+    text-decoration: uppercase; /*letter-spacing: 20px;*/
+    padding: 8px 0px;
+}
+
+#address {
+    width: 250px;
+    height: 150px;
+    float: left;
+}
+
+#customer {
+    overflow: hidden;
+}
+
+.edit #logohelp {
+    display: block;
+}
+
+.edit #save-logo, .edit #cancel-logo {
+    display: inline;
+}
+
+.edit #image, #save-logo, #cancel-logo, .edit #change-logo, .edit #delete-logo {
+    display: none;
+}
+
+#customer-title {
+    font-size: 20px;
+    font-weight: bold;
+    float: left;
+}
+
+#meta {
+    margin-top: 1px;
+    width: 500px;
+    float: right;
+}
+
+    #meta td {
+        text-align: right;
+    }
+
+        #meta td.meta-head {
+            text-align: left;
+            background: #eee;
+            font-family: arial;
+            font-weight: 700;
+        }
+
+textarea.client {
+    height: 20px;
+    text-align: right;
+    line-height: 19px;
+}
+
+#items {
+    clear: both;
+    width: 100%;
+    margin: 25px 0 0 0;
+    border: 1px solid #DDD;
+}
+
+    #items th {
+        background: #eee;
+    }
+
+#contr-desc {
+    height: 95px;padding:5px;
+}
+
+#items tr.item-row td {
+    border: 0;
+    vertical-align: top;
+}
+
+#items td.description textarea, #items td.item-name textarea {
+    width: 98.7%;
+    font-size: 14px;
+    font-family: Tahoma;
+}
+
+#items td.total-line {
+    border-right: 0;
+    text-align: right;
+}
+
+#items td.total-value {
+    border-left: 0;
+    padding: 10px;
+}
+
+    #items td.total-value textarea {
+        height: 20px;
+        background: none;
+    }
+
+#items td.balance {
+    background: #eee;
+}
+
+#items td.blank {
+    border: 0;
+}
+
+#terms {
+    text-align: center;
+    margin: 25px 0 0 0;
+}
+
+textarea:hover, textarea:focus,#header:hover,#header:focus {
+    background: #EEFF88;
+}
+
+#client-signature {
+    height: 200px;
+    overflow: hidden;
+}
+
+.delete-wpr {
+    position: relative;
+    text-align: center;
+}
+
+.btn-group {
+    bottom: -26px;
+    position: absolute;
+}
+
+.delete {
+    display: inline-block;
+    color: #000;
+    text-decoration: none;
+    background: #EEEEEE;
+    font-weight: bold;
+    padding: 0px 3px;
+    border: 1px solid;
+    font-family: Verdana;
+    font-size: 12px;
+}
+
+.pull-left {
+    float: left;
+}
+
+.kbw-signature.fullscreen canvas {
+    position: fixed;
+    margin: 0;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #FFF;
+    border-width: 3px;
+    width: 100%;
+    z-index: 1024;
+}
+
+#sig canvas {
+    cursor: url("pen.cur"), crosshair;
+    cursor: url("pen.cur") 16 16, crosshair;
+}
+
+.group-right {
+    position: absolute;
+    border: 5px solid #aaa;
+    background: #aaa;
+    right: 0px;
+    bottom: 0px;
+}
+
+.kbw-signature {
+    width: 99.7%;
+    height: 98%;
+    direction: ltr;
+}
+
+textarea:disabled {
+    background: none;
+}
+
+a, a:visited {
+    color: #226882;
+}
+
+#ui-datepicker-div {
+    font-size: 62.5%;
+}
+
+.reexport-table thead th {
+    font-family: Arial;
+}
+#CarPaperTypeID{float:left;margin-left:20px;}
+.hidden{display:none}
+.shipper tr,.shipper td,.space tr,.space td{border:0}

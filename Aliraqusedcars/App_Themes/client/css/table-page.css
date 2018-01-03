@@ -1,0 +1,61 @@
+﻿.modal-header h4 {
+            color: #fff;
+        }
+
+        .text-fade {
+            color: #d3d1d1;
+        }
+
+        a.model {
+            font-size: 12px;
+        }
+
+        @media print {
+            .white-area:before {
+                content: "شركة العراق لتجارة السيارات المستعملة وقطع الغيار ذ.م.م - www.iraqusedcars.ae";
+            }
+        }
+
+        .sub-menu {
+            margin: -20px -20px 20px;
+            text-align: center;
+        }
+
+        .dataTables_wrapper {
+            border: 1px solid #ebebeb;
+            -webkit-border-radius: 3px;
+            -webkit-background-clip: padding-box;
+            -moz-border-radius: 3px;
+            -moz-background-clip: padding;
+            border-radius: 3px;
+            background-clip: padding-box;
+            background: #f1f1f1;
+        }
+
+            .dataTables_wrapper > div {
+                padding: 10px;
+            }
+
+
+        .table-bordered > thead > tr > th, .table-bordered > thead > tr > td {
+            background-color: #e8e8e8;
+            border-bottom-width: 0px;
+            color: #808080;
+            border-bottom: 0 !important;
+        }
+
+        div.dataTables_wrapper div.dataTables_filter {
+            text-align: left;
+        }
+
+        button.dt-button, div.dt-button, a.dt-button {
+            padding: 0.23em 0.5em;
+        }
+
+        .dataTables_wrapper .row:first-child,
+        .dataTables_wrapper .row:last-child {
+            padding: 10px 7px 0 9px;
+        }
+s {
+    color: #a94442
+}

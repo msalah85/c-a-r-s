@@ -1,0 +1,135 @@
+﻿.invoice-head td {
+    padding: 1px 8px;
+}
+
+.invoice-body {
+    background-color: transparent;
+}
+
+.invoice-thank {
+    margin-top: 25px;
+    padding: 12px;
+}
+
+address {
+    margin-top: 15px;
+    display: flex;
+}
+
+.invoice-logo-info {
+    margin: 0 !important;
+}
+
+.invoice-body.well {
+    padding: 0;
+}
+
+.thumbnail {
+    border: none;
+}
+
+.invoice-body table {
+    margin-bottom: 0;
+}
+
+    .invoice-body table tr:first-child td {
+        border-top: 0;
+    }
+
+    .invoice-body table tr td {
+        padding: 6pt;
+    }
+
+.ace-thumbnails li img {
+    width: 215.3px;
+    height: 160px;
+}
+
+
+.ace-thumbnails > li {
+    border: none;
+    width: 48%;
+}
+@media (max-width: 767px) {
+    .row-fluid .span6 {
+        display: block;
+        float: right;
+        width: 49%;
+        margin-right: 10px;
+    }
+
+    .ace-thumbnails li {
+        width: 47%;
+    }
+
+        .ace-thumbnails li img {
+            width: 100%;
+            height: auto;
+        }
+}
+
+.alert strong {
+    font-size: 13px;
+}
+
+
+/*-------------*/
+img.img-print {
+    margin: 0;
+    width: 100%;
+}
+
+header, footer {
+    display: none;
+}
+@media print {
+    #breadcrumbs {
+        display: none;
+        visibility: hidden;
+    }
+
+    body {
+        margin: 0.3cm 0.4cm 0 0.3cm;
+    }
+
+    @page {
+        margin: 1px 5px 0 0;
+        /*mso-title-page: yes;
+        mso-page-orientation: Portrait;
+        mso-header: header;
+        mso-footer: footer;
+
+        @bottom-left {
+            content: counter(page);
+            color: black;
+        }*/
+    }
+
+    img.img-print {
+        margin: 0;
+        width: 100%;
+    }
+
+    @page:first {
+        size: A4;
+    }
+
+    header, footer {
+        display: block;
+    }
+
+    .paged {
+        /*page-break-after: always;
+        margin-top: 10px;
+        clear: both;*/
+    }
+
+    footer {
+        /*page-break-before: always;
+        position: relative;        
+        top: -100px;
+        margin-bottom:-100px;
+        display: block;
+        bottom: 7px;*/
+    }
+}

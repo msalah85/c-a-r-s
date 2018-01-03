@@ -1,0 +1,28 @@
+﻿
+
+#page-content {
+    width: auto;
+    margin: 0 10px;
+    padding: 0;
+    border: 0;
+    float: none !important;
+}
+table tr td {
+    font-size: 12pt;
+    font-family:Tahoma;
+}
+@media print {
+body {background: #808080;font-size: 12pt;}
+table tr td {
+    font-size: 12pt;
+    font-family:Tahoma;
+}
+    .visible-print {
+        display: block !important;
+    }
+
+    .hidden-print {
+        display: none !important;
+        visibility: visible !important;
+    }
+}

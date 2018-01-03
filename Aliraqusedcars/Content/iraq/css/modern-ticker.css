@@ -1,0 +1,151 @@
+﻿@charset "utf-8";
+.modern-ticker {
+	font-size: 14px;
+    height: 34px;
+    line-height: 30px;
+    overflow: hidden;
+    width: 100%;
+}
+.modern-ticker a {
+	text-decoration:none
+}
+.modern-ticker ul {
+	margin:0;
+	padding:0;
+	list-style:none
+}
+.mt-round {
+	border-radius:7px
+}
+.mt-body {
+	margin:2px;
+	position:relative
+}
+.mt-label {
+	right: 0;
+    margin-right: 0;
+    padding: 0 8px 0 12px;
+    position: absolute;
+	color:#1a4a57;
+	font-weight:bold;
+}
+.mt-round .mt-label {
+	
+}
+.mt-news {
+	overflow:hidden;
+	position:absolute
+}
+.mt-scroll .mt-news {
+	background-color:transparent
+}
+.mt-news ul {
+	background-repeat:no-repeat;
+	background-position:-1000px
+}
+.mt-news li {
+	float:right
+}
+.mt-round .mt-news:first-child, .mt-round .mt-news:first-child a {
+	border-top-left-radius:5px;
+	border-bottom-left-radius:5px
+}
+.mt-round .mt-news:last-child, .mt-round .mt-news:last-child a {
+	border-top-right-radius:5px;
+	border-bottom-right-radius:5px
+}
+.mt-news a {
+	  background-image: url("../images/marque-icnn.png");
+    background-position: 7px center;
+    background-repeat: no-repeat;
+    display: block;
+    font-size: 14px;
+    margin-left: 0;
+    padding-left: 73px;
+    white-space: nowrap;
+    padding-right: 12px;
+}
+.mt-scroll.mt-round .mt-news a {
+	border-radius:0
+}
+.mt-hide {
+	display:none
+}
+.mt-controls {
+margin-left: 0;
+    position: absolute;
+    left: 0;
+}
+.mt-next, .mt-play, .mt-prev {
+	width:30px;
+	height:30px;
+	background-repeat:no-repeat;
+	background-position:center;
+	float:left;
+	cursor:pointer
+}
+.mt-round .mt-next {
+	border-radius:0 5px 5px 0
+}
+#layout1 div { }
+
+@charset "utf-8";
+.modern-ticker {
+	  background-color: transparent;
+    color: #fff;
+}
+.mt-label {
+	
+}
+.mt-news {width: 80%!important;max-height:70px!important; margin-right: 85px;}#home-news {height: 25px;}
+.mt-preloader {background:url(images/preloader.gif) no-repeat center}
+.mt-news ul {
+	
+}
+.mt-news a {
+	  color: #fff;
+}
+.mt-news a:hover {
+	color:#fafafa;
+	
+}
+.mt-news a:active {
+	background-color:#feae0b
+}
+.mt-controls {
+	
+}
+.mt-next, .mt-prev {
+	
+}
+.mt-prev {
+	
+}
+.mt-next {
+	
+}
+.mt-play {
+	
+
+}
+.mt-pause {
+	
+}
+.mt-next:hover, .mt-play:hover, .mt-prev:hover {
+	
+}
+.mt-next:active, .mt-play:active, .mt-prev:active {
+	
+}
+.filter-marque .mt-controls .glyphicon{color:#797979;}
+.filter-marque , .filter-marque a , .filter-marque div , .filter-marque span{color:#797979;}
+.filter-marque	.mt-news a{padding: 16px 18px;}
+.filter-marque{border-bottom:2px solid #e3e3e3;}
+.filter-marque .mt-body {margin: 0;}
+.filter-marque .modern-ticker {
+    font-size: 14px;
+    height: 70px;
+    line-height: 38px;}
+.filter-marque .mt-news li {}
+ .filter-marque .mt-label { margin-top: 17px;margin-right: 7px;font-size: 13px;font-weight: normal;}
+.filter-marque .mt-next, .filter-marque .mt-play, .filter-marque .mt-prev {margin-top: 17px;}

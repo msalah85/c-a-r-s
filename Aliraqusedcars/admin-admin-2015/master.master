@@ -1,0 +1,260 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="master.master.cs" Inherits="Admin_Iraq_Admin" EnableViewState="false" %>
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ar" dir="rtl">
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link type="image/x-icon" href="~/favicon.ico" rel="shortcut icon" />
+    <meta name="Copyright" content="جميع الحقوق محفوظة ل شير لتصميم مواقع الانترنت - شركة العراق لتجارة السيارات المستعمله - 2014" />
+    <title><%: Page.Title %> شركة العراق لتجارة السيارات المستعمله</title>
+    <meta name="description" content="شير لتصميم مواقع الانترنت - شركة العراق لتجارة السيارات المستعمله" />
+    <link href="//fonts.googleapis.com/earlyaccess/droidarabickufi.css" rel="stylesheet" />
+    <meta name="author" content="www.share-web-design.com, eng.msalah.abdullah@gmail.com" />
+    <base id="appUrl" href="/admin-admin-2015/" target="_self"/><!--[if IE]></base><![endif]-->
+    <!--[if IE]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/selectivizr/1.0.2/selectivizr-min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script><![endif]-->
+    <asp:PlaceHolder runat="server">
+        <link rel="stylesheet" href="<%:Settings.Config.CDN%>/Scripts/anim/css/animsition.min.css" />
+        <link rel="stylesheet" href="<%:Settings.Config.CDN%>/App_Themes/iraq/allcss.css?v=3.3" id="appStyles" />
+        <script id="appScripts" src="<%:Settings.Config.CDN%>/App_Themes/iraq/js/app.min.js?v=7.5"></script>
+        <script src="<%:Settings.Config.CDN%>/Scripts/anim/js/animsition.min.js"></script>
+    </asp:PlaceHolder>
+    <asp:ContentPlaceHolder ID="head" runat="server" />    
+</head>
+<body data-iscached="0" data-hasupdate="0" data-isautoupdating="0" data-haslogs="0">
+    <div id="UpdateProgress1" style="display: none" role="status" aria-hidden="true">
+        <div class="progresss">جارى التحميل ...</div>
+    </div>
+    <div class="navbar navbar-inverse hidden-print">
+        <div class="navbar-inner">
+            <div class="container-fluid">
+                <a href="Home.aspx" class="brand"><i class="icon-th"></i>
+                    <small>شركة العراق لتجارة السيارات</small></a><ul class="nav ace-nav pull-left">
+                        <li id="noti1" runat="server" class="purple noti-li">
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="javascript:void(0);" data-type="1">
+                                <i class="icon-bell-alt icon-animated-bell"></i>
+                                <span class="badge badge-important divDangerCounts">0</span>
+                            </a>
+                            <ul class="pull-right dropdown-navbar navbar-pink dropdown-menu dropdown-caret dropdown-closer noti-list">
+                                <li class="nav-header">
+                                    <i class="icon-warning-sign"></i>
+                                    تنبيهات 
+                                    <span class="divDangerCounts">0</span></li>
+                            </ul>
+                        </li>
+                        <li id="noti2" runat="server" class="dark-yellow noti-li">
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="javascript:void(0);" data-type="0">
+                                <i class="icon-globe"></i>
+                                <span class="badge badge-yellow divWarningCounts">0</span>
+                            </a>
+                            <ul class="pull-right dropdown-navbar dropdown-menu navbar-yellow dropdown-caret dropdown-closer noti-list">
+                                <li class="nav-header">
+                                    <i class="icon-globe"></i>
+                                    إشعارات
+                                    <span class="divWarningCounts">0</span>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="light-blue user-profile"><a data-toggle="dropdown" href="#" class="user-menu dropdown-toggle">
+                            <span id="user_info"><small>مــرحباً بك،</small>
+                                <asp:Label ID="lblAdminName" runat="server">مدير النظام</asp:Label>
+                            </span><i class="icon-caret-down"></i></a>
+                            <ul class="pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-closer" id="user_menu">
+                                <li><a href='home#user' id="linkEditMe" runat="server"><i class="icon-user"></i>الملف الشخـــصى
+                                </a></li>
+                                <li><a href="/" target="_blank"><i class="icon-home"></i>الذهاب للموقع
+                                </a></li>
+                                <li class="divider"></li>
+                                <li><a class="normal" href="default.aspx"><i class="icon-off"></i>تسجيـــل الخــــروج
+                                </a></li>
+                            </ul>
+                        </li>
+                    </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid" id="main-container">
+        <a id="menu-toggler" href="#"><span></span></a>
+        <div id="sidebar" class="hidden-print" runat="server" clientidmode="Static">
+            <div class="sidebar-shortcuts" id="sidebar-shortcuts">
+                <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large"><a title="عرض العملاء" href="clients.aspx" class="btn btn-small btn-danger"><i class="icon-user"></i></a><a href="available/1/carslist.aspx" title="إنشاء فاتورة بيع" class="btn btn-small btn-warning"><i class="icon-desktop"></i></a><a href="InvoicesPayView.aspx" title="عرض السيارات" class="btn btn-small btn-purple"><i class="icon-car"></i></a><a href="InvoicePayAdd.aspx" title="فاتورة شراء" class="btn btn-small btn-info"><i class="icon-pencil"></i></a></div>
+                <div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini"><span class="btn btn-purple"></span><span class="btn btn-info"></span><span class="btn btn-warning"></span><span class="btn btn-danger"></span></div>
+            </div>
+            <ul class="nav nav-list">
+                <li class="open"><a href="#" class="dropdown-toggle"><i class="icon-pencil"></i><span>المشتـــريات</span> <b class="arrow icon-angle-down"></b></a>
+                    <ul class="submenu">
+                        <li><a class="animsition-link" href="InvoicePayAdd.aspx"><i class="icon-double-angle-left"></i>اضــافة سيــارة f6</a></li>
+                        <li><a class="animsition-link" href="InvoiceShippingAdd.aspx"><i class="icon-double-angle-left"></i>اضافة فاتورة
+شحن f7</a></li>
+                        <li><a class="animsition-link" href="InvoiceCustomsAdd.aspx"><i class="icon-double-angle-left"></i>اضافة فاتورة تخليص f8</a></li>
+                        <li><a class="animsition-link" href="ShippersBinding.aspx" title="توزيع الشاحنين"><i class="icon-double-angle-left"></i>توزيع الشاحنين</a></li>
+                        <li><a class="animsition-link" href="america/carnotes.aspx" title="السيارات المنتظرة عند الشاحن"><i class="icon-double-angle-left"></i>السيارات المنتظرة f9</a></li>
+                    </ul>
+                </li>
+                <li class="open"><a href="#" class="dropdown-toggle"><i class="icon-desktop"></i><span>المبيـــعات</span>
+                    <b class="arrow icon-angle-down"></b></a>
+                    <ul class="submenu">
+                        <li><a href="clients.aspx"><i class="icon-double-angle-left"></i>العمـــــــــــلاء f1</a></li>
+                        <li><a href="carsview.aspx"><i class="icon-double-angle-left"></i>السيارات المتاحه f2</a></li>
+                        <li><a href="ClientsPaymentsAdd.aspx"><i class="icon-double-angle-left"></i>إيــداع عمــــيل f3</a></li>
+                        <li><a href="PartsAdd.aspx"><i class="icon-double-angle-left"></i>فاتورة قطع غيار f4</a></li>
+                    </ul>
+                </li>
+
+                <li><a href="#" class="dropdown-toggle"><i class="icon-file-alt"></i><span>الســـــندات</span>
+                    <b class="arrow icon-angle-down"></b></a>
+                    <ul class="submenu">
+                        <li><a href="ReceiptVoucherAdd.aspx" title="اضافة سند قبض"><i class="icon-double-angle-left"></i>سند قبض</a></li>
+                        <li><a href="ReceiptVoucherView.aspx" title="عرض سندات القبض"><i class="icon-double-angle-left"></i>عرض سندات القبض</a></li>
+                        <li><a href="ClientPaymentsReview.aspx" title="ترحيل سندات القبض للبنك"><i class="icon-double-angle-left"></i>ترحيل سندات القبض</a></li>
+                        <li><a href="ReceiptPaymentsAdd.aspx" title="اضافة سند صرف"><i class="icon-double-angle-left"></i>سند صرف</a></li>
+                        <li><a href="ReceiptPaymentsView.aspx" title="عرض سندات الصرف"><i class="icon-double-angle-left"></i>عرض سندات الصرف</a></li>
+                        <li><a href="ClientBonusAdd.aspx" title="خصم مكتسب لعميل"><i class="icon-double-angle-left"></i>خصم مكتسب لعميل</a></li>
+                        <li><a href="ClientBonusView.aspx" title="عرض خصومات العميل"><i class="icon-double-angle-left"></i>عرض خصومات العميل</a></li>
+                    </ul>
+                </li>
+                <li><a href="#" class="dropdown-toggle"><i class="icon-credit-card"></i><span>الحــــوالات</span>
+                    <b class="arrow icon-angle-down"></b></a>
+                    <ul class="submenu">
+                        <li><a href="PayInvoicePaymentDetails.aspx"><i class="icon-double-angle-left"></i>إعداد حوالة شراء</a></li>
+                        <li><a href="payinvoicepaymentspendingprint.aspx" title="طباعة قيم البيرات وإنشاء سند الصرف"><i class="icon-double-angle-left"></i>طباعة البيرات قيد الدفع</a></li>
+                        <li><a href="PayInvoicePayments.aspx?pend=1"><i class="icon-double-angle-left"></i>حوالات الشراء قيد الدفع</a></li>
+                        <li><a href="ShipInvoicePaymentsDetails.aspx"><i class="icon-double-angle-left"></i>إعداد حوالة الشحن</a></li>
+                        <li><a href="ShipInvoicePayments.aspx?type=1"><i class="icon-double-angle-left"></i>حوالات الشحن قيد الدفع</a></li>
+                        <li><a href="CustomspaymentsDetails.aspx"><i class="icon-double-angle-left"></i>إعداد حوالة التخليص</a></li>
+                        <li><a href="CustomsPayments.aspx?pend=1"><i class="icon-double-angle-left"></i>حوالات التخليص قيد الدفع</a></li>
+                        <li><a href="AuctionCommissionAdd.aspx"><i class="icon-double-angle-left"></i>حوالة عمولة البيرات</a></li>
+                    </ul>
+                </li>
+                <li><a href="#" class="dropdown-toggle"><i class="icon-print"></i><span>فواتير وتقارير</span>
+                    <b class="arrow icon-angle-down"></b></a>
+                    <ul class="submenu">
+                        <li><a href="InvoicesPayView.aspx"><i class="icon-double-angle-left"></i>تقرير فواتير الشراء</a></li>
+                        <li><a href="WebsiteCarsView.aspx"><i class="icon-double-angle-left"></i>تقرير عرض البيع السريع</a></li>
+                        <li><a href="InvoicesShippBolView.aspx" title="بحث أرقام الحجز للحاويات"><i class="icon-double-angle-left"></i>أرقام الحجز للحاويات</a></li>
+                        <li><a href="InvoicesShippView.aspx"><i class="icon-double-angle-left"></i>عرض فواتير الشحن</a></li>
+                        <li><a href="invoicesshippratesview.aspx"><i class="icon-double-angle-left"></i>تقرير معدل اسعار الشحن</a></li>
+                        <li><a href="ContainersToCome.aspx?all=0"><i class="icon-double-angle-left"></i>حاويات بالطريق</a></li>
+                        <li><a href="ShipperContainers.aspx"><i class="icon-double-angle-left"></i>حصر حاويات</a></li>
+                        <li><a href="InvoicesCustomsView.aspx"><i class="icon-double-angle-left"></i>عرض فواتير التخليص</a></li>
+                        <li><a href="InvoicesSaleView.aspx"><i class="icon-double-angle-left"></i>تقرير فواتير البيع</a></li>
+                        <li><a href="PartsView.aspx"><i class="icon-double-angle-left"></i>فواتير قطع الغيار</a></li>
+                        <li><a href="PayInvoicePayments.aspx"><i class="icon-double-angle-left"></i>تقرير حوالات الشراء</a></li>
+                        <li><a href="ShipInvoicePayments.aspx"><i class="icon-double-angle-left"></i>تقرير حوالات الشحن</a></li>
+                        <li><a href="CustomsPayments.aspx"><i class="icon-double-angle-left"></i>تقرير حوالات التخليص</a></li>
+                        <li><a href="ClientsPaymentsView.aspx"><i class="icon-double-angle-left"></i>تقرير حوالات العملاء</a></li>
+                        <li><a href="AuctionCommissionView.aspx"><i class="icon-double-angle-left"></i>تقرير حوالات البيرات</a></li>
+                        <li><a href="rpt/ExpensesOnCarReportPrint.aspx"><i class="icon-double-angle-left"></i>كلفة السيارات</a></li>
+                        <li><a href="reexportcarsnorpaperlist.aspx" title="استلام ورق سيارات للتصدير"><i class="icon-double-angle-left"></i>ورق سيارات للتصدير</a></li>
+                        <li><a href="ReExportCarsList.aspx" title="استرجاع تأمينات جمركية"><i class="icon-double-angle-left"></i>استرجاع تأمينات جمركية</a></li>
+                        <li><a href="ReExportInvoicesList.aspx"><i class="icon-double-angle-left"></i>تقرير التأمينات الجمركية</a></li>
+                    </ul>
+                </li>
+                <li><a href="BankBalancesView.aspx"><i class="icon-list-alt"></i><span>البــــــــــــــنك</span></a></li>
+                <li><a href="CashFundsView.aspx"><i class="icon-list-alt"></i><span>النقدية - الصندوق</span></a></li>
+                <li><a href="#" class="dropdown-toggle"><i class="icon-cogs"></i><span>أســـاسيـــــات</span>
+                    <b class="arrow icon-angle-down"></b></a>
+                    <ul class="submenu">
+                        <li><a href="hr/AdvanceOutsideMemebers.aspx"><i class="icon-double-angle-left"></i>جهات السلف الخارجية</a></li>
+                        <li><a href="sms-templates.aspx"><i class="icon-double-angle-left"></i>رسائل الجوال</a></li>
+                        <li><a href="AuctionsTypes.aspx"><i class="icon-double-angle-left"></i>تصنيف الباير</a></li>
+                        <li><a href="Auctions.aspx"><i class="icon-double-angle-left"></i>أسماء المزادات</a></li>
+                        <li><a href="Buyers.aspx"><i class="icon-double-angle-left"></i>أرقام الباير</a></li>
+                        <li><a href="regions.aspx"><i class="icon-double-angle-left"></i>المـــــــــــدن</a></li>
+                        <li><a href="distnations.aspx"><i class="icon-double-angle-left"></i>جهات الوصول</a></li>
+                        <li><a href="ExpenseTypes.aspx"><i class="icon-double-angle-left"></i>أنواع المصروفات</a></li>
+                        <li><a href="ExchangeCompanies.aspx"><i class="icon-double-angle-left"></i>شركات الصرافه</a></li>
+                        <li><a href="ShippingMainCompanies.aspx"><i class="icon-double-angle-left"></i>الشركات الأم</a></li>
+                        <li><a href="ShippingCompanies.aspx"><i class="icon-double-angle-left"></i>شركات الشحن</a></li>
+                        <li><a href="ShippingExpenses.aspx"><i class="icon-double-angle-left"></i>مصروفات الشحن</a></li>
+                        <li><a href="CustomsExpenses.aspx"><i class="icon-double-angle-left"></i>مصروفات التخليص</a></li>
+                        <li><a href="TowingExpenses.aspx"><i class="icon-double-angle-left"></i>مصروفات Towing</a></li>
+                        <li><a href="customscompanies.aspx"><i class="icon-double-angle-left"></i>شركات التخليص الجمركي</a></li>
+                        <li><a href="NavigationCo.aspx" title="شركات الملاحة"><i class="icon-double-angle-left"></i>شركات الملاحة</a></li>
+                        <li><a href="Makers.aspx"><i class="icon-double-angle-left"></i>نوع السيارة</a></li>
+                        <li><a href="Models.aspx"><i class="icon-double-angle-left"></i>موديل السيارة</a></li>
+                        <li><a href="Colours.aspx"><i class="icon-double-angle-left"></i>لون السيارة</a></li>
+                        <li><a href="news.aspx"><i class="icon-double-angle-left"></i>أخبار الشركة</a></li>
+                        <li><a href="pages.aspx"><i class="icon-double-angle-left"></i>صفحات الموقع</a></li>
+                        <li><a href="banksnames.aspx"><i class="icon-double-angle-left"></i>البنـــوك</a></li>
+                        <li><a href="systemsettings.aspx"><i class="icon-double-angle-left"></i>إعدادات النظام</a></li>
+                    </ul>
+                </li>
+                <li class=""><a href="#" class="dropdown-toggle"><i class="icon-group"></i><span>شئون العاملين</span>
+                    <b class="arrow icon-angle-down"></b></a>
+                    <ul class="submenu">
+                        <li><a href="hr/salaryadd.aspx"><i class="icon-double-angle-left"></i>إنشاء الرواتب</a></li>
+                        <li><a href="hr/salaries.aspx"><i class="icon-double-angle-left"></i>عرض الرواتب</a></li>
+                        <li><a href="usersaddedit.aspx"><i class="icon-double-angle-left"></i>مــوظف جديد</a></li>
+                        <li><a href="usersview.aspx"><i class="icon-double-angle-left"></i>عرض المـوظفين</a></li>
+                    </ul>
+                </li>
+                <li><a href="america/carnotes.aspx"><i class="icon-edit"></i><span>تعليقات على السيارة</span></a></li>
+                <li class="del-sec exp"><a href="#" class="dropdown-toggle"><i class="icon-calendar"></i><span>مصروفات عمومية</span>
+                    <b class="arrow icon-angle-down"></b></a>
+                    <ul class="submenu">
+                        <li><a href="CompanyRentsAdd.aspx" title="اضافة إيجار الشركة السنوى"><i class="icon-double-angle-left"></i>إيجار الشركة السنوى</a></li>
+                        <li><a href="CompanyRents.aspx"><i class="icon-double-angle-left"></i>عرض إيجارات الشركة</a></li>
+                        <li><a href="budgetreport.aspx"><i class="icon-double-angle-left"></i>تقرير رأس المال</a></li>
+                        <li><a href="ProfitLossReport.aspx"><i class="icon-double-angle-left"></i>تقرير الأرباح-الخسائر</a></li>
+                    </ul>
+                </li>
+                <li class="del-sec"><a href="#" class="dropdown-toggle"><i class="icon-trash"></i><span>الملغي-المحذوف</span>
+                    <b class="arrow icon-angle-down"></b></a>
+                    <ul class="submenu">
+                        <li><a href="deleted/InvoicesPayViewDeleted.aspx"><i class="icon-double-angle-left"></i>السيارات الملغاه</a></li>
+                        <li><a href="deleted/invoicessaledeleted.aspx"><i class="icon-double-angle-left"></i>فواتير البيع الملغاه</a></li>
+                        <li><a href="deleted/receiptvoucherviewdeleted.aspx"><i class="icon-double-angle-left"></i>سندات القبض الملغاه</a></li>
+                        <li><a href="deleted/clientpaymentsviewdeleted.aspx"><i class="icon-double-angle-left"></i>إيداعات العملاء الملغاه</a></li>
+                        <li><a href="deleted/receiptpaymentsviewdeleted.aspx"><i class="icon-double-angle-left"></i>سندات الصرف الملغاه</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <div id="sidebar-collapse"><i class="icon-double-angle-right"></i></div>
+        </div>
+        <div id="main-content" class="clearfix">
+            <div class="page-contents animsition" id="page-contents">
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server" />
+            </div>
+            <div id="ace-settings-container" class="hidden-print">
+                <div class="btn btn-app btn-mini btn-warning" id="ace-settings-btn">
+                    <i class="icon-cog"></i>
+                </div>
+                <div id="ace-settings-box">
+                    <div>
+                        <div class="pull-right">
+                            <select id="skin-colorpicker" class="hidden">
+                                <option data-class="default" value="#006884">#006884</option>
+                                <option data-class="skin-1" value="#222A2D">#222A2D</option>
+                                <option data-class="skin-2" value="#C6487E">#C6487E</option>
+                                <option data-class="skin-3" value="#D0D0D0">#D0D0D0</option>
+                            </select>
+                        </div>
+                        <span>اختر لون التصميم</span>
+                    </div>
+                    <div>
+                        <input type="checkbox" class="ace-checkbox-2" id="ace-settings-header" />
+                        <label class="lbl" for="ace-settings-header">
+                            ثبت رأس الصفحة</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" class="ace-checkbox-2" id="ace-settings-sidebar" /><label class="lbl" for="ace-settings-sidebar">ثبت القائمة الجانبية</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="#" id="btn-scroll-up" class="btn btn-small btn-inverse hidden-print"><i class="icon-double-angle-up icon-only bigger-110"></i></a>
+    <!--[if IE 7]><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/3.1.0/css/font-awesome-ie7.css" /><![endif]-->
+    <!--[if lte IE 8]><link rel="stylesheet" href="<%: Settings.Config.CDN%>/App_Themes/iraq/css/ace-ie.min.css" /><script src="<%: Settings.Config.CDN%>/Scripts/excanvas.min.js"></script><![endif]-->
+    <div class="stickyFooter hidden-print hidden-phone hidden-480">
+        <form name="searchCarNo" method="get" action="CarDetailsPrint.aspx" accept-charset="UTF-8" class="form-inline">
+            <input class="form-control span2" placeholder="بحث برقم سند القبض" type="text" id="search-receipt-id" size="15" autocomplete="off" />
+            <input class="form-control span2" placeholder="بحث برقم اللوت" type="text" name="lot" size="15" autocomplete="off" />
+            <input class="form-control span2" placeholder="بحث برقم السيارة" type="text" name="id" size="15" autocomplete="off" />
+            <input class="btn btn-inverse btn-mini" type="submit" value="بحــث" />
+        </form>
+    </div>
+    <script src="<%:Settings.Config.CDN%>/App_Themes/iraq/js/master-options.min.js?v=1.3"></script>
+</body>
+</html>

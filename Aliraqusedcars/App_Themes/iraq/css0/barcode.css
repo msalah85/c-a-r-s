@@ -1,0 +1,13 @@
+﻿@page{margin:0px auto;}
+@media print {
+ #header, #footer { 
+    visibility: hidden !important;
+    display: none !important;
+ }
+}
+@font-face {font-family: "FREE 3 OF 9";font-style: normal;font-weight: normal;src: url("../font/FREE3OF9.TTF") format("truetype");}
+@font-face {font-family: "IDAutomationHC39M";font-style: normal;font-weight: normal;src: url("../font/IDAUTOM0.eot?#iefix") format("embedded-opentype"), url("../font/IDAutomationHC39M.ttf") format("truetype"),url("../font/IDAutomationHC39M.otf") format("otf");}
+.resizable{width: 212px;height: 207px;font-family: Tahoma;}
+table thead:hover{cursor: move;}
+.barcode{font-family:IDAutomationHC39M !important;font-size:13px !important;/*line-height:55px !important;font-family:Free 3 of 9*/}
+table{direction:rtl;}

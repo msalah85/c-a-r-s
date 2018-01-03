@@ -1,0 +1,4 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="master2.master.cs" Inherits="admin_admin_2015_master2" EnableViewState="false" ViewStateMode="Disabled" %>
+<title>شركة العراق</title>
+<asp:contentplaceholder id="head" runat="server" />
+<asp:contentplaceholder id="ContentPlaceHolder1" runat="server" />

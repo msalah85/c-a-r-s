@@ -1,0 +1,18 @@
+﻿.ajax__colorPicker td,.ajax__colorPicker th {border: 0 none;height: 12px;margin: 0;padding: 1px;}
+::-moz-selection { background: #F9A386; color: #fff; text-shadow: none; }/*#DAF0FE*/
+::selection { background: #F9A386; color: #fff; text-shadow: none; }
+::-webkit-scrollbar {width: 15px; height:8px; }
+::-webkit-scrollbar-track {background: #FFFFFF;-webkit-box-shadow: inset 1px 1px 2px #E0E0E0;border: 1px solid #D8D8D8;}
+::-webkit-scrollbar-thumb {background: #F88C00;-webkit-box-shadow: inset 1px 1px 2px rgba(155, 155, 155, 0.4);}
+::-webkit-scrollbar-thumb:hover {-webkit-box-shadow: inset 1px 1px 10px rgba(0,0,0,0.3);}
+::-webkit-scrollbar-thumb:active {background: #888;-webkit-box-shadow: inset 1px 1px 2px rgba(0,0,0,0.3);}
+.progresss{width:100px; height:25px;background-repeat:no-repeat;margin-right:100px;padding:3px;position:fixed;border:1px solid #b06d0c;background-color:#005c74;color:#ffffff;z-index:9999999;-moz-box-shadow: 0 0 5px 5px #b06d0c;-webkit-box-shadow: 0 0 5px 5px #b06d0c;box-shadow: 0 0 5px 5px #b06d0c;border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px;right:40%;top: 3px;}
+.progresss-bg{position:fixed;top:0;bottom:0;right:0;left:0;overflow:hidden;padding:0;margin:0;background-color:#000;filter:alpha(opacity=50);opacity:0.5;-moz-opacity: 0.50;z-index:1000;}
+.btn-add{border-style:None;height:24px;width:24px;margin-left: 6px;margin-top: 7px;cursor:pointer;}
+.bg-grayblue{background-color: #F9F9F9;border-color: #B3B3B3;color: #333333;}
+.bg-lightRed{background-color: #F7ECF2!important;background-image: linear-gradient(to bottom, #FFFFFF, #F7ECF2)!important;background-repeat: repeat-x;border-color: #E5BCD4!important;box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset, 0 1px 2px rgba(0, 0, 0, 0.05)!important;color: #B471A0!important;}
+.bg-lightGreen{background-color: #EBF7E4!important;background-image: linear-gradient(to bottom, #FFFFFF, #EBF7E4)!important;background-repeat: repeat-x;border-color: #B4D5AC!important;box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset, 0 1px 2px rgba(0, 0, 0, 0.05)!important;color: #88AA66!important;}
+.datepicker{right:inherit!important;}
+.radioList input[type=radio]{margin-left:5px;}
+.no-border{border:none!important;}label.removeField{display:inline;margin-bottom:0}.text-center{text-align:center!important;}.text-hide{color:#d3d1d1;}.text-black{color:#393939;}
+input.date_range_filter {width:75px}.print-h-margin-right{margin-right:15px;border-bottom: 1px solid #eee;}.btnArchiveList{float: left;padding-top: 0px;}.car-relist{background-color: rgba(254, 227, 209, 0.42);border-color: rgba(255, 106, 0, 0.61);}

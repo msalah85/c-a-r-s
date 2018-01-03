@@ -1,0 +1,183 @@
+﻿.btn-app.btn-inverse {
+    background: #3f3f3f !important;
+}
+
+.accordion dd,
+.accordion__panel {
+    padding: 0;
+    margin: 0;
+    -webkit-margin-start: 0 !important;
+}
+
+.accordion dl dt {
+    margin-bottom: 2px;
+    margin-top: 2px;
+}
+
+.accordionTitle:hover, .accordionTitle:focus {
+    color: #fff;
+}
+
+.accordionTitle,
+.accordion__Heading {
+    background: #3d369c;
+    font-weight: 700;
+    padding: 1em;
+    display: block;
+    text-decoration: none;
+    color: #fff;
+    font-size: 19px;
+    -webkit-transition: background-color 0.5s ease-in-out;
+    transition: background-color 0.5s ease-in-out;
+    border-radius: 4px;
+}
+
+    .accordionTitle:before,
+    .accordion__Heading:before {
+        content: "+";
+        font-size: 1.5em;
+        line-height: 0.5em;
+        float: right;
+        -webkit-transition: -webkit-transform 0.3s ease-in-out;
+        transition: -webkit-transform 0.3s ease-in-out;
+        transition: transform 0.3s ease-in-out;
+        transition: transform 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
+    }
+
+    .accordionTitleActive:before,
+    .accordionTitle.is-expanded:before {
+        -webkit-transform: rotate(-225deg);
+        transform: rotate(-225deg);
+    }
+
+.accordionItem {
+    height: auto;
+    overflow: hidden;
+    max-height: auto;
+    -webkit-transition: max-height 1s;
+    transition: max-height 1s;
+}
+
+@media screen and (min-width: 48em) {
+    .accordionItem {
+        max-height: auto;
+        -webkit-transition: max-height 0.5s;
+        transition: max-height 0.5s;
+    }
+}
+
+.accordionItem.is-collapsed {
+    max-height: 0;
+}
+
+.no-js .accordionItem.is-collapsed {
+    max-height: auto;
+}
+
+.animateIn {
+    -webkit-animation: accordionIn 0.45s normal ease-in-out both 1;
+    animation: accordionIn 0.45s normal ease-in-out both 1;
+}
+
+.animateOut {
+    -webkit-animation: accordionOut 0.45s alternate ease-in-out both 1;
+    animation: accordionOut 0.45s alternate ease-in-out both 1;
+}
+
+@-webkit-keyframes accordionIn {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale(0.9) rotateX(-60deg);
+        transform: scale(0.9) rotateX(-60deg);
+        -webkit-transform-origin: 50% 0;
+        transform-origin: 50% 0;
+    }
+
+    100% {
+        opacity: 1;
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+}
+
+@keyframes accordionIn {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale(0.9) rotateX(-60deg);
+        transform: scale(0.9) rotateX(-60deg);
+        -webkit-transform-origin: 50% 0;
+        transform-origin: 50% 0;
+    }
+
+    100% {
+        opacity: 1;
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+}
+
+@-webkit-keyframes accordionOut {
+    0% {
+        opacity: 1;
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        -webkit-transform: scale(0.9) rotateX(-60deg);
+        transform: scale(0.9) rotateX(-60deg);
+    }
+}
+
+@keyframes accordionOut {
+    0% {
+        opacity: 1;
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        -webkit-transform: scale(0.9) rotateX(-60deg);
+        transform: scale(0.9) rotateX(-60deg);
+    }
+}
+
+.shippingDiv p {
+    margin: 0 0 0.5px !important;
+}
+
+/*buttons*/
+
+.accordion-content p .btn-app {
+    min-width: 155px;
+}
+
+.shippingDiv .btn.btn-app {
+    padding: 3px 0 5px;
+    min-width: 160px;
+}
+
+.shippingDiv .btn-light {
+    color: #222 !important;
+    background-color: #cecece !important;
+    padding: 4.5px 3px !important;
+}
+
+.btn.btn-light:focus, .btn.btn-light:active, .btn.btn-light:active, .btn.btn-light:focus:active, .btn-light-border {
+    border: 2px solid #483f3f !important;
+    background-image: none;
+    outline: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.smaller {
+    font-size: 14px !important;
+}
+
+.shippingDiv .btn.btn-app > [class*=icon] {
+    margin: 0 5px 0 0 !important;
+    line-height: 32px !important;
+}

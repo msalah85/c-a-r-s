@@ -1,0 +1,512 @@
+[
+  {
+    "outputFileName": "Scripts/App/ClientsManager.min.js",
+    "inputFiles": [
+      "Scripts/App/ClientsManager.js"
+    ]
+  },
+  {
+    "outputFileName": "Content/iraq/iraq-styles.min.css",
+    "inputFiles": [
+      "Content/iraq/iraq-styles.css"
+    ]
+  },
+  {
+    "outputFileName": "Content/shipperImages.min.css",
+    "inputFiles": [
+      "Content/shipperImages.css"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/App/ClientCarsManager.min.js",
+    "inputFiles": [
+      "Scripts/App/ClientCarsManager.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/client/user-cars.min.js",
+    "inputFiles": [
+      "Scripts/client/user-cars.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/client/user-cars-finished.min.js",
+    "inputFiles": [
+      "Scripts/client/user-cars-finished.js"
+    ]
+  },
+  {
+    "outputFileName": "Content/css/user-profile.min.css",
+    "inputFiles": [
+      "Content/css/user-profile.css"
+    ]
+  },
+  {
+    "outputFileName": "App_Themes/client/css/table-page.min.css",
+    "inputFiles": [
+      "App_Themes/client/css/table-page.css"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/utilities/stickyTableHeader.min.js",
+    "inputFiles": [
+      "Scripts/utilities/stickyTableHeader.js"
+    ]
+  },
+  {
+    "outputFileName": "App_Themes/iraq/utilities/ShippingExpensesUtility.min.css",
+    "inputFiles": [
+      "App_Themes/iraq/utilities/ShippingExpensesUtility.css"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/App/InvoicePayView.min.js",
+    "inputFiles": [
+      "Scripts/App/InvoicePayView.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/App/InvoicePayAdd.min.js",
+    "inputFiles": [
+      "Scripts/App/InvoicePayAdd.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/hr/salary-print.min.js",
+    "inputFiles": [
+      "Scripts/hr/salary-print.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/Templates/ShipInvoicePayments.min.js",
+    "inputFiles": [
+      "Scripts/Templates/ShipInvoicePayments.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/Templates/Customspaymentsmaster.min.js",
+    "inputFiles": [
+      "Scripts/Templates/Customspaymentsmaster.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/App/CarsViewManager.min.js",
+    "inputFiles": [
+      "Scripts/App/CarsViewManager.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/Deleted/InvoicePayView.min.js",
+    "inputFiles": [
+      "Scripts/Deleted/InvoicePayView.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/Templates/PayInvoicePaymentsPrint.min.js",
+    "inputFiles": [
+      "Scripts/Templates/PayInvoicePaymentsPrint.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/hr/advances.min.js",
+    "inputFiles": [
+      "Scripts/hr/advances.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/hr/salaries-view.min.js",
+    "inputFiles": [
+      "Scripts/hr/salaries-view.js"
+    ]
+  },
+  {
+    "outputFileName": "App_Themes/iraq/allcss.min.css",
+    "inputFiles": [
+      "App_Themes/iraq/allcss.css"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/App/budget-report.min.js",
+    "inputFiles": [
+      "Scripts/App/budget-report.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/hr/advance-outsides.min.js",
+    "inputFiles": [
+      "Scripts/hr/advance-outsides.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/hr/gridManager.min.js",
+    "inputFiles": [
+      "Scripts/hr/gridManager.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/hr/emps-loans.min.js",
+    "inputFiles": [
+      "Scripts/hr/emps-loans.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/Templates/CustomPaymentsReport.min.js",
+    "inputFiles": [
+      "Scripts/Templates/CustomPaymentsReport.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/App/ReceiptVoucherAdd.min.js",
+    "inputFiles": [
+      "Scripts/App/ReceiptVoucherAdd.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/App/ProfitLoss-report.min.js",
+    "inputFiles": [
+      "Scripts/App/ProfitLoss-report.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/App/ShipperExpensesManager.min.js",
+    "inputFiles": [
+      "Scripts/App/ShipperExpensesManager.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/App/ClientBuyersManager.min.js",
+    "inputFiles": [
+      "Scripts/App/ClientBuyersManager.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/App/clientDiscountsManager.min.js",
+    "inputFiles": [
+      "Scripts/App/clientDiscountsManager.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/App/clientExtrasManager.min.js",
+    "inputFiles": [
+      "Scripts/App/clientExtrasManager.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/App/DefaultGridFilterManager.min.js",
+    "inputFiles": [
+      "Scripts/App/DefaultGridFilterManager.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/Templates/CustomspaymentsDetails.min.js",
+    "inputFiles": [
+      "Scripts/Templates/CustomspaymentsDetails.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/Templates/PayInvoicePaymentDetails.min.js",
+    "inputFiles": [
+      "Scripts/Templates/PayInvoicePaymentDetails.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/Templates/ClientsPayments.min.js",
+    "inputFiles": [
+      "Scripts/Templates/ClientsPayments.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/Templates/ShipInvoicePaymentsDetails.min.js",
+    "inputFiles": [
+      "Scripts/Templates/ShipInvoicePaymentsDetails.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/Templates/container-come-shipping.min.js",
+    "inputFiles": [
+      "Scripts/Templates/container-come-shipping.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/Templates/ExpensesOnCarReportPrint.min.js",
+    "inputFiles": [
+      "Scripts/Templates/ExpensesOnCarReportPrint.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/app-home.min.js",
+    "inputFiles": [
+      "Scripts/app-home.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/App/newsManger.min.js",
+    "inputFiles": [
+      "Scripts/App/newsManger.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/App/smsManager.min.js",
+    "inputFiles": [
+      "Scripts/App/smsManager.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/App/pagesManager.min.js",
+    "inputFiles": [
+      "Scripts/App/pagesManager.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/App/banksManager.min.js",
+    "inputFiles": [
+      "Scripts/App/banksManager.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/Templates/PayInvoicePaymentsPendingPrint.min.js",
+    "inputFiles": [
+      "Scripts/Templates/PayInvoicePaymentsPendingPrint.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/Templates/PayInvoicePayments.min.js",
+    "inputFiles": [
+      "Scripts/Templates/PayInvoicePayments.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/App/shipper-containers.min.js",
+    "inputFiles": [
+      "Scripts/App/shipper-containers.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/flot/jquery.flot.min.js",
+    "inputFiles": [
+      "Scripts/flot/jquery.flot.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/flot/jquery.flot.resize.min.js",
+    "inputFiles": [
+      "Scripts/flot/jquery.flot.resize.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/statistics/dashboardManager.min.js",
+    "inputFiles": [
+      "Scripts/statistics/dashboardManager.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/flot/jquery.flot.pie.min.js",
+    "inputFiles": [
+      "Scripts/flot/jquery.flot.pie.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/App/InvoicesSaleView.min.js",
+    "inputFiles": [
+      "Scripts/App/InvoicesSaleView.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/App/InvoicesShippView.min.js",
+    "inputFiles": [
+      "Scripts/App/InvoicesShippView.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/Templates/InvoiceShippingPrint.min.js",
+    "inputFiles": [
+      "Scripts/Templates/InvoiceShippingPrint.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/Templates/ShipInvoicePaymentsPrint.min.js",
+    "inputFiles": [
+      "Scripts/Templates/ShipInvoicePaymentsPrint.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/App/cars-notes-en.min.js",
+    "inputFiles": [
+      "Scripts/App/cars-notes-en.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/App/cars-notes.min.js",
+    "inputFiles": [
+      "Scripts/App/cars-notes.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/App/printContainerSaleCarsBill.min.js",
+    "inputFiles": [
+      "Scripts/App/printContainerSaleCarsBill.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/App/car-notes-manager.min.js",
+    "inputFiles": [
+      "Scripts/App/car-notes-manager.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/App/ReceiptVoucherView.min.js",
+    "inputFiles": [
+      "Scripts/App/ReceiptVoucherView.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/App/ShippInvoicesManager.min.js",
+    "inputFiles": [
+      "Scripts/App/ShippInvoicesManager.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/App/ClientsBonusAdd.min.js",
+    "inputFiles": [
+      "Scripts/App/ClientsBonusAdd.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/App/ClientBonusView.min.js",
+    "inputFiles": [
+      "Scripts/App/ClientBonusView.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/client/user-cars-4sale.min.js",
+    "inputFiles": [
+      "Scripts/client/user-cars-4sale.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/Templates/CarShopExpenses.min.js",
+    "inputFiles": [
+      "Scripts/Templates/CarShopExpenses.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/plugins/checkLogin.min.js",
+    "inputFiles": [
+      "Scripts/plugins/checkLogin.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/Deleted/InvoicesSaleView.min.js",
+    "inputFiles": [
+      "Scripts/Deleted/InvoicesSaleView.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/plugins/shippersImages.min.js",
+    "inputFiles": [
+      "Scripts/plugins/shippersImages.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/client/user-payments.min.js",
+    "inputFiles": [
+      "Scripts/client/user-payments.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/client/ReceiptVoucherPrint.min.js",
+    "inputFiles": [
+      "Scripts/client/ReceiptVoucherPrint.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/plugins/utilities.min.js",
+    "inputFiles": [
+      "Scripts/plugins/utilities.js"
+    ]
+  },
+  {
+    "outputFileName": "App_Themes/client/css/mobile.min.css",
+    "inputFiles": [
+      "App_Themes/client/css/mobile.css"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/datatable/dataTables.responsive.min.js",
+    "inputFiles": [
+      "Scripts/datatable/dataTables.responsive.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/client/dashboard.min.js",
+    "inputFiles": [
+      "Scripts/client/dashboard.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/client/ClientShippingCarsManager.min.js",
+    "inputFiles": [
+      "Scripts/client/ClientShippingCarsManager.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/client/ClientMoneyBackManager.min.js",
+    "inputFiles": [
+      "Scripts/client/ClientMoneyBackManager.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/client/ClientExtrasManager.min.js",
+    "inputFiles": [
+      "Scripts/client/ClientExtrasManager.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/client/ClientDiscountsManager.min.js",
+    "inputFiles": [
+      "Scripts/client/ClientDiscountsManager.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/App/AuctionCommissionPayment.min.js",
+    "inputFiles": [
+      "Scripts/App/AuctionCommissionPayment.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/client/user-set-car-4sale.min.js",
+    "inputFiles": [
+      "Scripts/client/user-set-car-4sale.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/jquery.colorbox-min.min.js",
+    "inputFiles": [
+      "Scripts/jquery.colorbox-min.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/App/car-details.min.js",
+    "inputFiles": [
+      "Scripts/App/car-details.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/datatable/Arabic.min.js",
+    "inputFiles": [
+      "Scripts/datatable/Arabic.min.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/App/DefaultGridManager.min.js",
+    "inputFiles": [
+      "Scripts/App/DefaultGridManager.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/App/Common.min.js",
+    "inputFiles": [
+      "Scripts/App/Common.js"
+    ]
+  }
+]

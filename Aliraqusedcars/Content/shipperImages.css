@@ -1,0 +1,17 @@
+﻿body {
+            background: rgba(0, 105, 134, 0.8) !important;
+        }
+
+        @media (min-width: 768px) {
+            .navbar > .container-fluid .navbar-brand {
+                margin-right: 0;
+            }
+        }
+
+        .after-nav .col-xs-offset-3 {
+            margin-right: 29.7%;
+        }
+
+        table.images_table {
+            width: 100%;
+        }

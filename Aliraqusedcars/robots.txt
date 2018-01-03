@@ -1,0 +1,12 @@
+﻿User-agent: *
+Disallow: /admin-admin-2015/
+Disallow: /404.aspx
+Noindex: /mycarsetforsale
+Noindex: /mycarsforsale
+Noindex: /myfinishedcars
+Noindex: /mypaidcars
+Noindex: /mypayments
+Noindex: /PasswordChange
+Noindex: /Profile
+
+Sitemap: https://www.iraqusedcars.ae/sitemap.xml

@@ -1,0 +1,369 @@
+﻿.bookingNow.btn-small {
+    padding: 3px;
+}
+
+.btn.btn-app {
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+}
+
+#listItems td img {
+    max-height: 35px;
+}
+
+#listItems td input[type="checkbox"] {
+    margin: 0 !important;
+    position: relative;
+}
+
+#commentsModal {
+    direction: ltr;
+}
+
+.widget {
+    position: relative;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+    .widget .toolbar, .widget .toolbar-fluid {
+        padding: 3px;
+        position: relative;
+    }
+
+    .widget .messaging {
+        display: block;
+        position: relative;
+        padding: 0;
+        background: #FFF;
+    }
+
+    .widget .block, .widget .block-fluid {
+        border: 10px solid #FFF;
+        padding: 0 5px;
+    }
+
+    .widget .toolbar.bottom {
+        border-width: 1px;
+    }
+
+    .widget .head .icon {
+        display: block;
+        float: left;
+        margin: 1px 0px 0px 5px;
+        padding: 7px 0px 0px 0px;
+    }
+
+    .widget .head.dark h2 {
+        color: #FFF;
+        text-shadow: 0 1px #000;
+    }
+
+    .widget .head h2 {
+        margin: 0px 0px 0px 5px;
+        padding: 0px;
+        font-family: 'Helvetica Neue','Helvetica',Arial,sans-serif;
+        font-size: 13px;
+        padding: 7px 0px 5px 0px;
+        font-weight: bold;
+        text-shadow: 0 1px white;
+        display: inline-block;
+        line-height: 20px;
+    }
+
+    .widget .head ul.buttons {
+        list-style: none;
+        padding: 0px;
+        margin: 0px;
+        position: relative;
+    }
+
+    .widget .buttons {
+        float: right;
+        padding: 3px 15px 0px 10px;
+    }
+
+    .widget .toolbar .user {
+        display: inline-block;
+        margin-right: 8px;
+    }
+
+    .widget .messaging .item {
+        position: relative;
+        display: block;
+        margin-bottom: 10px;
+    }
+
+        .widget .messaging .item.out .image {
+            right: 0px;
+            left: auto;
+        }
+
+        .widget .messaging .item .date {
+            position: absolute;
+            right: 5px;
+            top: 3px;
+            color: #999;
+            text-shadow: 0px 1px 0px #FFF;
+            font-size: 11px;
+        }
+
+        .widget .messaging .item .text {
+            margin-left: 50px;
+            display: block;
+            padding: 5px;
+            border: 1px solid #E5E5E5;
+            background: #F5F5F5;
+            -moz-border-radius: 4px;
+            -webkit-border-radius: 4px;
+            border-radius: 4px;
+            direction: ltr;
+        }
+
+            .widget .messaging .item .text > a {
+                font-family: 'Helvetica Neue','Helvetica',Arial,sans-serif;
+                font-size: 12px;
+                color: #005580;
+                text-decoration: none;
+                font-weight: bold;
+                text-shadow: 0px 1px 0px #FFF;
+            }
+
+    .widget a {
+        outline: none !important;
+        color: #428bca;
+        text-decoration: none;
+        background-color: transparent;
+    }
+
+    .widget .block:after, .widget .block-fluid:after, .widget .toolbar:after, .widget .toolbar-fluid:after {
+        clear: both;
+        content: ".";
+        display: block;
+        height: 0;
+        visibility: hidden;
+        font-size: 0;
+    }
+
+    .widget :before, .widget :after {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+    .widget .input-group {
+        position: relative;
+        display: table;
+        border-collapse: separate;
+    }
+
+
+    .widget .img-thumbnail {
+        display: inline-block;
+        max-width: 100%;
+        height: auto;
+        padding: 4px;
+        line-height: 1.42857143;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        -webkit-transition: all .2s ease-in-out;
+        -o-transition: all .2s ease-in-out;
+        transition: all .2s ease-in-out;
+        max-width: 35px;
+    }
+
+    .widget img {
+        vertical-align: middle;
+    }
+
+    .widget img {
+        border: 0;
+    }
+
+    .widget .messaging .item .image {
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+
+
+    .widget .toolbar.top, .widget .toolbar.top a {
+        background-color: rgba(65, 162, 188, 0.11);
+        color: #747e7f;
+        font-size: 11px;
+        border-bottom: 1px solid #add;
+    }
+
+#commentsModal .modal-body {
+    padding: 0;
+}
+
+.modal .modal-header .close {
+    float: right;
+}
+
+.ace-file-multiple label.selected span:after {
+    display: none;
+}
+
+.ace-file-multiple label span img {
+    margin: 0;
+}
+
+.ace-file-multiple label span [class*="icon-"] {
+    line-height: 35px;
+    font-size: 30px;
+}
+
+.ace-file-multiple label:before {
+    display: none;
+}
+
+.ace-file-input label.selected {
+    left: 3px;
+}
+
+.modal-footer .widget-main {
+    padding: 0 5px;
+}
+
+.modal-footer {
+    padding: 10px 13px 10px;
+}
+
+p i.icon-quote-left, div.text .icon-quote-left {
+    color: rgba(169,169,169,0.50) !important;
+}
+
+.messaging .item .text p {
+    margin: 0;
+}
+/*all notif*/
+#notifications .itemdiv > .user {
+    left: 0;
+    right: auto;
+}
+
+#notifications .itemdiv > .body {
+    margin-left: 50px;
+    margin-right: 0;
+    background: #F5F5F5;
+    border-radius: 5px;
+    border-right-width: 1px;
+}
+
+#notifications .widget-header > :first-child {
+    float: left;
+}
+
+#notifications .itemdiv.dialogdiv > .body > .time {
+    float: right;
+}
+
+#notifications .modal-body {
+    padding: 1px;
+}
+
+#notifications .itemdiv > .body > .time, #notifications .itemdiv > .body > .time [class*="icon-"] {
+    font-weight: normal;
+    font-size: 11px;
+}
+
+#notifications .itemdiv.dialogdiv {
+    padding-bottom: 0;
+}
+
+#notifications form {
+    margin: 0;
+}
+
+#notifications .input-append {
+    margin-bottom: 0;
+}
+
+#notifications .widget-header h6.smaller {
+    color: #fff;
+    font-weight: bold;
+}
+
+#notifications .form-actions {
+    padding: 10px 20px 10px; /*padding: 5px 17px 0px;*/
+    margin-top: 5px;
+    background-color: #fff;
+    border-top: none;
+}
+
+#notifications .widget-box {
+    margin: 0 0 10px 0;
+}
+
+#notifications .itemdiv.dialogdiv > .body:before {
+    display: none;
+}
+
+#notifications .widget-header.header-color-blue5 {
+    background: #6fb3e0;
+    border-color: #6fb3e0;
+}
+
+.header-color-blue5 + .widget-body {
+    border-color: #6fb3e0;
+}
+
+#notifications .itemdiv.dialogdiv > .user > img {
+    display: inline-block;
+    height: auto;
+    padding: 4px;
+    line-height: 1.42857143;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    -webkit-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+    max-width: 35px;
+}
+
+#notifications .itemdiv.dialogdiv:before {
+    border: none !important;
+    display: none;
+}
+
+.modal-header h4 {
+    margin: 3px 0;
+}
+
+.form-panel {
+    display: block;
+    padding: 5px;
+    margin-top: 10px;
+}
+
+    .form-panel .ace-file-input.ace-file-multiple {
+        max-width: 90px;
+        display: inline-block;
+    }
+
+    .form-panel .fast-reply-text {
+        vertical-align: top;
+    }
+/*6-2-2017*/
+#frmAddNote textarea.car-notes {
+    width: 78%;
+}
+
+#frmAddNote .action-group .btnAdd {
+    float: left;
+    padding: 0 5px 0;
+    margin-right: 7px;
+}
+
+#frmAddNote .inline .lbl {
+    margin: 0;
+}
+
+#frmAddNote .icon-location-arrow {
+    margin-left: 0;
+}
