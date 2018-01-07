@@ -93,7 +93,7 @@
                 <div class="span4 padding-left-20">
                     <ul class="item-list">
                         <li class="item-blue clearfix">التاريخ/ <span class="blue bolder" id="AddDate"></span>
-                            <button id="btnSaveBudjet" class="btn btn-primary btn-mini pull-left hidden-print hidden btns" data-rel="tooltip" title="حفظ تقرير رأس المال بتاريخ اليوم للميزانية"><i class="icon-save"></i></button>
+                            <button id="btnSaveBudjet" class="btn btn-primary btn-mini pull-left hidden-print hidden btns" data-rel="tooltip" title="حفظ تقرير رأس المال الحالى وتحديث الأرصده بآخر ترصيد"><i class="icon-save"></i></button>
                             <button id="btnPrintBudjet" onclick="javascript:window.print();" class="btn btn-grey btn-mini pull-left hidden-print hidden btns" data-rel="tooltip" title="طباعه"><i class="icon-print"></i></button>
                         </li>
                     </ul>
@@ -161,7 +161,6 @@
             <div class="space-24"></div>
             <img alt="center" class="print-footer" src="/Content/images/print/print-footer.png" /><div class="space-6"></div>
         </div>
-        <!-- end report-->
     </div>
     <script>BudgetReport.Init();</script>
 </asp:Content>

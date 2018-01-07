@@ -508,5 +508,17 @@
     "inputFiles": [
       "Scripts/App/Common.js"
     ]
+  },
+  {
+    "outputFileName": "Scripts/App/systemSettings.min.js",
+    "inputFiles": [
+      "Scripts/App/systemSettings.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/App/DefaultGridVariables.min.js",
+    "inputFiles": [
+      "Scripts/App/DefaultGridVariables.js"
+    ]
   }
 ]

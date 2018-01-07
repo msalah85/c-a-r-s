@@ -18,7 +18,7 @@ var dataService = dataService || {},
                         successCallback(data);
                     },
                     beforeSend: function (xhr, settings) {
-                        xhr.setRequestHeader("Content-Encoding", "gzip");
+                        // xhr.setRequestHeader("Content-Encoding", "gzip");
                         $(".sinpper").html("<i class='icon-spinner icon-spin orange bigger-125 fa fa-spinner'></i>");
                         $('div[id$=UpdateProgress1]').css('display', 'block');
 
@@ -38,10 +38,10 @@ var dataService = dataService || {},
                             }
                             return cookieValue;
                         }
-                        if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
-                            // Only send the token to relative URLs i.e. locally.
-                            xhr.setRequestHeader("X-CSRFToken", getCookie('__smToken'));
-                        } // end csrf
+                        //if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
+                        //    // Only send the token to relative URLs i.e. locally.
+                        //    xhr.setRequestHeader("X-CSRFToken", getCookie('__smToken'));
+                        //} // end csrf
                     },
                     complete: function () {
                         $(".sinpper").html(""); $('div[id$=UpdateProgress1]').css('display', 'none');

@@ -165,7 +165,7 @@ public partial class api_data : System.Web.UI.Page
         var saved = new Save().SaveRow(actionName, names, values);
         object data = new { };
 
-        if (saved.Rows>0)
+        if (saved.Rows > 0)
         {
             data = new
             {
@@ -364,7 +364,7 @@ public partial class api_data : System.Web.UI.Page
 
         var data = new
         {
-            sEcho = param.sEcho,
+            param.sEcho,
             iTotalRecords = _ds.Tables[1].Rows[0][0],
             iTotalDisplayRecords = _ds.Tables[1].Rows[0][0],
             aaData = rows.ToList()

@@ -2,7 +2,7 @@
 // Developer: M. Salah (09-02-2016)
 // Email: eng.msalah.abdullah@gmail.com
 //=======================================
-var pageManager = pageManager || {},
+var 
     pageManager = function () {
         "use strict";
         var
@@ -203,7 +203,7 @@ var pageManager = pageManager || {},
                             {
                                 "bSortable": false,
                                 "mData": function (d) {
-                                    return '<a title="اختر الشاحن" data-dest-id="' + d.DistinationID + '" data-region-id="' + d.RegionID + '" data-id="CarID" data-pk="' + d.CarID + '"  data-value="" data-table="CarsData" data-name="ShipperID" class="editable shipper" href="#" data-placeholder="اختر الشاحن"><i class="icon-location-arrow"></i> ' + ((d.ShipCompanyNameEn != '' && d.ShipCompanyNameEn) != null ? d.ShipCompanyNameEn : 'اختر الشاحن') + '</a>';
+                                    return '<a title="اختر الشاحن" data-dest-id="' + (d.DistinationID || 0) + '" data-region-id="' + (d.RegionID || 0) + '" data-id="CarID" data-pk="' + d.CarID + '"  data-value="" data-table="CarsData" data-name="ShipperID" class="editable shipper" href="#" data-placeholder="اختر الشاحن"><i class="icon-location-arrow"></i> ' + ((d.ShipCompanyNameEn != '' && d.ShipCompanyNameEn) != null ? d.ShipCompanyNameEn : 'اختر الشاحن') + '</a>';
                                 }
                             },
                             {

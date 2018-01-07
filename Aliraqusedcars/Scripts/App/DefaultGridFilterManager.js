@@ -1,6 +1,5 @@
 ﻿//<reference path="../DefaultGridVariables.js" />
-var
-    DefaultGridManager = DefaultGridManager || {},
+var    
     DefaultGridManager = function () {
         var
             Init = function () {

@@ -1,6 +1,6 @@
 ﻿var
     Password = $('#Password'), ConvertAmount = $('#ConvertAmount'), Storage = $('#Storage'), LatePayment = $('#LatePayment'),
-    CustomValue = $('#CustomValue'), Commission = $('#Commission'),
+    CustomValue = $('#CustomValue'), Commission = $('#Commission'), VatRegisterNo = $('#VatRegisterNo'), VatRate = $('#VatRate'),
 
 
     bindData = function (d) {
@@ -11,6 +11,8 @@
             CustomValue.val(numeral(jsn.CustomValue).format('0.00'));
             Commission.val(numeral(jsn.Commission).format('0.00'));
             ConvertAmount.val(numeral(jsn.ConvertAmount).format('0.00'));
+            VatRegisterNo.val(jsn.VatRegisterNo);
+            VatRate.val(numeral(jsn.VatRate).format('0.00'));
 
             //Password
             dataService.callAjax('Post', JSON.stringify({ 'value': jsn.Password }),
@@ -24,9 +26,9 @@
     saveData = function () {
         var isValid = commonManger.applyValidation('aspnetForm');
         var dto = {
-            'actionName': 'SystemSettings_Update',
-            'names': ['Password', 'LatePayment', 'CustomValue', 'Commission', 'Storage', 'ConvertAmount'],
-            'values': [Password.val(), LatePayment.val(), CustomValue.val(), Commission.val(), Storage.val(), ConvertAmount.val()]
+            actionName: 'SystemSettings_Update',
+            names: ['Password', 'LatePayment', 'CustomValue', 'Commission', 'Storage', 'ConvertAmount', 'VatRegisterNo', 'VatRate'],
+            values: [Password.val(), LatePayment.val(), CustomValue.val(), Commission.val(), Storage.val(), ConvertAmount.val(), VatRegisterNo.val(), VatRate.val()]
         };
 
         if (isValid) {
@@ -36,6 +38,7 @@
             commonManger.showMessage('بيانات مطلوبة', 'يرجي التأكد من ادخال رقم وتاريخ البيان الجمركي.');
         }
     };
+
 // load data
 getData();
 $('#SaveAll').click(function (e) {

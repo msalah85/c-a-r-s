@@ -66,6 +66,7 @@
                                                 <th>الباير
                                                 </th>
                                                 <th width="20%">المبلغ <sub>$</sub></th>
+                                                <th width="15%">VAT Tax <sub>درهم</sub></th>
                                                 <th width="20%">المبلغ <sub>درهم</sub></th>
                                             </tr>
                                         </thead>
@@ -75,14 +76,7 @@
                                             <tr>
                                                 <th colspan="3"><span class="pull-left">الاجمالى</span></th>
                                                 <th class="col-bg total"></th>
-                                                <th class="col-bg totalPaymentTotalDhs"></th>
-                                            </tr>
-                                            <tr>
-                                                <th colspan="4"><span class="pull-left">ضريبة القيمة المضافة <sub>درهم</sub></span></th>
                                                 <th class="col-bg vatTotalAmount"></th>
-                                            </tr>
-                                            <tr>
-                                                <th colspan="4"><span class="pull-left">صافى قيمة الحوالة <sub>درهم</sub></span></th>
                                                 <th class="col-bg totalDhs"></th>
                                             </tr>
                                         </tfoot>

@@ -19,55 +19,57 @@
                         <div class="control-group">
                             <label class="control-label" for="Password">كلمة السر للحوالة<span class="red">*</span></label>
                             <div class="controls">
-                                <div class="span12">
-                                    <input type="text" class="required" required id="Password" name="pass" />
-                                    <p class="text-info">كلمة السر المستخدمة فى حوالة العميل.</p>
-                                </div>
+                                <input dir="ltr" type="text" class="required" required id="Password" name="pass" />
+                                <p class="text-info">كلمة السر المستخدمة فى حوالة العميل.</p>
                             </div>
                         </div>
                         <div class="control-group">
                             <label class="control-label" for="ConvertAmount">عمولة مكتب الصرافة<span class="red">*</span></label>
                             <div class="controls">
-                                <div class="span12">
-                                    <input type="text" class="required" required id="ConvertAmount" name="ConvertAmount" value="0" />
-                                    <p class="text-info">عمولة مكتب/شركة الصرافة بالدرهم.</p>
-                                </div>
+                                <input dir="ltr" type="text" class="required" required id="ConvertAmount" name="ConvertAmount" value="0" />
+                                <p class="text-info">عمولة مكتب/شركة الصرافة بالدرهم.</p>
                             </div>
                         </div>
                         <div class="control-group">
                             <label class="control-label" for="Storage">غرامة أرضيات<span class="red">*</span></label>
                             <div class="controls">
-                                <div class="span12">
-                                    <input type="text" class="required" required id="Storage" name="Storage" value="0" />
-                                    <p class="text-info">$</p>
-                                </div>
+                                <input dir="ltr" type="text" class="required" required id="Storage" name="Storage" value="0" />
+                                <p class="text-info">$</p>
                             </div>
                         </div>
                         <div class="control-group">
                             <label class="control-label" id="Label7" for="LatePayment">غرامة تأخير الدفع<span class="red">*</span></label>
                             <div class="controls">
-                                <div class="span12">
-                                    <input type="text" class="required" required id="LatePayment" name="LatePayment" value="0" />
-                                    <p class="text-info">$</p>
-                                </div>
+                                <input dir="ltr" type="text" class="required" required id="LatePayment" name="LatePayment" value="0" />
+                                <p class="text-info">$</p>
                             </div>
                         </div>
                         <div class="control-group">
                             <label class="control-label" id="Label10" for="CustomValue">قيمة الجمارك الثابتة<span class="red">*</span></label>
                             <div class="controls">
-                                <div class="span12">
-                                    <input type="text" class="required" required id="CustomValue" value="0" />
-                                    <p class="text-info">مبلغ الجمارك الثابت المضاف فى فاتورة التخليص الجمركي.</p>
-                                </div>
+                                <input dir="ltr" type="text" class="required" required id="CustomValue" value="0" />
+                                <p class="text-info">مبلغ الجمارك الثابت المضاف فى فاتورة التخليص الجمركي.</p>
                             </div>
                         </div>
                         <div class="control-group">
                             <label class="control-label" id="Label3" for="Commission">عمولة الشركة الثابتة<span class="red">*</span></label>
                             <div class="controls">
-                                <div class="span12">
-                                    <input type="text" class="required" name="commissions" id="Commission" required value="0" />
-                                    <p class="text-info">قيمة عمولة الشركة الثابتة.</p>
-                                </div>
+                                <input dir="ltr" type="text" class="required" name="commissions" id="Commission" required value="0" />
+                                <p class="text-info">قيمة عمولة الشركة الثابتة.</p>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="VatRegisterNo">رقم التسجيل الضريبي<span class="red">*</span></label>
+                            <div class="controls">
+                                <input dir="ltr" type="text" class="required" name="VatRegisterNo" id="VatRegisterNo" required value="" />
+                                <p class="text-info">رقم السجل الضريبي للشركة تظهر فى فاتورة البيع.</p>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="VatRate">عمولة القيمة المضافة <span class="red">*</span></label>
+                            <div class="controls">
+                                <input dir="ltr" type="text" class="required" name="VatRate" id="VatRate" required value="1" />
+                                <p class="text-info">نسبة عمولة القيمة المضافة مثال: 5% = 0.05.</p>
                             </div>
                         </div>
                         <div class="control-group">
@@ -84,7 +86,8 @@
     <script src="/Scripts/App/systemSettings.min.js?v=1.1"></script>
     <style>
         #masterForm p.text-info {
-            display: inline-block;margin-right:5px;
+            display: inline-block;
+            margin-right: 5px;
         }
     </style>
 </asp:Content>

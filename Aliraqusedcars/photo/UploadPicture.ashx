@@ -23,7 +23,6 @@ public class UploadPicture : IHttpHandler
             XmlDocument xmldoc = new XmlDocument();
             XmlElement doc = xmldoc.CreateElement("doc");
             xmldoc.AppendChild(doc);
-                                  
 
             for (int i = 0; i < files.Count; i++)
             {

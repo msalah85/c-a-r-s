@@ -169,7 +169,8 @@
                                                     <td>أجور التحويل <sub class="green">درهم</sub>
                                                     </td>
                                                     <td>
-                                                        <label id="Convertamount"></label>
+                                                        <label class="inline" id="Convertamount"></label>                                                        
+                                                        #ضريبة القيمة المضافة: <label class="inline" id="VAT">0</label>
                                                     </td>
                                                 </tr>
                                                 <tr class="hidden new">

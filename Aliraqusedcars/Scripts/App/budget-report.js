@@ -17,7 +17,6 @@
                             cars: $('.comp-cars-costs').text(),
                             clients: $('.clients-required').text(),
                             inTotal: $('.total-required').text(),
-
                             shipp: $('.waiting-shipp').text(),
                             cust: $('.waiting-cust').text(),
                             outTotal: $('.total-waiting-inv').text(),
@@ -27,38 +26,35 @@
 
                     // 
                     var dto = {
-                        actionName: 'Budgets_Save', names: ['Date', 'Bank', 'Cars', 'Clients', 'InTotal', 'Shipp', 'Cust', 'OutTotal', 'Net'],
+                        actionName: 'Budgets_Save',
+                        names: ['Date', 'Bank', 'Cars', 'Clients', 'InTotal', 'Shipp', 'Cust', 'OutTotal', 'Net'],
                         values: [elm.date, elm.bank, elm.cars, elm.clients, elm.inTotal, elm.shipp, elm.cust, elm.outTotal, elm.net]
                     };
-
 
                     dataService.callAjax('Post', JSON.stringify(dto), sUrl + 'saveData', saveCallBack, commonManger.errorException);
 
                 });
             },
             saveCallBack = function (d) {
-                console.log(d.d);
+                commonManger.showMessage('تم الحفظ:', 'تم أخذ نسخه من تقرير رأس المال الحالى، وتحديث الأرصدة بآخر ترصيد.');
 
-                commonManger.showMessage('تم الحفظ:', 'تم أخذ نسخه من تقرير رأس المال الحالى.');
+                // refresh report.
+                getReport();
             },
             getReport = function () {
                 var DTO = { actionName: 'Budget_Select' };
-                dataService.callAjax('Post', JSON.stringify(DTO), sUrl + 'GetDataDirect', bindReportControls, commonManger.errorException);
+                dataService.callAjax('Post', JSON.stringify(DTO), sUrl + 'GetDataDirect',
+                    bindReportControls, commonManger.errorException);
             },
             bindReportControls = function (data) {
                 var jsnData = commonManger.comp2json(data.d),
                     jsn = jsnData.list,    // Client`s required & Cars costs.
-                    //jsn = jsnData.list1,  // Shipping (loading-shipping - towing - partitioning - transportation costs), (pending shipping invoices -- BOL invoices), (Costs on sold cars not setted on shipping invoice).
-                    //jsn = jsnData.list2,  // Postpond or not paid shipping invoices, (Custom invoices not paid or pending).
-                    //jsn = jsnData.list3,  // Emps, Ouside Loans statistics
 
                     totalRequired = 0,
                     totalWatingShipp = 0,
                     totalWatingCust = 0,
                     totalWaitingInv = 0;
 
-
-                //
                 if (jsn) {
 
                     $('#AddDate').text(commonManger.formatJSONDateCal(jsn.AddDate, 'dd/MM/yyyy'));
@@ -67,7 +63,6 @@
                         currentBankBalance = jsn.CurrentBankBalance ? jsn.CurrentBankBalance * 1 : 0,
                         clientsCarsPayPricesNotSold = jsn.ClientsCarsPayPricesNotSold ? (jsn.ClientsCarsPayPricesNotSold * 1) : 0,
                         IraqCarCost = jsn.IraqCarCost ? (jsn.IraqCarCost * 1) : 0,
-
 
                         clRequired = jsn.ClientsRequired ? jsn.ClientsRequired * 1 : 0,
                         totalRequired = currentBankBalance + clRequired + IraqCarCost + clientsCarsPayPricesNotSold;
@@ -92,7 +87,6 @@
 
 
                     // loans
-
                     var outsideReceivable = jsn.AdvOutsideReceivable * 1,
                         outsideCreditor = jsn.AdvOutsideCreditor * 1,
                         usersReceivable = jsn.AdvUsersReceivable * 1;
@@ -105,7 +99,6 @@
                     $('.AdvOutsideCreditor').text(numeral(outsideCreditor).format('0,0'));
                     $('.AdvUsersReceivable').text(numeral(usersReceivable).format('0,0'));
                 }
-
 
 
                 // total receivable.

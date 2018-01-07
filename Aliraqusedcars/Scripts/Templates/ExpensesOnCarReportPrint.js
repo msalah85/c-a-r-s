@@ -7,8 +7,6 @@
             Init = function () {
                 filllistItems();
 
-                setDataToSearch();
-
                 $('#btnSearchAll').click(function (e) {
                     e.preventDefault();
 
@@ -18,7 +16,6 @@
                         to = commonManger.dateFormat($('#To').val()),
                         auction = $('#Auction').val(),
                         client = $('#Client').val();
-
 
                     updateGrid();
                 });
@@ -31,26 +28,21 @@
             },
             getSoldCarsTotalCosts = function () {
                 var funName = 'ExpensesOnCarReportTotalCosts',
-                    DTO = { 'actionName': funName },
+                    DTO = { actionName: funName },
                     bindTotalCosts = function (d) {
-                        var _data = commonManger.comp2json(d.d);
-                        // show all pages total
+                        var _data = commonManger.comp2json(d.d); // show all pages total
+
                         if (_data && _data.list) {
-                            $('.sum-total-all').html('').text(numeral(_data.list.SumTotal).format('0,0'));
+                            $('.sum-total-all').html('').html(
+                                '<span>' + numeral(_data.list.AllSoldCarsCosts).format('0,0') + '</span> - ' +
+                                '<span>عدد السيارات: ' + numeral(_data.list.SoldCarsCount).format('0,0') + '</span> - ' +
+                                '<span>وقت التحديث: ' + moment(_data.list.AddDate).format('(DD/MM/YYYY hh:mm A)') + '</span>'
+                            );
                         }
                     };
 
                 dataService.callAjax('Post', JSON.stringify(DTO), sUrl + 'GetDataDirect',
                     bindTotalCosts, commonManger.errorException);
-            },
-            setDataToSearch = function () {
-                var functionName = "ExpensesOnCarReport_Properties", DTO = { 'actionName': functionName, 'value': '' };
-                dataService.callAjax('Post', JSON.stringify(DTO), mainServiceUrl + 'GetData',
-                    function (data) {
-                        var myList = JSON.parse(data.d);
-                        commonManger.Filllist(myList, 'searchForm');
-                    },
-                    commonManger.errorException);
             },
             updateGrid = function () {
                 $('#listItems').DataTable().draw();
@@ -66,8 +58,7 @@
                             $('.dataTables_length,.form-horizontal').closest('div.row-fluid').addClass('hidden-print');
                             window.print();
                         }
-                    }
-                    ],
+                    }],
                     //stateSave: true,
                     responsive: true,
                     "bServerSide": true,
@@ -80,7 +71,6 @@
                             { "name": "from", "value": from }, { "name": "to", "value": to });
                     },
                     "fnServerData": function (sSource, aoData, fnCallback) {
-
                         var bindGird = function (data) {
                             // get data as json format from xml
                             var jsnData = commonManger.comp2json(data.d), aaData = jsnData.list, jsn1 = jsnData.list1;
@@ -243,4 +233,5 @@
         return {
             Init: Init
         };
+
     }();

@@ -6,7 +6,6 @@
         td p {
             margin: 0;
         }
-
         @media print {
             #listItems td {
                 font-size: 11px;
@@ -35,13 +34,11 @@
         </div>
         <div class="row-fluid">
             <div class="form-horizontal" id="searchForm">
-                <div class="span6">
+                <div class="span4">
                     <div class="control-group">
                         <label class="control-label" for="Auction">بحث بالمزاد</label>
                         <div class="controls">
-                            <select class="form-control" data-placeholder="اختــر" id="Auction">
-                                <option></option>
-                            </select>
+                            <input type="text" id="Auction" name="Auction" class="select2 form-control" data-fn-name="Auctions_Names" />
                         </div>
                     </div>
                     <div class="control-group">
@@ -114,7 +111,7 @@
                 </tfoot>
             </table>
             <div class="alert alert-block alert-info">
-                <p>إجمالى تكاليف السيارات المباعه: <strong class="sum-total-all"><a href="javascript:void(0);" class="getTotalCosts">اضغط هنا</a></strong>$</p>
+                <p>إجمالى تكاليف السيارات المباعه: <strong class="sum-total-all"><a href="javascript:void(0);" class="getTotalCosts">اضغط هنا</a></strong></p>
             </div>
             <div class="clearfix">&nbsp;</div>
         </div>

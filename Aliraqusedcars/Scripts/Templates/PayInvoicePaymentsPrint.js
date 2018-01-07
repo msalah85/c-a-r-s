@@ -1,5 +1,5 @@
 ﻿
-var PayInvoicePaymentsPrint = PayInvoicePaymentsPrint || {},
+var 
     PayInvoicePaymentsPrint = function () {
         var
             oTable = "", oTable2 = "", idUpdatevalue = "", exchanger = [],
