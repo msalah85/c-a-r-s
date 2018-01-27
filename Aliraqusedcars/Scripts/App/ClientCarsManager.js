@@ -31,11 +31,6 @@
                 $('.lnkClientCars').attr('href', 'ClientFinishedCars.aspx?id=' + _id);
                 $('.addPay').attr('href', 'ClientsPaymentsAdd.aspx?cid=' + _id);
             },
-
-            getClientBalance = function (clientID) {
-
-            },
-
             btnProceessing = function (btnElem, isProceessing) { // Under process, please waint
                 if (isProceessing === true) {
                     btnElem.addClass('disabled').prop('disabled', true).text('قيد التنفيذ...');
@@ -65,6 +60,35 @@
                         }
                     }
                 });
+
+                // cancel vat
+                $('#cancelVatModal .modal-footer .btn-warning').on('click', function (e) {
+                    e.preventDefault();
+
+                    btnProceessing($(this), true); // under process please wait
+
+                    var
+                        _invoiceID = $('#cancelVatInvoiceID').val(),
+                        _cancelVatReason = $('#cancelVatNotes').val();
+
+                    if (_invoiceID && _cancelVatReason != '') {
+                        var form = 'aspnetForm',
+                            url = sUrl + 'SaveData',
+                            DTO = {
+                                actionName: 'ClientInstallments_CancelVat',
+                                names: ['InvoiceID', 'Reason'],
+                                values: [_invoiceID, _cancelVatReason]
+                            };
+
+                        commonManger.doWork('cancelVatModal', form, url, DTO, successCallback,
+                            commonManger.errorException);
+                    }
+                    else {
+                        commonManger.showMessage('بيانات مطلوبة', 'يرجي التحقق من رقم السيارة وسبب الإلغاء أولاً.'); $('#cancelVatNotes').focus();
+                        btnProceessing($(this), false); // under process please wait
+                    }
+                });
+
 
                 // cancel invoice
                 $('#cancelModal .modal-footer .btn-danger').on('click', function (e) {
@@ -128,7 +152,11 @@
                         clientID = commonManger.getNumbersFromString(_id), // client id
                         scParam = [];
 
-                    scParam.push("0", clientID, $('#CarID').val(), commonManger.getNumbersFromString($('.Amount').text().replace(',', '')), $('#InstallmentTypeID').val(), 0);
+                    scParam.push("0",
+                        clientID,
+                        $('#CarID').val(),
+                        commonManger.getNumbersFromString($('.Amount').text().replace(',', '')),
+                        $('#InstallmentTypeID').val(), 0);
                     var DTO = { "values": scParam };
 
 
@@ -261,29 +289,27 @@
                     $(this).tooltip('hide');
                     $('.tooltip.fade.in').remove();
                 });
-
             },
-            updateClientBalance = function () {
-                var dto = { actionName: 'Client_ResetBalance', value: _id },
-                    successCall = function (data) {
-                        var jsnAll = commonManger.comp2json(data.d), jsn = jsnAll.list, jsn1 = jsnAll.list1;
-
-                        if (jsn1) {
-                            bindClientBalance(jsn1);
-                            commonManger.showMessage('تم تحديث الرصيد', 'تم تحديث رصيد العميل بنجاح.');
-                        }
-                    };
-
-                dataService.callAjax('POST', JSON.stringify(dto), sUrl + 'GetData', successCall, commonManger.errorException);
-            },
+            //updateClientBalance = function () {
+            //    var dto = { actionName: 'Client_ResetBalance', value: _id },
+            //        successCall = function (data) {
+            //            var jsnAll = commonManger.comp2json(data.d), jsn = jsnAll.list, jsn1 = jsnAll.list1;
+            //            if (jsn1) {
+            //                bindClientBalance(jsn1);
+            //                commonManger.showMessage('تم تحديث الرصيد', 'تم تحديث رصيد العميل بنجاح.');
+            //            }
+            //        };
+            //    dataService.callAjax('POST', JSON.stringify(dto), sUrl + 'GetData', successCall, commonManger.errorException);
+            //},
             successCallback = function (data) {
+                console.log(data);
 
                 data = data.d;
                 $('div[id$=Modal].modal').modal('hide');
                 btnProceessing($('div[id$=Modal].modal.fade.in .modal-footer .btn[type="submit"]'), false);
 
 
-                commonManger.showMessage('تم تنفيذ الإجراء:', data.Message);
+                commonManger.showMessage('تم تنفيذ الإجراء:', data.Message || data.message);
 
 
                 if (data.Status) {
@@ -405,7 +431,10 @@
                         "sDom": "<'row-fluid hidden-print'<'span6 'l><'span6 lft-pane'BfT>r>t<'row-fluid'<'span6'i><'span6'p>>",
                         buttons: [{ extend: 'csv', text: 'تصدير إكسيل' }, { extend: 'copy', text: 'نسـخ', }, { text: 'طباعة', action: function (e, dt, node, config) { window.print(); } }],
                         responsive: true,
-                        'language': { 'search': '_INPUT_', 'searchPlaceholder': 'برقم السيارة' },
+                        'language': {
+                            search: '_INPUT_',
+                            searchPlaceholder: 'برقم السيارة'
+                        },
                         "bServerSide": true,
                         "bDestroy": true,
                         "iDisplayLength": 50,
@@ -465,7 +494,6 @@
                                     bindClientBalance(Client);
                                 }
 
-
                                 // next & previous clients 
                                 bindNextPrevClients(nextClient)
 
@@ -499,7 +527,7 @@
                             // hide finished car                    
                             if (_done.val() === 1) {
                                 var itm = $(nRow).find('td strong.carRequired');
-                                if (itm.text() === '0' && (aData.Arrived === 'true' || oObj.WithoutShipping === 'true' || oObj.SalePriceDemand === 'true')) {
+                                if (itm.text() === '0' && (aData.Arrived === 'true' || rowData.WithoutShipping === 'true' || rowData.SalePriceDemand === 'true')) {
                                     $(nRow).addClass('hidden');
                                 }
                             }
@@ -552,22 +580,22 @@
                         "aoColumns": [
                             {
                                 "bSortable": true,
-                                "mData": function (oObj) {
-                                    return '<a data-rel="tooltip" title="# ' + oObj.SaleInvoiceID + ' التاريخ: ' + commonManger.formatJSONDateCal(oObj.InvoiceDate) + '" href=\"InvoiceSalePrint.aspx?id=' + oObj["SaleInvoiceID"] + '\">' + oObj["CarID"] + '</a>';
+                                "mData": function (rowData) {
+                                    return '<a data-rel="tooltip" title="# ' + rowData.SaleInvoiceID + ' التاريخ: ' + commonManger.formatJSONDateCal(rowData.InvoiceDate) + '" href=\"InvoiceSalePrint.aspx?id=' + rowData["SaleInvoiceID"] + '\">' + rowData["CarID"] + '</a>';
                                 }
                             },
                             {
                                 "mDataProp": "MainPicture",
                                 "bSortable": false,
-                                "mData": function (oObj) {
-                                    return oObj["MainPicture"] != null ? '<a data-rel=\"tooltip\" title=\"صور السيارة رقم: ' + oObj["CarID"] + '\" href=\"images.aspx?id=' + oObj["CarID"] + '\"><img alt=\"car\" width=\"50\" src=\"/public/cars/' + oObj["CarID"] + '/_thumb/' + oObj["MainPicture"] + '\" /></a>' : '<a href=\"images.aspx?id=' + oObj["CarID"] + '\"><img alt=\"car\" width=\"50\" src="/public/cars/noimage.gif" /></a>';
+                                "mData": function (rowData) {
+                                    return rowData["MainPicture"] != null ? '<a data-rel=\"tooltip\" title=\"صور السيارة رقم: ' + rowData["CarID"] + '\" href=\"images.aspx?id=' + rowData["CarID"] + '\"><img alt=\"car\" width=\"50\" src=\"/public/cars/' + rowData["CarID"] + '/_thumb/' + rowData["MainPicture"] + '\" /></a>' : '<a href=\"images.aspx?id=' + rowData["CarID"] + '\"><img alt=\"car\" width=\"50\" src="/public/cars/noimage.gif" /></a>';
                                 }
                             },
                             {
                                 "mDataProp": "ChassisNo",
                                 "bSortable": false,
-                                "mData": function (oObj) {
-                                    return '<a data-rel=\"tooltip\" title=\"عرض تفاصيل السيارة\" href="CarDetailsPrint.aspx?id=' + oObj["CarID"] + '">' + oObj["MakerNameAr"] + ' - ' + oObj["TypeNameAr"] + ' - ' + oObj["Year"] + (oObj["PayInvTypeID"] == 3 ? ' - Relist' : '') + '</a><br><span data-rel="tooltip" title="الشاصي: ' + oObj.ChassisNo + '">' + (oObj.ChassisNo.substr(-8)) + '</span> | <span title="اللوت">' + oObj.LotNo + '</span>';
+                                "mData": function (rowData) {
+                                    return '<a data-rel=\"tooltip\" title=\"عرض تفاصيل السيارة\" href="CarDetailsPrint.aspx?id=' + rowData["CarID"] + '">' + rowData["MakerNameAr"] + ' - ' + rowData["TypeNameAr"] + ' - ' + rowData["Year"] + (rowData["PayInvTypeID"] == 3 ? ' - Relist' : '') + '</a><br><span data-rel="tooltip" title="الشاصي: ' + rowData.ChassisNo + '">' + (rowData.ChassisNo.substr(-8)) + '</span> | <span title="اللوت">' + rowData.LotNo + '</span>';
                                 }
                             },
                             {
@@ -580,16 +608,16 @@
                             { // العربون
                                 "mDataProp": 'CarRetainer',
                                 "bSortable": false,
-                                "mData": function (oObj) {
-                                    if (oObj["CarRetainer"] * 1 > 0) {
-                                        if (oObj["CarRetainerDone"] * 1 > 0)
-                                            return '<s class="red" data-rel="tooltip" title="تم السداد">' + numeral(oObj.CarRetainer).format('0,0') + '</s> ' + undoLink;
+                                "mData": function (rowData) {
+                                    if (rowData["CarRetainer"] * 1 > 0) {
+                                        if (rowData["CarRetainerDone"] * 1 > 0)
+                                            return '<s class="red" data-rel="tooltip" title="تم السداد">' + numeral(rowData.CarRetainer).format('0,0') + '</s> ' + undoLink;
 
-                                        if (!aarrivedCar(oObj) && oObj.SalePriceDemand === 'true' && oObj.SaleTypeID > 1) { // مطلوب كامل المبلغ عند الوصول
-                                            return '<strong data-rel="tooltip" class="text-hide" title="غير مفعل : السيارة غير واصه">' + numeral(oObj.CarRetainer).format('0,0') + '</strong>';
+                                        if (!aarrivedCar(rowData) && rowData.SalePriceDemand === 'true' && rowData.SaleTypeID > 1) { // مطلوب كامل المبلغ عند الوصول
+                                            return '<strong data-rel="tooltip" class="text-hide" title="غير مفعل : السيارة غير واصه">' + numeral(rowData.CarRetainer).format('0,0') + '</strong>';
                                         }
                                         else
-                                            return '<a href="javascript:void(0);" data-rel="tooltip" data-original-title="سداد العربون الآن" title="سداد العربون الآن" class="pay"><strong class="text-black">' + numeral(oObj["CarRetainer"]).format('0,0') + '</strong></a>';
+                                            return '<a href="javascript:void(0);" data-rel="tooltip" data-original-title="سداد العربون الآن" title="سداد العربون الآن" class="pay"><strong class="text-black">' + numeral(rowData["CarRetainer"]).format('0,0') + '</strong></a>';
                                     }
                                     else
                                         return '';
@@ -597,15 +625,15 @@
                             },
                             { // المتبقي على السيارة
                                 "bSortable": false,
-                                "mData": function (oObj) {
-                                    if (oObj["DelayedAfterDisc"] * 1 > 0) {
-                                        if (oObj["CarDelayedDone"] * 1 > 0)
-                                            return '<s class="red ace-tooltip" data-rel="tooltip" title="تم السداد">' + numeral(oObj.DelayedAfterDisc).format('0,0') + '</s> ' + undoLink;
+                                "mData": function (rowData) {
+                                    if (rowData["DelayedAfterDisc"] * 1 > 0) {
+                                        if (rowData["CarDelayedDone"] * 1 > 0)
+                                            return '<s class="red ace-tooltip" data-rel="tooltip" title="تم السداد">' + numeral(rowData.DelayedAfterDisc).format('0,0') + '</s> ' + undoLink;
 
-                                        if (!aarrivedCar(oObj) && (oObj.SalePriceDemand != 'true' || oObj.SaleTypeID > 1))
-                                            return '<strong data-rel="tooltip" class="text-hide" title="غير مفعل : السيارة غير واصه">' + numeral(oObj["DelayedAfterDisc"]).format('0,0') + '</strong>';
+                                        if (!aarrivedCar(rowData) && (rowData.SalePriceDemand != 'true' || rowData.SaleTypeID > 1))
+                                            return '<strong data-rel="tooltip" class="text-hide" title="غير مفعل : السيارة غير واصه">' + numeral(rowData["DelayedAfterDisc"]).format('0,0') + '</strong>';
                                         else
-                                            return '<a href="javascript:void(0);" data-rel="tooltip" title="سداد المتبقى الآن" class="pay"><strong class="text-black">' + numeral(oObj["DelayedAfterDisc"]).format('0,0') + '</strong></a>';
+                                            return '<a href="javascript:void(0);" data-rel="tooltip" title="سداد المتبقى الآن" class="pay"><strong class="text-black">' + numeral(rowData["DelayedAfterDisc"]).format('0,0') + '</strong></a>';
                                     }
                                     else
                                         return '';
@@ -614,16 +642,16 @@
                             {
                                 "mDataProp": "TotalCarShippExpenses",
                                 "bSortable": false,
-                                "mData": function (oObj) {
-                                    var add = '<a data-rel="tooltip" href="CarShippExpenses.aspx?id=' + oObj["CarID"] + '" title="اضافة مصروف شحن"><i class="icon-plus"></a></a>';
-                                    if (oObj["TotalCarShippExpenses"] * 1 > 0) {
-                                        if (oObj["TotalCarShippExpensesDone"] * 1 > 0)
-                                            return '<s class="red ace-tooltip" data-rel="tooltip" title="تم السداد">' + numeral(oObj["TotalCarShippExpenses"]).format('0,0') + '</s> ' + undoLink;
+                                "mData": function (rowData) {
+                                    var add = '<a data-rel="tooltip" href="CarShippExpenses.aspx?id=' + rowData["CarID"] + '" title="اضافة مصروف شحن"><i class="icon-plus"></a></a>';
+                                    if (rowData["TotalCarShippExpenses"] * 1 > 0) {
+                                        if (rowData["TotalCarShippExpensesDone"] * 1 > 0)
+                                            return '<s class="red ace-tooltip" data-rel="tooltip" title="تم السداد">' + numeral(rowData["TotalCarShippExpenses"]).format('0,0') + '</s> ' + undoLink;
                                         else
-                                            return '<a href="javascript:void(0);" data-rel="tooltip" title="سداد مصروف الشحن الآن" class="pay"><strong class="text-black">' + numeral(oObj["TotalCarShippExpenses"]).format('0,0') + '</strong></a> ' + add;
+                                            return '<a href="javascript:void(0);" data-rel="tooltip" title="سداد مصروف الشحن الآن" class="pay"><strong class="text-black">' + numeral(rowData["TotalCarShippExpenses"]).format('0,0') + '</strong></a> ' + add;
                                     }
                                     else
-                                        if (oObj["Arrived"] === 'true' || oObj.WithoutShipping === 'true')
+                                        if (rowData["Arrived"] === 'true' || rowData.WithoutShipping === 'true')
                                             return add;
                                         else
                                             return '---';
@@ -632,77 +660,103 @@
                             {
                                 "mDataProp": "TotalCarShopExpenses",
                                 "bSortable": false,
-                                "mData": function (oObj) {
-                                    var add = '<a data-rel="tooltip" href="CarShopExpenses.aspx?id=' + oObj["CarID"] + '" title="اضافة مصروف ورشة"><i class="icon-plus"></a></a>';
-                                    if (oObj["TotalCarShopExpenses"] * 1 > 0) {
-                                        if (oObj["TotalCarShopExpensesDone"] * 1 > 0)
-                                            return '<s class="red ace-tooltip" data-rel="tooltip" title="تم السداد">' + numeral(oObj["TotalCarShopExpenses"]).format('0,0') + '</s> ' + undoLink;
+                                "mData": function (rowData) {
+                                    var add = '<a data-rel="tooltip" href="CarShopExpenses.aspx?id=' + rowData["CarID"] + '" title="اضافة مصروف ورشة"><i class="icon-plus"></a></a>';
+                                    if (rowData["TotalCarShopExpenses"] * 1 > 0) {
+                                        if (rowData["TotalCarShopExpensesDone"] * 1 > 0)
+                                            return '<s class="red ace-tooltip" data-rel="tooltip" title="تم السداد">' + numeral(rowData["TotalCarShopExpenses"]).format('0,0') + '</s> ' + undoLink;
                                         else
-                                            return '<a href="javascript:void(0);" data-rel="tooltip" title="سداد مصروف الورشة الآن" class="pay"><strong class="text-black">' + numeral(oObj["TotalCarShopExpenses"]).format('0,0') + '</strong></a> ' + add;
+                                            return '<a href="javascript:void(0);" data-rel="tooltip" title="سداد مصروف الورشة الآن" class="pay"><strong class="text-black">' + numeral(rowData["TotalCarShopExpenses"]).format('0,0') + '</strong></a> ' + add;
                                     }
                                     else
-                                        if (oObj["Arrived"] === 'true' || oObj.WithoutShipping === 'true')
+                                        if (rowData["Arrived"] === 'true' || rowData.WithoutShipping === 'true')
                                             return add;
                                         else
                                             return '---';
                                 }
                             },
+                            {
+                                "mDataProp": "VAT",
+                                "bSortable": false,
+                                "mData": function (row) {
+                                    if (row.VAT && row.VAT * 1 > 0) {
+                                        if (row["VATDone"] * 1 > 0)
+                                            return '<s class="red ace-tooltip" data-rel="tooltip" title="تم السداد">' + numeral(row.VAT).format('0,0') + '</s> ' + undoLink;
+
+                                        // pay VAT after finish all other fees required on the car.
+                                        var isRequiredToPayVat = (row.CarRetainerDone * 1 > 0 && row.CarDelayedDone * 1 > 0 && row.TotalCarShippExpensesDone * 1 > 0 &&
+                                            row.TotalCarShopExpensesDone * 1 > 0 && row.ClientExtraOnCarPaid * 1 > 0),
+                                            cancelVatLink = ' <a data-rel="tooltip" data-carid="' + row.CarID + '" data-vatvalue="' + row.VAT
+                                                + '" title="إلغاء VAT عن العميل" href="javascript:void(0);" class="cancel-vat"><i class="icon-remove orange bigger-120"></i></a>';
+
+                                        if (!isRequiredToPayVat)
+                                            return '<strong data-rel="tooltip" class="text-fade" title="غير مفعل للسداد: يرجي سداد كل المطلوب على السيارة أولاً.">' + numeral(row["VAT"]).format('0,0') + '</strong>' + cancelVatLink;
+                                        else
+                                            return '<a href="javascript:void(0);" data-rel="tooltip" title="سداد الضريبة" class="pay"><strong class="text-black">' + numeral(row.VAT).format('0,0') + '</strong></a>' + cancelVatLink;
+                                    }
+                                    else
+                                        return '---';
+                                }
+                            },
                             { // المطلوب
                                 "bSortable": false,
-                                "mData": function (oObj) {
+                                "mData": function (rowData) {
 
-                                    var _sum = (oObj.TotalCarShippExpenses * 1) + (oObj.TotalCarShopExpenses * 1);
-                                    var _arrived = (oObj.Arrived === 'true' || oObj.WithoutShipping === 'true');
+                                    var _sum = (rowData.TotalCarShippExpenses * 1) + (rowData.TotalCarShopExpenses * 1),
+                                        _vatAmount = (rowData.VAT || 0) * 1;
+                                    var _arrived = (rowData.Arrived === 'true' || rowData.WithoutShipping === 'true');
 
                                     // Add car retainer to total except at (آجل - Demand - Not Arrived) state.
-                                    if (oObj.SaleTypeID == 1 || _arrived || oObj.SalePriceDemand != 'true') {
-                                        _sum += oObj.CarRetainer * 1;
+                                    if (rowData.SaleTypeID == 1 || _arrived || rowData.SalePriceDemand != 'true') {
+                                        _sum += rowData.CarRetainer * 1;
                                     }
 
-
                                     // add delayed only when car arrived or in (Demand, نقدا) states.
-                                    if (_arrived || (oObj.SalePriceDemand === 'true' && oObj.SaleTypeID === "1") || oObj.CarDelayedDone * 1 > 0) {
+                                    if (_arrived || (rowData.SalePriceDemand === 'true' && rowData.SaleTypeID === "1") || rowData.CarDelayedDone * 1 > 0) {
                                         // delayed value - discount value.
                                         // amount after car discount.
-                                        _sum += (parseFloat(oObj.CarDelayed) - parseFloat(oObj.CarDiscount));
+                                        _sum += parseFloat(rowData.CarDelayed) +
+                                            parseFloat(_vatAmount) - // VAT should activated/added with car delayed amount.
+                                            parseFloat(rowData.CarDiscount); // 
                                     } // end if
 
 
-                                    var _totalInstallments = (oObj.CarRetainerDone * 1) + (oObj.CarDelayedDone * 1)
-                                        + (oObj.TotalCarShippExpensesDone * 1) + (oObj.TotalCarShopExpensesDone * 1),
+                                    var _totalInstallments = (rowData.CarRetainerDone * 1) + (rowData.CarDelayedDone * 1)
+                                        + (rowData.TotalCarShippExpensesDone * 1) + (rowData.TotalCarShopExpensesDone * 1) + (rowData.VATDone * 1),
 
                                         __total = (_sum - _totalInstallments),
                                         // discount for client from discounts table but binded to this car.
-                                        discountOnCar = (oObj.ClientDiscountOnCar > 0 ? '<i data-id="' + oObj.CarID + '" data-amount-type="discount" title="خصم: ' + numeral(oObj.ClientDiscountOnCar).format('0,0') + '" data-rel="tooltip" class="green icon-smile bigger-200 amountDetails"></i>' : ''),
+                                        discountOnCar = (rowData.ClientDiscountOnCar > 0 ? '<i data-id="' + rowData.CarID + '" data-amount-type="discount" title="خصم: ' + numeral(rowData.ClientDiscountOnCar).format('0,0') + '" data-rel="tooltip" class="green icon-smile bigger-200 amountDetails"></i>' : ''),
 
-                                        sadFace = '<i data-id="' + oObj.CarID + '" title="زيادة: ' + (oObj.ClientExtraOnCar * 1 > 0 ? numeral(oObj.ClientExtraOnCar).format('0,0') : '') + '" data-rel="tooltip" data-amount-type="extra" class="red icon-frown bigger-200 amountDetails"></i> ',
+                                        sadFace = '<i data-id="' + rowData.CarID + '" title="زيادة: ' + (rowData.ClientExtraOnCar * 1 > 0 ? numeral(rowData.ClientExtraOnCar).format('0,0') : '') + '" data-rel="tooltip" data-amount-type="extra" class="red icon-frown bigger-200 amountDetails"></i> ',
 
-                                        extraOnCar = ((oObj.ClientExtraOnCar * 1) > 0 ? // is there an extra amount on this car
+                                        extraOnCar = ((rowData.ClientExtraOnCar * 1) > 0 ? // is there an extra amount on this car
                                             // sad face   -- activate installment this amount only when car active to installments like retainer.
-                                            (sadFace + ((oObj.SaleTypeID == 1 || _arrived || oObj.SalePriceDemand != 'true') ? '<a href="javascript:void(0);" class="pay payExtra inline" data-rel="tooltip" title="سداد مبلغ الزيادة"><strong class="text-black">' + numeral(oObj.ClientExtraOnCar).format('0,0') + '</strong></a>' : ''))
+                                            (sadFace + ((rowData.SaleTypeID == 1 || _arrived || rowData.SalePriceDemand != 'true') ? '<a href="javascript:void(0);" class="pay payExtra inline" data-rel="tooltip" title="سداد مبلغ الزيادة"><strong class="text-black">' + numeral(rowData.ClientExtraOnCar).format('0,0') + '</strong></a>' : ''))
                                             : ''),
-                                        extraOnCarPaid = (oObj.ClientExtraOnCar * 1 === 0 && oObj.ClientExtraOnCarPaid * 1 > 0 ? // extra amount was paid.
-                                            sadFace + '<s data-rel="tooltip" title="تم السداد"  class="red ace-tooltip inline">' + numeral(oObj.ClientExtraOnCarPaid).format('0,0') + '</s>' : extraOnCar);
+                                        extraOnCarPaid = (rowData.ClientExtraOnCar * 1 === 0 && rowData.ClientExtraOnCarPaid * 1 > 0 ? // extra amount was paid.
+                                            sadFace + '<s data-rel="tooltip" title="تم السداد"  class="red ace-tooltip inline">' + numeral(rowData.ClientExtraOnCarPaid).format('0,0') + '</s>' : extraOnCar);
 
                                     return '<strong data-rel="tooltip" class="carRequired" title="المطلوب على السيارة">' + numeral(__total).format('0,0') + '</strong> &nbsp;' + discountOnCar + ' ' + extraOnCarPaid;
                                 }
                             },
                             {
                                 "bSortable": false,
-                                "mData": function (oObj) {
-                                    if (oObj["PayInvTypeID"] === 3) // Re-list car
+                                "mData": function (rowData) {
+                                    if (rowData["PayInvTypeID"] === 3) // Re-list car
                                         return '---';
-                                    if (oObj["Arrived"] === 'true' || oObj.WithoutShipping === 'true')
-                                        return '<img src="/App_Themes/iraq/images/' + oObj["DistinationNameEn"] + '.jpg" width="25" /> ' + oObj["DistinationNameAr"];
+                                    if (rowData["Arrived"] === 'true' || rowData.WithoutShipping === 'true')
+                                        return '<img src="/App_Themes/iraq/images/' + rowData["DistinationNameEn"] + '.jpg" width="25" /> ' + rowData["DistinationNameAr"];
                                     else
-                                        return '<img src="/App_Themes/iraq/images/USA.jpg" width="25" /> أمريكا';
+                                        return '<img src="/App_Themes/iraq/images/USA.jpg" width="25" /> أمريكا ' +
+                                            (rowData.ShipCompanyNameEn ? rowData.ShipCompanyNameEn.split('-')[1] : '');
                                 }
                             },
                             {
                                 "bSortable": false,
-                                "mData": function (oObj) {
-                                    if (oObj["Arrived"] === 'true' || oObj.WithoutShipping === 'true') {
-                                        var printPaper = (oObj["ReceiveWithPaper"] != null) ? '<a class="hidden-print" title="استلام أوراق السيارة" href="signature/signature.aspx?id=' + oObj["SaleInvoiceID"] + '&type=1"><i class="icon-print"></i></a>' : '', paperUrl = '<a data-rel="tooltip" href="javascript:void(0);" class="car-paper" title="تسليم السيارة">' + ((!oObj["ReceiveWithPaper"]) ? "لم تسلم" : (oObj["ReceiveWithPaper"] == 'true') ? "بالورق" : "بدون الورق") + '</a> ';
+                                "mData": function (rowData) {
+                                    if (rowData["Arrived"] === 'true' || rowData.WithoutShipping === 'true') {
+                                        var printPaper = (rowData["ReceiveWithPaper"] != null) ? '<a class="hidden-print" title="استلام أوراق السيارة" href="signature/signature.aspx?id=' + rowData["SaleInvoiceID"] + '&type=1"><i class="icon-print"></i></a>' : '', paperUrl = '<a data-rel="tooltip" href="javascript:void(0);" class="car-paper" title="تسليم السيارة">' + ((!rowData["ReceiveWithPaper"]) ? "لم تسلم" : (rowData["ReceiveWithPaper"] == 'true') ? "بالورق" : "بدون الورق") + '</a> ';
                                         return paperUrl + printPaper;
                                     }
                                     else
@@ -724,6 +778,7 @@
                             }]
                     });
 
+                // grid installment payment
                 $("#listItems:eq(0) tbody").delegate('tr a[href="javascript:void(0);"]', 'click', function (e) {
                     e.preventDefault();
 
@@ -733,44 +788,44 @@
 
                     if (pos != null) {
                         if (self.hasClass('pay')) {
-
                             // to help click payment again.
                             self.addClass('waitingPay');
 
-
-                            var title = "سداد مبلغ",
-                                operation = 'insert',
-                                modalDialog = 'paymentModal';
-
+                            var title = "سداد مبلغ", operation = 'insert', modalDialog = 'paymentModal';
                             aData = oTable.row(pos).data(); //get data of the clicked row
 
                             //assign value to hidden field
                             var amount = self.text();
                             $('.Amount').html(amount); // amount to pay.
                             $('#CarID').val(aData['CarID']);
-                            var colIndex = self.closest("td").index();
-                            //if (colIndex > 5) // for Shipping and Shop costs installment types
-                            //    colIndex = colIndex - 1;
-                            //1	عربون
-                            //2	متبقى
-                            //3	شحن
-                            //4	ورشة
-                            //5 زيادة
-                            $('#InstallmentTypeID').val(colIndex - 3);
+                            var colIndex = self.closest("td").index(),
+                                installmentTypeTempId = colIndex - 3,
+                                //if (colIndex > 5) // for Shipping and Shop costs installment types
+                                //    colIndex = colIndex - 1;
+                                //1	عربون
+                                //2	متبقى
+                                //3	شحن
+                                //4	ورشة
+                                //5 زيادة
+                                //6 VAT
+                                installmentTypeId = installmentTypeTempId === 6 ? 5 : (installmentTypeTempId === 5 ? 6 : installmentTypeTempId);
+
+                            $('#InstallmentTypeID').val(installmentTypeId);
+
                             // show title
                             commonManger.showPopUpDialog(title, operation, modalDialog);
+
                             var _titl = $('#listItems thead th:eq(' + colIndex + ')').text();
                             $('#addModalLabel').append(' ' + _titl + ' على السيارة رقم: ' + aData['CarID']);
-
                         }
                         else if (self.hasClass('car-place')) {
-                            var title = "وصول السيارة",
-                                operation = 'insert',
-                                modalDialog = 'placeModal';
+                            var title = "وصول السيارة", operation = 'insert', modalDialog = 'placeModal';
                             aData = oTable.row(pos).data(); //get data of the clicked row
-                            //$('#aspnetForm')[0].reset();
+
+
                             //assing value to hidden field
                             $('input[name=CarID]').val(aData['CarID']);
+
                             // show title
                             commonManger.showPopUpDialog(title, operation, modalDialog);
                         }
@@ -799,7 +854,7 @@
                         else if (self.hasClass('car-discnt')) {
                             var title = "الخصم على السيارة", operation = 'insert', modalDialog = 'discountModal';
                             aData = oTable.row(pos).data(); //get data of the clicked row
-                            //$('#aspnetForm')[0].reset();
+
                             //assing value to hidden field
                             $('#discountCarID').val(aData['CarID']);
                             $('#CarDiscount').val(aData['CarDiscount']);
@@ -811,6 +866,7 @@
 
                             var title = "إلغاء فاتورة البيع", operation = 'insert', modalDialog = 'cancelModal';
                             aData = oTable.row(pos).data(); //get data of the clicked row
+
                             $('#cancelCarID').val(aData['CarID']);
                             $('#cancelInvoiceID').val(aData['SaleInvoiceID']);
                             $('#cancelCarModel').val(aData["MakerNameAr"] + ' - ' + aData["TypeNameAr"] + ' ' + aData["Year"]);
@@ -828,13 +884,26 @@
                             $('#undoForm input[id],#undoNotes').val('');
                             $('#undoForm lebel[id]').text('');
 
-
-                            var colIndex = self.closest("td").index() - 3; // installment type ID: (1, Retainer), (2,Delayed),(3,ShippExpenses),(4,ShopExpenses)
+                            // Installment type ID: (1, Retainer), (2,Delayed),(3,ShippExpenses),(4,ShopExpenses)
+                            var colIndex = self.closest("td").index() - 3,
+                                installmentTypeId = colIndex === 6 ? 5 : (colIndex === 5 ? 6 : colIndex);
 
                             $('#undoCarID').text(aData['CarID']);
                             $('#undoClientID').val(aData['ClientID']);
-                            $('#undoInstallmentTypeID').val(colIndex);
+                            $('#undoInstallmentTypeID').val(installmentTypeId);
                             $('#undoCarModel').text(aData["MakerNameAr"] + ' - ' + aData["TypeNameAr"] + ' ' + aData["Year"]);
+
+                            commonManger.showPopUpDialog(title, 'save', modalDialog);
+                        }
+                        else if (self.hasClass('cancel-vat')) {
+                            var title = "إلغاء ضريبة VAT",
+                                modalDialog = 'cancelVatModal';
+                            aData = oTable.row(pos).data(); // get data of the clicked row
+
+                            $('#cancelVatValue').val(numeral(aData.VAT).format('0.00'));
+                            $('#cancelVatInvoiceID').val(aData.SaleInvoiceID);
+                            $('#cancelVatCarModel').val(aData.MakerNameAr + ' - ' + aData.TypeNameAr + ' ' + aData.Year);
+                            $('#cancelVatNotes').val('');
 
                             commonManger.showPopUpDialog(title, 'save', modalDialog);
                         }

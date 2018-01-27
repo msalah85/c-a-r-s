@@ -115,6 +115,7 @@
     </div>
     <script src="/Scripts/select2/select2.min.js?v=1.2"></script>
     <script src="/Scripts/App/DefaultGridFilterManager.min.js?v=4.3"></script>
-    <script src="/Scripts/App/clientDiscountsManager.min.js?v=1.4"></script>
+    <script src="/Scripts/DataTables/media/js/dataTables.rowsGroup.min.js?v=1.6"></script>
+    <script src="/Scripts/App/clientDiscountsManager.min.js?v=1.5"></script>
     <script src="/Scripts/select2/select2-optinal.min.js?v=1.4"></script>
 </asp:Content>

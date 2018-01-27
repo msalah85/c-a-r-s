@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>طباعة فاتورة البيع</title>
-    <script>window.print(); </script>
+    <script>window.print();</script>
     <link href="//fonts.googleapis.com/earlyaccess/droidarabickufi.css" rel="stylesheet" />
     <link href="/App_Themes/iraq/allcss.min.css" id="appStyles" rel="stylesheet" />
     <script src="/Scripts/jquery-1.10.2.min.js"></script>
@@ -26,7 +26,8 @@
                     <img alt="" class="img-print" src="/Content/images/print/print-header.png" /></a>
                 <div class="row">
                     <div class="span6">
-                        <h2 style="margin: 46px 84px 0 0">فاتورة بيع سيارة</h2>
+                        <h2 class="text-center" style="color: #21536e">فـاتــــورة ضـريــــبية</h2>
+                        <p class="text-center">رقم التسجيل الضريبي: <span runat="server" id="divVatRegistrationNumber"></span></p>
                         <h3 style="margin: 0 84px 0 0" id="divCanceled" class="red" runat="server"></h3>
                     </div>
                     <div class="span6 well">
@@ -129,6 +130,54 @@
                         <!--end signature board-->
                     </div>
                 </div>
+                <div class="row">
+                    <!-- extra on car -->
+                    <div class="span6 extra-div hidden">
+                        <h4 class="red">الزيادات على السيارة</h4>
+                        <table class="table car-info more extra-list">
+                            <thead>
+                                <tr>
+                                    <th width="17%">المبلغ <sub>$</sub></th>
+                                    <th>السبب</th>
+                                </tr>
+                            </thead>
+                            <colgroup class="col-bg"></colgroup>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- car discounts -->
+                    <div class="span6 disc-div hidden">
+                        <h4 class="green">الخصومات على السيارة</h4>
+                        <table class="table car-info more disc-list">
+                            <thead>
+                                <tr>
+                                    <th width="17%">المبلغ <sub>$</sub></th>
+                                    <th>السبب</th>
+                                </tr>
+                            </thead>
+                            <colgroup class="col-bg"></colgroup>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="span6 car-summary">
+                        <h4 class="green">صافي الفاتورة</h4>
+                        <table class="table car-info more">
+                            <colgroup class="col-bg"></colgroup>
+                            <tbody>
+                                <tr class="alert alert-danger">
+                                    <td width="40%" class="bolder">ضريبة VAT 5% <sub>$</sub></td>
+                                    <td><span class="vat" runat="server" id="VAT">0</span></td>
+                                </tr>
+                                <tr class="bolder alert alert-success">
+                                    <td>المبلغ المستحق <sub>$</sub></td>
+                                    <td class="carTotal">0</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
                 <!--print footer-->
                 <img alt="" class="print-footer" src="/Content/images/print/print-footer.png" />
                 <!--end printed footer-->
@@ -137,136 +186,16 @@
             <button type="submit" id="SaveSignature" class="btn btn-info hidden hidden-print pull-left" title="حفـــظ">حفظ توقيع العميل</button>
         </div>
     </div>
-    <style>
-        .container {
-            background: #fff;
-            padding: 10px;
-        }
-
-        body, body:before {
-            background: #525659;
-        }
-
-        .form-actions {
-            margin: 0;
-            padding: 9px 17px 9px;
-        }
-
-        .invoice-body.well {
-            padding: 0;
-        }
-
-        #client-signature, .kbw-signature {
-            min-height: 188px;
-            overflow: hidden;
-        }
-
-            .kbw-signature canvas {
-                width: 100%;
-            }
-
-        .widget-main.padding-6 {
-            padding-bottom: 2px;
-        }
-
-        .bigger-150 {
-            font-size: 25px;
-        }
-
-        .thumbnail {
-            border: none;
-        }
-
-        .invoice-body table {
-            margin-bottom: 0;
-        }
-
-            .invoice-body table tr:first-child td {
-                border-top: 0;
-            }
-
-            .invoice-body table tr td {
-                padding: 6pt;
-            }
-
-        .invoice-head td {
-            padding: 1px 8px;
-        }
-
-        .stickyFooter input {
-            border: 1px solid red;
-        }
-
-        input[type=text].form-control {
-            height: 27px;
-        }
-
-        @media (max-width: 767px) {
-            .row-fluid .span6 {
-                display: block;
-                float: right;
-                width: 49%;
-                margin-right: 10px;
-            }
-
-            .ace-thumbnails li {
-                width: 47%;
-            }
-
-                .ace-thumbnails li img {
-                    width: 100%;
-                    height: auto;
-                }
-        }
-
-        @media print {
-            body, body:before {
-                background: #fff !important;
-            }
-
-            #sig svg {
-                max-height: 200px;
-                width: 500px;
-            }
-
-            .print-footer {
-                bottom: 5px;
-                right: 0;
-                position: fixed;
-                display: block;
-            }
-        }
-    </style>
-
+    <link href="/App_Themes/iraq/sale-invoice.min.css?v=1.3" rel="stylesheet" />
     <script src="/admin-admin-2015/signature/js/jquery.signature.min.js"></script>
     <script src="/admin-admin-2015/signature/js/canvg.min.js"></script>
-    <script>
-        var renderSVG = function (svg, width, height) {
-            document.createElement('canvas')
-            var c = document.createElement('canvas');
-            c.width = width || 500;
-            c.height = height || 500;
-            document.getElementById('sig').innerHTML = '';
-            document.getElementById('sig').appendChild(c);
-            if (typeof FlashCanvas != "undefined") {
-                FlashCanvas.initElement(c);
-            }
-            canvg(c, svg, {
-                log: true, renderCallback: function (dom) {
-                    if (typeof FlashCanvas != "undefined") {
-                        document.getElementById('sig').innerHTML = 'svg not supported';
-                    } else {
-                        var svg = (new XMLSerializer()).serializeToString(dom);
-                        document.getElementById('sig').innerHTML = svg;
-                    }
-                }
-            });
-            $('#SaveSignature,#clear').addClass('hidden');
-        };
-        $('.printme').click(function () {
-            window.print();
-        });
-    </script>
+    <script src="/Scripts/client/InvoicePrint.js"></script>
+    <script src="Scripts/lz-string/lz-string.min.js"></script>
+    <script src="Scripts/jquery.xml2json.min.js"></script>
+    <script src="Scripts/numeral.min.js"></script>
+    <script src="Scripts/App/DataService.min.js"></script>
+    <script src="Scripts/App/Common.min.js"></script>
+    <script src="/Scripts/App/carsaleInvoicesManager.js?v=1.4"></script>
     <asp:Literal ID="Label1" runat="server" />
 </body>
 </html>

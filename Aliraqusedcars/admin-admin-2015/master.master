@@ -10,6 +10,7 @@
     <title><%: Page.Title %> شركة العراق لتجارة السيارات المستعمله</title>
     <meta name="description" content="شير لتصميم مواقع الانترنت - شركة العراق لتجارة السيارات المستعمله" />
     <link href="//fonts.googleapis.com/earlyaccess/droidarabickufi.css" rel="stylesheet" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
     <meta name="author" content="www.share-web-design.com, eng.msalah.abdullah@gmail.com" />
     <base id="appUrl" href="/admin-admin-2015/" target="_self"/><!--[if IE]></base><![endif]-->
     <!--[if IE]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/selectivizr/1.0.2/selectivizr-min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script><![endif]-->
@@ -148,6 +149,7 @@
                         <li><a href="reexportcarsnorpaperlist.aspx" title="استلام ورق سيارات للتصدير"><i class="icon-double-angle-left"></i>ورق سيارات للتصدير</a></li>
                         <li><a href="ReExportCarsList.aspx" title="استرجاع تأمينات جمركية"><i class="icon-double-angle-left"></i>استرجاع تأمينات جمركية</a></li>
                         <li><a href="ReExportInvoicesList.aspx"><i class="icon-double-angle-left"></i>تقرير التأمينات الجمركية</a></li>
+                        <li><a href="vat/vatreports.aspx"><i class="icon-double-angle-left"></i>تقرير ضريبة VAT</a></li>
                     </ul>
                 </li>
                 <li><a href="BankBalancesView.aspx"><i class="icon-list-alt"></i><span>البــــــــــــــنك</span></a></li>
@@ -245,7 +247,6 @@
         </div>
     </div>
     <a href="#" id="btn-scroll-up" class="btn btn-small btn-inverse hidden-print"><i class="icon-double-angle-up icon-only bigger-110"></i></a>
-    <!--[if IE 7]><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/3.1.0/css/font-awesome-ie7.css" /><![endif]-->
     <!--[if lte IE 8]><link rel="stylesheet" href="<%: Settings.Config.CDN%>/App_Themes/iraq/css/ace-ie.min.css" /><script src="<%: Settings.Config.CDN%>/Scripts/excanvas.min.js"></script><![endif]-->
     <div class="stickyFooter hidden-print hidden-phone hidden-480">
         <form name="searchCarNo" method="get" action="CarDetailsPrint.aspx" accept-charset="UTF-8" class="form-inline">

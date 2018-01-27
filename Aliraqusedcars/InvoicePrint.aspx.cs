@@ -28,8 +28,10 @@ public partial class InvoicePrint : System.Web.UI.Page
         var result = new CarsSaleInvoiceManager().GetCarSaleInvoiceToPrint(_Id);
         if (result != null && result.ClientID == Convert.ToInt32(SessionManager.Current.ID))
         {
+            divVatRegistrationNumber.InnerText = result.VatRegisterNo;
+            VAT.InnerText = string.Format("{0:0,0}", result.VAT ?? 0);
             toDay.InnerHtml = string.Format("{0:dd/MM/yyyy}", result.InvoiceDate);
-            CarID.InnerHtml = result.CarID.ToString();
+            CarID.InnerHtml =string.Format("<a>{0}</a>", result.CarID.ToString());
             divColor.InnerHtml = result.ColorNameEn;
             divChassis.InnerHtml = result.ChassisNo;
             divLotNo.InnerHtml = result.LotNo;

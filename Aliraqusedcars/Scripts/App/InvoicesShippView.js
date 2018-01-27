@@ -1,5 +1,4 @@
 ﻿var
-    pageManager = pageManager || {},
     pageManager = function () {
         var
             shipper = '', shipperMain = '', paid = '', from = '', to = '', distination = '', container = '', invoice = '',
@@ -15,9 +14,14 @@
                     e.preventDefault();
 
                     // search criteria
-                    shipper = $('#Shipper').val(), shipperMain = $('#ShipperMain').val(), paid = $('#Paid').val(),
-                        from = commonManger.dateFormat($('#From').val()), to = commonManger.dateFormat($('#To').val()), distination = $('#DistinationID').val(),
-                        container = $('#ContainerNo').val(), invoice = $('#InvoiceNo').val();
+                    shipper = $('#Shipper').val(),
+                        shipperMain = $('#ShipperMain').val(),
+                        paid = $('#Paid').val(),
+                        from = commonManger.dateFormat($('#From').val()),
+                        to = commonManger.dateFormat($('#To').val()),
+                        distination = $('#DistinationID').val(),
+                        container = $('#ContainerNo').val(),
+                        invoice = $('#InvoiceNo').val();
 
 
                     // show header title for print

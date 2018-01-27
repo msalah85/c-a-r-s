@@ -46,6 +46,7 @@
         .exp-footer {
             background-color: rgba(130,175,111,0.09);
         }
+        td.no-padding {padding:0}td.no-padding #VAT{margin:0;}
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
@@ -64,7 +65,7 @@
         <div class="row-fluid">
             <form runat="server" id="aspnetForm" clientidmode="Static">
                 <div class="form-horizontal" id="masterForm">
-                    <div class="span6">
+                    <div class="span4">
                         <div class="control-group">
                             <label class="control-label" for="CustomsPrice">قيمة البيان الجمركي<span data-toggle="tooltip" title="البيان الجمركي المسجل فى فاتورة المخلص" class="text-error">!*</span></label>
                             <div class="controls">
@@ -290,7 +291,17 @@
                 </tr>
                 <tr class="bg-footer">
                     <td><b class="pull-left">إجمالى الفاتورة <sub>درهم</sub></b></td>
-                    <td width="14%"><strong id="lblInvoiceTotalDhs">0</strong></td>
+                    <td><strong id="lblInvoiceCalculatedDhs">0</strong></td>
+                </tr>
+                <tr class="bg-footer">
+                    <td><label for="VAT" class="pull-left">ضريبة VAT 5% <sub>درهم</sub></label></td>
+                    <td class="no-padding">
+                        <input type="number" id="VAT" name="VAT" value="10" />
+                    </td>
+                </tr>
+                <tr class="success">
+                    <td><b class="pull-left">المبلغ المستحق <sub>درهم</sub></b></td>
+                    <td><strong id="lblInvoiceTotalDhs">0</strong></td>
                 </tr>
             </table>
         </div>

@@ -117,6 +117,7 @@
     <!--balance-->
     <script src="/Scripts/select2/select2.min.js?v=2.2"></script>
     <script src="/Scripts/App/DefaultGridFilterManager.min.js?v=4.3"></script>
-    <script src="/Scripts/App/clientExtrasManager.js?v=1.5"></script>
+    <script src="/Scripts/DataTables/media/js/dataTables.rowsGroup.min.js?v=1.6"></script>
+    <script src="/Scripts/App/clientExtrasManager.min.js?v=1.7"></script>
     <script src="/Scripts/select2/select2-optinal.min.js?v=1.3"></script>
 </asp:Content>

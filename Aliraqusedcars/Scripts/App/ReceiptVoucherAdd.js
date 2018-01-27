@@ -1,5 +1,4 @@
 ﻿var
-    ClientsPayments = ClientsPayments || {},
     ClientsPayments = function () {
         var
             Init = function () {
@@ -35,7 +34,7 @@
 
                 // show/hide client option
                 $('#ReceiptTypeID input').change(function () {
-                    $('#divEmpID,#divClientID,#divOutsideMemberID').addClass('hidden'); // reset
+                    $('#divEmpID,#divClientID,#divOutsideMemberID, .cut-amount').addClass('hidden'); // reset
                     $('#EmpID,#ClientID,#OutsideMemberID').val('');
                     $('#EmpID,#ClientID,#OutsideMemberID').trigger("chosen:updated");
 
@@ -45,7 +44,7 @@
                         $('#divClientID').removeClass('hidden');
                     }
                     else if (selectedVal == 3) {
-                        $('#divEmpID').removeClass('hidden');
+                        $('#divEmpID, .cut-amount').removeClass('hidden');
                     }
                     else if (selectedVal == 4) {
                         $('#divOutsideMemberID').removeClass('hidden');
@@ -62,46 +61,41 @@
 
                 });
 
+                $('input.cut-amount').on('keyup change', function () {
+                    getReceiptAmountDhs();
+                });
+
                 // currency rate from $ to Dirham.
                 $('#Amount').on('blur change', function () {
-                    var payType = $('#PayTypeID input:checked').val(),
-                        amount = $('#Amount').val();
+                    // get amount as keywords
+                    var $AmountArabic = $('#AmountArabic'),
+                        _amountDollar = $(this).val();
 
-                    //var num2words = new NumberToWords();
-                    //var _towords = num2words.numberToWords(amount);
-                    //var _towords = toWords(amount);
-
-                    commonManger.num2Arabic(amount, 1);
+                    commonManger.num2Arabic(_amountDollar, 1);
                     $.fn.afterSave = function (alpha) {
-                        $('#AmountArabic').val(alpha.d);
+                        $AmountArabic.val(alpha.d);
                     }
 
-                    if (payType == 3) {
-                        amount = amount * 3.67;
-                        $('#AmountDhs').val(amount.toFixed(2));
-
-                    } else {
-                        amount = amount * 3.667;
-                        $('#AmountDhs').val(amount.toFixed(2));
-                    }
+                    getReceiptAmountDhs();
                 });
 
                 // show/hide check no
                 $('#PayTypeID input').change(function () {
                     // reset controls under payment type options:
-                    $('.bank-options,.exchange-options, #divBankTransferNo').addClass('hidden'); // reset
+                    $('.bank-options,.exchange-options, #divBankTransferNo, .cut-amount').addClass('hidden'); // reset
                     $('.bank-options input,.bank-options select,.exchange-options input,.exchange-options select,#BankTransferNo').val('');
+                    $('input.cut-amount:eq(0)').val(20);
+                    $('input.cut-amount:eq(1)').val(1);
                     $('.divBankRequired').text('*');
                     $('#BankID,#BankCheckNo').attr('name', 'BankInfo').attr('required', '');
                     $('.bank-exch-date').html('تاريخ الشيك');
-
 
                     var selectVal = $(this).val();
                     if (selectVal == 2) { // bank options
                         $('.bank-options').removeClass('hidden');
                     }
                     else if (selectVal == 3) { // exchange company options
-                        $('.bank-options,.exchange-options').removeClass('hidden');
+                        $('.bank-options,.exchange-options, .cut-amount').removeClass('hidden');
                         $('.divBankRequired').text('');
                         $('#BankID, #BankCheckNo').removeAttr('name required').removeClass('required');
                     }
@@ -134,6 +128,24 @@
                 $('#ExchangeDate').datepicker().on('changeDate', function (e) {
                     checkDuplicateReceipt();
                 });
+            },
+            getReceiptAmountDhs = function () {
+                var
+                    _obj = {
+                        comm: $('#Commision').val() * 1 > 0 ? ($('#Commision').val() * 1) : 0,
+                        vat: $('#VAT').val() * 1 > 0 ? ($('#VAT').val() * 1) : 0,
+                        payType: $('#PayTypeID input:checked').val() * 1,
+                        amount: $('#Amount').val() * 1 > 0 ? ($('#Amount').val() * 1) : 0
+                    },
+                    $AmountDhs = $('#AmountDhs');
+
+                if (_obj.payType === 3) { // شركة صرافه
+                    _obj.amount = (_obj.amount * 3.67) - _obj.vat - _obj.comm;
+                    $AmountDhs.val(_obj.amount.toFixed(2));
+                } else {
+                    _obj.amount = (_obj.amount * 3.667);
+                    $AmountDhs.val(_obj.amount.toFixed(2));
+                }
             },
             checkDuplicateReceipt = function () {
                 // receipt no and exchange company and date parameters.
@@ -229,7 +241,7 @@
                             });
 
                             // update money format
-                            $('#Amount,#AmountDhs').val(function () {
+                            $('#Amount,#AmountDhs, input.cut-amount').val(function () {
                                 return numeral($(this).val()).format('0.0');
                             });
 

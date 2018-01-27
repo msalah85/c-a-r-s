@@ -6,18 +6,21 @@
         td p {
             margin: 0;
         }
+
         @media print {
             #listItems td {
                 font-size: 11px;
             }
         }
-        #searchForm .control-group{
-            margin-bottom:5px;
+
+        #searchForm .control-group {
+            margin-bottom: 5px;
         }
+
         input.date_range_filter {
-    width: 80px;
-}
-    </style>    
+            width: 80px;
+        }
+    </style>
     <link href="/Scripts/select2/select2.min.css?v=1.5" rel="stylesheet" />
     <script src="/Scripts/templates/ExpensesOnCarReportPrint.min.js?v=3.3"></script>
 </asp:Content>
@@ -73,7 +76,6 @@
                     </div>
                 </div>
             </div>
-            <div class="hr hr-dotted"></div>
         </div>
         <div class="row-fluid">
             <div class="table-header">

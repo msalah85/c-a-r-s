@@ -92,9 +92,9 @@
                     convertVal = v.Convertamount * 1;
 
                     var dhsAmount = (v.FinalAmount * rateVal),
-                        dhsWithCommision = dhsAmount > 0 ? (dhsAmount + convertVal) : 0;
+                        dhsWithCommision = dhsAmount > 0 ? (dhsAmount + convertVal + _vat) : 0;
 
-                    invTotalDhs += dhsWithCommision + _vat;
+                    invTotalDhs += dhsWithCommision;
                     VatPaymentTotalAmount += _vat; // VAT per Buyer
 
                     // 
@@ -106,13 +106,13 @@
 
                 }).get(),
                     ids = $(jsn1).map(function (i, v) { return v.PayInvoicePaymentsID; }).get().join(',');
-                
+
                 $('#listItems tbody').append(rows);
                 $('.total').text(numeral(invTotal).format('0,0.00'));
                 $('.vatTotalAmount').text(numeral(VatPaymentTotalAmount).format('0,0.00'));
 
                 var netAmount = (invTotalDhs * 1);
-                
+
                 // go to receipt payment
                 var receiptBtn = ' <a href="ReceiptPaymentsAdd.aspx?pamount=' + netAmount.toFixed() + '&ids=' + ids + '" class="btn btn-mini btn-success pull-left hidden-print">انشاء سند صرف <i class="icon-double-angle-left"></i></a>';
 

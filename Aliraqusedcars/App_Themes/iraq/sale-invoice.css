@@ -127,3 +127,11 @@ input[type=text].form-control {
     }
     .container{width:100%}
 }
+/*sale invoice*/
+table.more {
+    border: 1px solid #dce0a4;
+}
+
+.table thead:first-child tr th:first-child {
+    border-right-color: #dce0a4;
+}

@@ -1,9 +1,8 @@
 ﻿<%@ Page Title="تسجيل سند قبض" Language="C#" EnableSessionState="ReadOnly" MasterPageFile="~/admin-admin-2015/master.master"
-    AutoEventWireup="true" CodeFile="ReceiptVoucherAdd.aspx.cs" Inherits="ReceiptVoucherAdd"
-    EnableEventValidation="false" %>
+    AutoEventWireup="true" CodeFile="ReceiptVoucherAdd.aspx.cs" Inherits="ReceiptVoucherAdd" EnableEventValidation="false" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
-    <script src="/Scripts/app/ReceiptVoucherAdd.min.js?v=2.8"></script>
+    <script src="/Scripts/App/ReceiptVoucherAdd.min.js?v=123456"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div id="breadcrumbs" class="hidden-print">
@@ -180,6 +179,18 @@
                                         <option value="1">عامه/سيارات</option>
                                         <option value="2">أخري</option>
                                     </select>
+                                </div>
+                            </div>
+                            <div class="control-group cut-amount hidden">
+                                <label class="control-label" for="Commision" title="هذه القيمة يتم خصمها من إجمالى قيمة السند بالدرهم.">عمولة شركة الصرافة</label>
+                                <div class="controls">
+                                    <input type="text" class="required cut-amount" required value="0" id="Commision" autocomplete="off" />
+                                </div>
+                            </div>
+                            <div class="control-group cut-amount hidden">
+                                <label class="control-label" for="VAT" title="هذه القيمة يتم خصمها من إجمالى قيمة السند بالدرهم.">VAT</label>
+                                <div class="controls">
+                                    <input type="text" class="required cut-amount" required value="0" id="VAT" autocomplete="off" />
                                 </div>
                             </div>
                             <div class="control-group">

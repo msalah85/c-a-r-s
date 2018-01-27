@@ -40,6 +40,7 @@ public partial class CarShippExpenses : FactshMasterPage
             DataSet ds = new DataSet();
             adp.Fill(ds);
             command.Connection.Close();
+
             var rows = new List<Dictionary<string, object>>();
             Dictionary<string, object> row;
             DataTable dt = ds.Tables[0];
@@ -54,7 +55,7 @@ public partial class CarShippExpenses : FactshMasterPage
             }
             var data = new
             {
-                sEcho = param.sEcho,
+                param.sEcho,
                 iTotalRecords = ds.Tables[1].Rows[0][0],
                 iTotalDisplayRecords = ds.Tables[1].Rows[0][0],
                 aaData = rows.ToList()

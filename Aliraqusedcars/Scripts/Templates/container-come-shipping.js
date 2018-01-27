@@ -195,7 +195,9 @@ var
                     "fnServerData": function (sSource, aoData, fnCallback) {
                         dataService.callAjax('GET', aoData, sSource, function (data) {
                             // get data as json format from xml
-                            var jsnData = commonManger.comp2json(data.d), aaData = jsnData.list, jsn1 = jsnData.list1;
+                            var jsnData = commonManger.comp2json(data.d),
+                                aaData = jsnData.list,
+                                jsn1 = jsnData.list1;
 
                             // create object for datatables control
                             var objDT = {

@@ -4,8 +4,9 @@ using System.Web.Services;
 using IraqCars.Business.Business;
 using System.Web.Script.Services;
 using Aliraqusedcars;
+using System.Web.UI;
 
-public partial class ClientCars : FactshMasterPage
+public partial class ClientCars : Page
 {
     [WebMethod]
     [ScriptMethod(UseHttpGet = true)]
@@ -96,7 +97,7 @@ public partial class ClientCars : FactshMasterPage
     public static object Save(string[] values)
     {
         string actionName = "ClientInstallments_Save";
-        string[] names = { "InstallmentID", "ClientID", "CarID", "Amount", "InstallmentTypeID", "PaidOut" };
+        string[] names = { "InstallmentID", "ClientID", "CarID", "Amount", "InstallmentTypeID", "PaidOut", "Notes" };
 
         var saved = new Save().SaveRow(actionName, names, values);
 

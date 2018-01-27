@@ -56,7 +56,7 @@
             }
         }
     </style>
-    <script src="/Scripts/App/printContainerSaleCarsBill.min.js?v=1.1"></script>
+    <script src="/Scripts/App/printContainerSaleCarsBill.js?v=1.1"></script>
     <script src="/Scripts/Templates/container-come-shipping.min.js?v=6.3"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">

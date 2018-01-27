@@ -134,6 +134,29 @@
                     }
                 },
                 {
+                    "mDataProp": "VAT",
+                    "bSortable": false,
+                    "mData": function (row) {
+                        if (row.VAT && row.VAT * 1 > 0) {
+                            if (row["VATDone"] * 1 > 0)
+                                return '<s class="red ace-tooltip" data-rel="tooltip" title="تم السداد">' + numeral(row.VAT).format('0,0') + '</s> ' + undoLink;
+
+                            // pay VAT after finish all other fees required on the car.
+                            var isRequiredToPayVat = (row.CarRetainerDone * 1 > 0 && row.CarDelayedDone * 1 > 0 && row.TotalCarShippExpensesDone * 1 > 0 &&
+                                row.TotalCarShopExpensesDone * 1 > 0 && row.ClientExtraOnCarPaid * 1 > 0),
+                                cancelVatLink = ' <a data-rel="tooltip" data-carid="' + row.CarID + '" data-vatvalue="' + row.VAT
+                                    + '" title="إلغاء VAT عن العميل" href="javascript:void(0);" class="cancel-vat"><i class="icon-remove orange bigger-120"></i></a>';
+
+                            if (!isRequiredToPayVat)
+                                return '<strong data-rel="tooltip" title="غير مفعل للسداد: يرجي سداد كل المطلوب على السيارة أولاً.">' + numeral(row["VAT"]).format('0,0') + '</strong>' + cancelVatLink;
+                            else
+                                return '<a href="javascript:void(0);" data-rel="tooltip" title="سداد الضريبة" class="pay"><strong class="text-black">' + numeral(row.VAT).format('0,0') + '</strong></a>' + cancelVatLink;
+                        }
+                        else
+                            return '---';
+                    }
+                },
+                {
                     "mData": null, // المطلوب
                     "bSortable": false,
                     "render": function (data, type, row) {

@@ -1,8 +1,8 @@
 ﻿<%@ Page Title="سيارات العميل" Language="C#" EnableSessionState="ReadOnly" MasterPageFile="~/admin-admin-2015/master.master" AutoEventWireup="true" CodeFile="ClientCars.aspx.cs" Inherits="ClientCars" %>
 
 <asp:Content ID="Contenst2" ContentPlaceHolderID="head" runat="Server">
-    <link href="<%: Settings.Config.CDN%>/App_Themes/iraq/client-cars-custom.min.css?v=1.1" rel="stylesheet" />
-    <link href="<%: Settings.Config.CDN%>/Scripts/select2/select2.min.css?v=1.1" rel="stylesheet" />
+    <link href="/App_Themes/iraq/client-cars-custom.min.css?v=1.1" rel="stylesheet" />
+    <link href="/Scripts/select2/select2.min.css?v=1.1" rel="stylesheet" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <input type="hidden" value="0" id="doneFlag" />
@@ -87,6 +87,7 @@
                                                 <th>المتبقي</th>
                                                 <th>الشحن</th>
                                                 <th>الورشة</th>
+                                                <th title="ضريبة القيمة المضافة 5% دبي فقط">VAT</th>
                                                 <th>المطلوب</th>
                                                 <th width="85">الموقع</th>
                                                 <th width="120">ورق السيارة</th>
@@ -121,7 +122,7 @@
                                                         </ul>
                                                     </div>
                                                 </th>
-                                                <th colspan="5"></th>
+                                                <th colspan="6"></th>
                                                 <th></th>
                                             </tr>
                                         </tfoot>
@@ -139,10 +140,8 @@
                                                 </th>
                                                 <th>المبلغ <sub>$</sub>
                                                 </th>
-                                                <th>الخصم <sub>$</sub>
-                                                </th>
-                                                <th colspan="2">المطلوب <sub>$</sub>
-                                                </th>
+                                                <th>الخصم <sub>$</sub></th>
+                                                <th colspan="2">المطلوب <sub>$</sub></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -193,8 +192,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="submit" tabindex="0" class="btn btn-success" id="paycar" aria-hidden="true" data-text="سداد">سـداد</button>
-                    <button class="btn" data-dismiss="modal" aria-hidden="true">
-                        إلغاء</button>
+                    <button class="btn" data-dismiss="modal" aria-hidden="true">إلغاء</button>
                 </div>
             </div>
             <div id="placeModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="placeModalLabel"
@@ -418,7 +416,6 @@
                     <button class="btn" data-dismiss="modal" aria-hidden="true">إلغاء</button>
                 </div>
             </div>
-            <!--client`s money back modal-->
             <div id="moneyBack" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -451,9 +448,57 @@
                 </div>
             </div>
             <!--end client`s money back modal-->
+            <!-- cancel vat modal -->
+            <div id="cancelVatModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="cancelVatLbl"
+                aria-hidden="true">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        ×</button>
+                    <h3 id="cancelVatLbl">إلغاء ضريبة القيمة المضافة
+                    </h3>
+                </div>
+                <div class="modal-body">
+                    <div id="cancelVatForm" class="form-horizontal">
+                        <div class="control-group">
+                            <div class="span1"></div>
+                            <p class="orange bolder"><i class="icon-2x icon-warning-sign"></i>&nbsp;تـنـبــــــــيه: سوف يتم إلغـــاءالضريبة من حســـاب العمـــيل.</p>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="cancelVatInvoiceID">رقم فاتورة البيع</label>
+                            <div class="controls">
+                                <input id="cancelVatInvoiceID" class="form-control" type="text" value="0" readonly />
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="cancelVatCarModel">السيارة</label>
+                            <div class="controls">
+                                <input id="cancelVatCarModel" class="form-control" type="text" value="0" readonly />
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="cancelVatValue">مبلغ الضريبة</label>
+                            <div class="controls">
+                                <input id="cancelVatValue" class="form-control" type="text" value="0" readonly />
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="cancelVatNotes">السبب: <span class="red">*</span></label>
+                            <div class="controls">
+                                <textarea class="form-control required" name="cancelVatNotes" required id="cancelVatNotes" cols="5" rows="5"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-warning bntcancelVatInvoice" aria-hidden="true" data-text="تنفيذ إلغاء VAT عن العميل">تنفيذ إلغاء VAT عن العميل</button>
+                    <button class="btn" data-dismiss="modal" aria-hidden="true">
+                        تجاهل</button>
+                </div>
+            </div>
+            <!-- end cancel vat modal -->
         </form>
     </div>
-    <script src="<%: Settings.Config.CDN%>/Scripts/App/ClientCarsManager.js?v=1.8"></script>
+    <script src="/Scripts/App/ClientCarsManager.js?v=1.8"></script>
     <script type="text/javascript">
         pageManager.Init();
         $('#Arrived').change(function () {
@@ -463,7 +508,7 @@
                 $('#ReceiveWithPaper').attr('disabled', 'disabled');
         });
     </script>
-    <script src="<%: Settings.Config.CDN%>/Scripts/select2/select2.min.js?v=1.5"></script>
-    <script async src="<%: Settings.Config.CDN%>/Scripts/select2/select2-optinal.min.js?v=1.5"></script>
-    <script src="<%: Settings.Config.CDN%>/Scripts/utilities/stickyTableHeader.min.js"></script>
+    <script src="/Scripts/select2/select2.min.js?v=1.5"></script>
+    <script async src="/Scripts/select2/select2-optinal.min.js?v=1.5"></script>
+    <script src="/Scripts/utilities/stickyTableHeader.min.js"></script>
 </asp:Content>

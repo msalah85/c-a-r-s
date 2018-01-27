@@ -56,7 +56,7 @@ public partial class car_details : Page
 
         // get all data from db.
         var dsAll = GetData("CarsData_SelectOne", _carId);
-        
+
         if (dsAll != null && dsAll.Tables[0].Rows.Count > 0)
         {
             var dtCar = dsAll.Tables[0];
@@ -71,8 +71,9 @@ public partial class car_details : Page
             status.InnerHtml = string.Format("{0}", dtCar.Rows[0]["WorkingStatusName"]);
             transmi.InnerHtml = string.Format("{0}", dtCar.Rows[0]["TransmissionNameEn"]);
 
-            arrive.InnerHtml = dtCar.Rows[0]["Arrived"].Equals("True") ? "واصـــله" : string.Format("{0}", dtCar.Rows[0]["ArrivalDate"]);
-            //arrive.InnerHtml = dtCar.Rows[0]["Arrived"].Equals("True") || parseDate(dtCar.Rows[0]["ArrivalDate"]).Subtract(DateTime.Now).TotalDays <= 0 ? "واصـــله" : string.Format("{0}", dtCar.Rows[0]["ArrivalDate"]);
+            arrive.InnerHtml = dtCar.Rows[0]["Arrived"].Equals("True") || parseDate(dtCar.Rows[0]["ArrivalDate"]).Subtract(DateTime.Now).TotalDays <= 0 ?
+                "واصـــله" : string.Format("قيد الشحن {0} {1}", dtCar.Rows[0]["ArrivalDate"],
+                (dtCar.Rows[0]["ShipCompanyNameEn"] != null && !string.IsNullOrEmpty(Convert.ToString(dtCar.Rows[0]["ShipCompanyNameEn"])) ? dtCar.Rows[0]["ShipCompanyNameEn"].ToString().Split('-')[1] : ""));
 
             orangePrice.InnerHtml = price.InnerHtml = string.Format("{0:0,0} $", dtCar.Rows[0]["WesitePrice"]);
             notes.InnerHtml = string.Format("{0}", dtCar.Rows[0]["Notes"]);
@@ -90,11 +91,11 @@ public partial class car_details : Page
             Page.Title += pageTitle.InnerText;
             Page.MetaDescription += pageTitle.InnerText;
             Page.MetaKeywords += "," + pageTitle.InnerText.Replace(" ", ",");
-            
+
             StringBuilder shareTags = new StringBuilder(),
                           twitImgs = new StringBuilder();
             var masterSocial = this.Master.FindControl("socialShare") as Literal;
-            
+
             shareTags.Append(string.Format(@"<meta property='og:type' content='website' />
                                             <meta property='og:title' content='{0}' />
                                             <meta property='og:description' content='{0}' />
@@ -108,7 +109,7 @@ public partial class car_details : Page
                                             <meta name='twitter:description' content='{0}' />",
                                             Resources.Resource_ar.IraqComp + " " + pageTitle.InnerText,
                                             Request.Url.AbsoluteUri));
-            
+
             // bind car images
             var dtImages = dsAll.Tables[1];
             for (int i = 0; i < dtImages.Rows.Count; i++)
@@ -126,7 +127,7 @@ public partial class car_details : Page
                 //twitImgs.Append(path + ",");
 
                 divCarImages.InnerHtml += @"<div data-p='144.50' style='display: none;'><img alt=" + pageTitle.InnerText + " data-rel='prettyPhoto[gallery]' data-u='image' src='" + path + "' /><img data-u='thumb' src='" + pathThumb + "' /></div>";
-            }            
+            }
             masterSocial.Text = shareTags.ToString();
 
             // bind next , prev buttons
@@ -144,7 +145,7 @@ public partial class car_details : Page
                 prevCar.HRef = string.Format("/car/{0}-details", prevID);
                 prevCar.Attributes["class"] = prevCar.Attributes["class"].Replace("hidden", "").Trim();
             }
-            
+
             // comments
             var url = string.Format(@"https://www.iraqusedcars.ae/car/{0}-{1}-{2}-{3}", _id.InnerText, dtCar.Rows[0]["MakerNameEn"], dtCar.Rows[0]["TypeNameEn"], dtCar.Rows[0]["Year"]);
             divCarComments.Attributes.Add("data-href", url);

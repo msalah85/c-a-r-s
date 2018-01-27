@@ -520,5 +520,29 @@
     "inputFiles": [
       "Scripts/App/DefaultGridVariables.js"
     ]
+  },
+  {
+    "outputFileName": "Scripts/App/carsaleInvoicesManager.min.js",
+    "inputFiles": [
+      "Scripts/App/carsaleInvoicesManager.js"
+    ]
+  },
+  {
+    "outputFileName": "App_Themes/iraq/sale-invoice.min.css",
+    "inputFiles": [
+      "App_Themes/iraq/sale-invoice.css"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/App/CustomsInvoicesManager.min.js",
+    "inputFiles": [
+      "Scripts/App/CustomsInvoicesManager.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/App/vat/vat-reports.min.js",
+    "inputFiles": [
+      "Scripts/App/vat/vat-reports.js"
+    ]
   }
 ]

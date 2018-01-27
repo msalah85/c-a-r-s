@@ -1,5 +1,8 @@
 ﻿$.extend(true, $.fn.dataTable.defaults, {
-    "searching": false
+    "orderCellsTop": true,
+    "rowsGroup": [1],
+    "sDom": "<'row-fluid hidden-print'<'span6 'l><'span6 lft-pane'BfT>r>t<'row-fluid'<'span6'i><'span6'p>>",
+    'language': { 'search': 'بحث', 'searchPlaceholder': 'برقم السيارة' }
 });
 
 modalDialog = "addModal";

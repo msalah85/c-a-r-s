@@ -26,6 +26,8 @@ public partial class admin_admin_2015_InvoiceSalePrint2 : Page
         var result = new CarsSaleInvoiceManager().GetCarSaleInvoiceToPrint(_Id);
         if (result != null)
         {
+            divVatRegistrationNumber.InnerText = result.VatRegisterNo;
+            VAT.InnerText = string.Format("{0:0,0}", result.VAT ?? 0);
             toDay.InnerHtml = string.Format("{0:dd/MM/yyyy}", result.InvoiceDate);
             clientAccount.HRef += string.Format("{0}&selcarid={1}", result.ClientID, result.CarID);
             clientAccount.InnerHtml = result.full_name;
@@ -43,7 +45,7 @@ public partial class admin_admin_2015_InvoiceSalePrint2 : Page
             divArriveDate.InnerHtml = string.Format("{0:dd/MM/yyyy}", result.ArrivalDate);
             divModel.InnerHtml = string.Format("{0} - {1}", result.MakerNameEn, result.TypeNameEn);
             if (result.WorkingStatusName.Equals("حــادث"))
-                divStatus.InnerHtml = string.Format("{0} <span class='pull-left'>نوع الحادث: {1}</span>", result.WorkingStatusName, result.AccidentType);
+                divStatus.InnerHtml = string.Format("{0} <span class='pull-left'><span class='pink'>نوع الحادث</span>: {1}</span>", result.WorkingStatusName, result.AccidentType);
             else
                 divStatus.InnerHtml = string.Format("{0}", result.WorkingStatusName);
 
@@ -53,14 +55,12 @@ public partial class admin_admin_2015_InvoiceSalePrint2 : Page
                 divCanceled.InnerHtml += "<p>" + result.DeleteReason + "</p>";
             }
 
-
             // view client signature
             if (!string.IsNullOrEmpty(result.ClientSignature))
             {
                 string _sig = string.Format(@"{0}", result.ClientSignature.Replace("\n", @" ").Replace(Environment.NewLine, @" "));
                 Label1.Text = "<script type='text/javascript'>renderSVG('" + _sig + "', 665, 188);</script>";
             }
-
 
             // Car photo
             string path = string.Format("/public/cars/{0}/", result.CarID);
@@ -69,7 +69,7 @@ public partial class admin_admin_2015_InvoiceSalePrint2 : Page
             //ShowCarImages(result.CarID.ToString());
         }
     }
-    
+
     protected void ShowCarImages(string id)
     {
         string path = string.Format("/public/cars/{0}/_thumb/", id);

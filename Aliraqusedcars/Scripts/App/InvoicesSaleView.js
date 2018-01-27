@@ -130,13 +130,19 @@
                                         allInvoicesString = '',
                                         firstBlock = $(htmlPage).clone(true),
                                         nextBlock = firstBlock.filter('div.container'),
-                                        bindCarExtraDiscountToInvoice = function (mainInvoiceId, childElemntId, dtaList, netPrice) {
+                                        bindCarExtraDiscountToInvoice = function (mainInvoiceId, childElemntId, dtaList, netPrice, hasValue) {
                                             var $allWinHtml = $('<div />', { html: allInvoicesString });
 
-                                            $allWinHtml.find(mainInvoiceId + " ." + childElemntId + "-list tbody")
-                                                .html(getChildrenHtmlElements(dtaList))
-                                                .closest('div.span6').removeClass('hidden')
-                                                .find('.carTotal').text(numeral(netPrice).format('0,0'));
+                                            if (hasValue)
+                                                $allWinHtml.find(mainInvoiceId + " ." + childElemntId + "-list tbody")
+                                                    .html(getChildrenHtmlElements(dtaList))
+                                                    .closest('div.span6').removeClass('hidden'); // show addtional/dicounts block
+                                            else
+                                                $allWinHtml.find(mainInvoiceId + " ." + childElemntId + "-list tbody")
+                                                    .html(getChildrenHtmlElements(dtaList))
+                                                    .closest('div.span6').remove(); // show addtional/dicounts block
+
+                                            $allWinHtml.find(mainInvoiceId + " .carTotal").text(numeral(netPrice).format('0,0')); // car total price.
 
                                             allInvoicesString = $allWinHtml.html();
                                         };
@@ -147,6 +153,7 @@
 
                                         $(billblock).attr('id', 'InvoiceNo_' + i);
                                         $("#ContentPlaceHolder1_divInvoiceNo", billblock).text(itm.SaleInvoiceID);
+                                        $("#ContentPlaceHolder1_divVatRegistrationNumber", billblock).text(itm.VatRegisterNo);
                                         $("#ContentPlaceHolder1_clientAccount", billblock).text(itm.full_name);
                                         $("#ContentPlaceHolder1_toDay", billblock).text(commonManger.formatJSONDateCal(itm.InvoiceDate));
                                         $("#ContentPlaceHolder1_divModel", billblock).text(itm["MakerNameEn"] + ' - ' + itm["TypeNameEn"]);
@@ -160,6 +167,7 @@
                                         $("#ContentPlaceHolder1_divArriveDate", billblock).text(commonManger.formatJSONDateCal(itm.ArrivalDate));
                                         $("#ContentPlaceHolder1_divSaleTypeName", billblock).text(itm.SaleTypeName);
                                         $("#ContentPlaceHolder1_divNotes", billblock).text(itm.Notes);
+                                        $("#ContentPlaceHolder1_VAT", billblock).text(numeral(itm.VAT).format('0,0') || 0);
                                         $("#ContentPlaceHolder1_divPrice", billblock).text(numeral(itm.PayPrice).format('0,0'));
                                         $(".ace-thumbnails", billblock).html(
                                             `<img class="thumb" src="/public/cars/${itm.CarID}/${itm.MainPicture}" />`
@@ -169,7 +177,7 @@
                                         allInvoicesString += finalBillStr + '<br>';
 
                                         // bind extra list by CarID if exits.
-                                        var netCarPrice = itm.PayPrice * 1, // after extra and discounts
+                                        var netCarPrice = (itm.PayPrice * 1) + ((itm.VAT || 0) * 1), // after extra and discounts
                                             mainBlockId = '#InvoiceNo_' + i,
                                             thisCarId = itm.CarID,
                                             carDiscountList = [],
@@ -203,13 +211,11 @@
 
                                         }
 
-                                        if (carDiscountList.length > 0) {
-                                            bindCarExtraDiscountToInvoice(mainBlockId, 'disc', carDiscountList, netCarPrice);
-                                        }
+                                        // dicounts block
+                                        bindCarExtraDiscountToInvoice(mainBlockId, 'disc', carDiscountList, netCarPrice, (carDiscountList.length > 0));
 
-                                        if (carExtrasList.length > 0) {
-                                            bindCarExtraDiscountToInvoice(mainBlockId, 'extra', carExtrasList, netCarPrice);
-                                        }
+                                        // extras block
+                                        bindCarExtraDiscountToInvoice(mainBlockId, 'extra', carExtrasList, netCarPrice, (carExtrasList.length > 0));
                                     });
 
                                     // draw all invoices to print

@@ -49,6 +49,7 @@
                         </th>
                         <th>الورشة
                         </th>
+                        <th title="ضريبة القيمة المضافة 5% دبي فقط">VAT</th>
                         <th>المطلوب <sub>$</sub>
                         </th>
                         <th>الموقع</th>
@@ -122,8 +123,9 @@
     <script src="/Scripts/datatable/buttons/buttons.html5.min.js"></script>
     <script src="/Scripts/datatable/buttons/jszip.min.js"></script>    
     <script src="/Scripts/moment.min.js"></script>
-    <script src="/Scripts/numeral.min.js"></script><script src="/Scripts/jquery.gritter.min.js"></script>
+    <script src="/Scripts/numeral.min.js"></script>
+    <script src="/Scripts/jquery.gritter.min.js"></script>
     <script src="/Scripts/App/Common.min.js"></script>
-    <script src="/Scripts/client/user-cars.min.js?v=1.7"></script>
+    <script src="/Scripts/client/user-cars.js?v=1.9"></script>
 </asp:Content>
 

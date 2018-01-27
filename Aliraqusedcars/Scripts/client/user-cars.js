@@ -206,11 +206,35 @@ var
                     }
                 },
                 {
+                    "mDataProp": "VAT",
+                    "bSortable": false,
+                    "mData": function (row) {
+                        if (row.VAT && row.VAT * 1 > 0) {
+                            if (row["VATDone"] * 1 > 0)
+                                return '<s class="red ace-tooltip" data-rel="tooltip" title="تم السداد">' + numeral(row.VAT).format('0,0') + '</s> ' + undoLink;
+
+                            // pay VAT after finish all other fees required on the car.
+                            var isRequiredToPayVat = (row.CarRetainerDone * 1 > 0 && row.CarDelayedDone * 1 > 0 && row.TotalCarShippExpensesDone * 1 > 0 &&
+                                row.TotalCarShopExpensesDone * 1 > 0 && row.ClientExtraOnCarPaid * 1 > 0),
+                                cancelVatLink = ' <a data-rel="tooltip" data-carid="' + row.CarID + '" data-vatvalue="' + row.VAT
+                                    + '" title="إلغاء VAT عن العميل" href="javascript:void(0);" class="cancel-vat"><i class="icon-remove orange bigger-120"></i></a>';
+
+                            if (!isRequiredToPayVat)
+                                return '<strong data-rel="tooltip" class="text-fade" title="غير مفعل للسداد إلا بعد سداد كل المطلوب على السيارة أولاً.">' + numeral(row["VAT"]).format('0,0') + '</strong>' + cancelVatLink;
+                            else
+                                return '<strong class="text-black" title="المبلغ جاهز للسداد الآن">' + numeral(row.VAT).format('0,0') + '</strong>' + cancelVatLink;
+                        }
+                        else
+                            return '---';
+                    }
+                },
+                {
                     "mData": null, // المطلوب
                     "bSortable": false,
                     "render": function (data, type, row) {
                         var _sumR = addition(row.CarRetainer, row.TotalCarShippExpenses, row.TotalCarShopExpenses),
-                        _arrived = (row.Arrived === 'true' || row.WithoutShipping === 'true');
+                            _vatAmount = (row.VAT || 0) * 1,
+                            _arrived = (row.Arrived === 'true' || row.WithoutShipping === 'true');
 
                         if (row.Arrived === 'true') { // add delayed only when car outside usa.
                             // delayed value
@@ -218,12 +242,14 @@ var
                             delayedAvaila = delayedAvaila == 0 ? row.CarDelayed : delayedAvaila;
 
                             // amount after car discount
-                            _sumR += parseFloat(delayedAvaila);
+                            _sumR += parseFloat(delayedAvaila) +
+                                parseFloat(_vatAmount) - // VAT should activated/added with car delayed amount.
+                                parseFloat(row.CarDiscount); // 
                         } // end if
 
                         // sum total required on this car.
                         var _totalInstallments = (row.CarRetainerDone * 1) + (row.CarDelayedDone * 1)
-                            + (row.TotalCarShippExpensesDone * 1) + (row.TotalCarShopExpensesDone * 1),
+                            + (row.TotalCarShippExpensesDone * 1) + (row.TotalCarShopExpensesDone * 1) + (row.VATDone * 1),
 
                             __total = (_sumR - _totalInstallments),
                             discountOnCar = (row.ClientDiscountOnCar * 1 > 0 ? '<i data-carid="' + row.CarID + '" title="خصم: ' + numeral(row.ClientDiscountOnCar).format('0,0') + '" data-rel="tooltip" data-type="-1" class="addionalAmount text-success fa fa-smile-o fa-2x"></i>' : ''),
@@ -245,7 +271,8 @@ var
                         if (row.Arrived === 'true')
                             return '<img src="/App_Themes/iraq/images/' + row.DistinationNameEn + '.jpg" width="25" /> ' + row.DistinationNameAr;
                         else
-                            return '<img src="/App_Themes/iraq/images/USA.jpg" width="25" /> أمريكا';
+                            return '<img src="/App_Themes/iraq/images/USA.jpg" width="25" /> أمريكا ' +
+                                (row.ShipCompanyNameEn ? row.ShipCompanyNameEn.split('-')[1] : '');
                     }
                 },
                 {
@@ -281,7 +308,7 @@ var
                     $('#lists tbody').html('').append(rows);
                     $('.total').text(total.toFixed());
                 };
-            
+
             if (_carID !== null) {
                 // get addionalAmount id
                 dto = { actionName: 'Client' + _typeName + '_One', value: _carID };

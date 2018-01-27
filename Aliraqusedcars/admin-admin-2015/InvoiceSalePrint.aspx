@@ -1,9 +1,9 @@
-﻿<%@ Page Title="طباعة فاتورة البيع" Language="C#" MasterPageFile="master2.master" AutoEventWireup="true" CodeFile="InvoiceSalePrint.aspx.cs" Inherits="admin_admin_2015_InvoiceSalePrint2" EnableEventValidation="false" %>
+﻿<%@ Page Title="طباعة فاتورة بيع سيارة" Language="C#" MasterPageFile="master2.master" AutoEventWireup="true" CodeFile="InvoiceSalePrint.aspx.cs" Inherits="admin_admin_2015_InvoiceSalePrint2" EnableEventValidation="false" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <link href="//fonts.googleapis.com/earlyaccess/droidarabickufi.css" rel="stylesheet" />
     <link href="/App_Themes/iraq/allcss.min.css?v=1.1" id="appStyles" rel="stylesheet" />
-    <link href="/App_Themes/iraq/sale-invoice.min.css?v=1.2" rel="stylesheet" />
+    <link href="/App_Themes/iraq/sale-invoice.min.css?v=1.3" rel="stylesheet" />
     <script src="/App_Themes/iraq/js/app.min.js?v=1.1"></script>
     <!--[if lt IE 9]>
         <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -14,14 +14,15 @@
     <div class="container">
         <div class="row-fluid">
             <a href="Home.aspx" title="الرئيسية للأدمن">
-                <img alt="" class="img-print" src="/Content/images/print/print-header.png" /></a>
+                <img alt="iraq" class="img-print" src="/Content/images/print/print-header.png" /></a>
         </div>
         <div class="wrap-pad">
             <div class="row-fluid">
                 <div class="span12">
                     <div class="row">
                         <div class="span6">
-                            <h2 style="margin: 46px 87px 0 0; color: #21536e">فاتورة بيع سيارة</h2>
+                            <h2 class="text-center" style="color: #21536e">فـاتــــورة ضـريــــبية</h2>
+                            <p class="text-center">رقم التسجيل الضريبي: <span runat="server" id="divVatRegistrationNumber"></span></p>
                             <h3 style="margin: 0 84px 0 0" id="divCanceled" class="red" runat="server"></h3>
                         </div>
                         <div class="span6 well">
@@ -53,7 +54,7 @@
                                 <colgroup class="col-bg"></colgroup>
                                 <tbody>
                                     <tr>
-                                        <td width="39%">نوع السيارة</td>
+                                        <td width="30%">نوع السيارة</td>
                                         <td><span runat="server" id="divModel"></span></td>
                                     </tr>
                                     <tr>
@@ -143,12 +144,6 @@
                                 <colgroup class="col-bg"></colgroup>
                                 <tbody>
                                 </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th class="carTotal"></th>
-                                        <th>إجمالى سعر السيارة</th>
-                                    </tr>
-                                </tfoot>
                             </table>
                         </div>
                         <!-- car discounts -->
@@ -164,23 +159,24 @@
                                 <colgroup class="col-bg"></colgroup>
                                 <tbody>
                                 </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th class="carTotal"></th>
-                                        <th>إجمالى سعر السيارة</th>
-                                    </tr>
-                                </tfoot>
                             </table>
                         </div>
-                        <style>
-                            table.more {
-                                border: 1px solid #dce0a4;
-                            }
-                            .table thead:first-child tr th:first-child {
-                                border-right-color: #dce0a4;
-                            }
-                        </style>
-                        <!-- car discounts -->
+                        <div class="span6 car-summary">
+                            <h4 class="green">صافي الفاتورة</h4>
+                            <table class="table car-info more">
+                                <colgroup class="col-bg"></colgroup>
+                                <tbody>
+                                    <tr class="alert alert-danger">
+                                        <td width="40%" class="bolder">ضريبة VAT 5% <sub>$</sub></td>
+                                        <td><span class="vat" runat="server" id="VAT">0</span></td>
+                                    </tr>
+                                    <tr class="bolder alert alert-success">
+                                        <td>المبلغ المستحق <sub>$</sub></td>
+                                        <td class="carTotal">0</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                     <img alt="Aliraq Cars" class="print-footer" src="/Content/images/print/print-footer.png" />
                 </div>
@@ -191,7 +187,7 @@
     </div>
     <script src="signature/js/jquery.signature.min.js?v=1.1"></script>
     <script src="signature/js/canvg.min.js?v=1.1"></script>
-    <script src="/Scripts/App/carsaleInvoicesManager.min.js?v=1.2"></script>
+    <script src="/Scripts/App/carsaleInvoicesManager.min.js?v=1.4"></script>
     <asp:literal id="Label1" runat="server" />
     <div class="stickyFooter hidden-print">
         <form name="searchCarNo" method="get" action="SearchCars.aspx" accept-charset="UTF-8" class="form-inline">
