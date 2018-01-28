@@ -57,7 +57,13 @@
                         <div class="control-group">
                             <label class="control-label" for="Commission">عمولة شركة الصرافة</label>
                             <div class="controls">
-                                <input type="text" id="Commission" name="Commission" value="100" />درهم
+                                <input class="money" type="text" id="Commission" name="Commission" value="100" />درهم
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="VAT">ضريبة VAT 5%</label>
+                            <div class="controls">
+                                <input class="money" type="number" id="VAT" name="VAT" value="0" />درهم
                             </div>
                         </div>
                         <div class="control-group">
@@ -72,7 +78,6 @@
                     </div>
                 </div>
             </div>
-            <hr class="hr-dotted" />
             <a data-toggle="tooltip" id="btnAddNew" title="اضافة راتب لموظف" data-dismiss="modal"
                 aria-hidden="true" class="icon-animated-vertical btn btn-pink btn-small"><i class="icon-plus"></i>
                 اضافة راتب موظف                    

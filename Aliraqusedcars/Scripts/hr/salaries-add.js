@@ -28,25 +28,40 @@ var _id = commonManger.getQueryStrs()['id'],
         }
     },
     oTable = $('#' + gridId).DataTable({
-        "sDom": "<'row'>t<'row'>", searching: false, retrieve: true, paging: false, destroy: true,
+        "sDom": "<'row'>t<'row'>",
+        searching: false, retrieve: true,
+        paging: false, destroy: true,
         "aoColumnDefs": [{ "bVisible": false, "aTargets": [0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13] }]
     }),
     getDefaults = function () {
         // default & current month, year.
-        var d = new moment(), n = d.format('M'), y = d.format('YYYY'); $month.val(n); $year.val(y);
+        var d = new moment(), n = d.format('M'),
+            y = d.format('YYYY');
+
+        $month.val(n);
+        $year.val(y);
+
         // fill employees list
-        var t = JSON.stringify({ actionName: "Salaries_Properties" }), e = sUrl + "GetDataDirect"; dataService.callAjax("Post", t, e, showEmps, commonManger.errorException)
+        var t = JSON.stringify({ actionName: "Salaries_Properties" }),
+            e = sUrl + "GetDataDirect";
+
+        dataService.callAjax("Post", t, e, showEmps,
+            commonManger.errorException)
     },
     getGridHeader = function () {
         return $("#" + formName).find('input[id],select[id],textarea[id]').map(function () { return this.id; }).get();
     },
     fillDataTable = function () {
-        var ifexite = 0, gridTDs = [], gridControls = getGridHeader(), index = $('#UserID').val();
+        var ifexite = 0, gridTDs = [],
+            gridControls = getGridHeader(),
+            index = $('#UserID').val();
+
         // validate employee not repeated
         $('#' + gridId + ' tbody tr').find('td:nth-child(1)').each(function () {
             if ($(this).text() === $('#' + gridControls[1] + ' option:selected').text())
                 ifexite = 1;
         });
+
         // bind grid with items from add form.
         for (var i = 0; i < gridControls.length; i++) {
             var Ctype = $('#' + gridControls[i]).prop('type');
@@ -89,7 +104,11 @@ var _id = commonManger.getQueryStrs()['id'],
         commonManger.showMessage('تم الاضافة بنجاح:', 'تمت عملية الاضافة بنجاح.');
     },
     setSalariesTotal = function () {
-        var ttal = ($('#Commission').val() * 1);
+        var ttal = ($('#Commission').val() * 1),
+            _vat = ttal * 0.05;
+
+        $('#VAT').val(_vat);
+
 
         $('#' + gridId + ' tbody tr').find('td:nth-child(2)').each(function () {
             ttal += numeral().unformat($(this).text());
@@ -228,7 +247,14 @@ $('#btnAddNew').click(function (e) {
 $userID.change(function () {
     var selectedVal = $(this).val();
     if (selectedVal > 0) {
-        var t = JSON.stringify({ actionName: "Salaries_GetEmpDefaults", value: selectedVal }), e = sUrl + "GetData"; dataService.callAjax("Post", t, e, showEmpDefaults, commonManger.errorException);
+        var
+            t = JSON.stringify({
+                actionName: "Salaries_GetEmpDefaults",
+                value: selectedVal
+            }),
+            e = sUrl + "GetData";
+
+        dataService.callAjax("Post", t, e, showEmpDefaults, commonManger.errorException);
     }
     else
         resetSalaryForm();
@@ -293,7 +319,8 @@ $('#SaveAll').click(function (e) {
         valuesDetails.push(itm);
     });
 
-    commonManger.SaveDataMasterDetails("", "masterForm", successSave, "", fieldsDetails, valuesDetails, "SalariesTotal_Save", "1");
+    commonManger.SaveDataMasterDetails("", "masterForm", successSave, "", fieldsDetails,
+        valuesDetails, "SalariesTotal_Save", "1");
 });
 
 

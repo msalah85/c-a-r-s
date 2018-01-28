@@ -544,5 +544,11 @@
     "inputFiles": [
       "Scripts/App/vat/vat-reports.js"
     ]
+  },
+  {
+    "outputFileName": "Scripts/hr/salaries-add.min.js",
+    "inputFiles": [
+      "Scripts/hr/salaries-add.js"
+    ]
   }
 ]
