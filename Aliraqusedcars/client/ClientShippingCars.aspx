@@ -26,6 +26,7 @@
                         <th>سعر البيع</th>
                         <th>تاريخ الشراء</th>
                         <th>تاريخ الوصول</th>
+                        <th>موقع الشحن</th>
                         <th width="30" class="hidden-print" title="عرض السيارة بالموقع">عرض</th>
                     </tr>
                 </thead>
@@ -41,7 +42,8 @@
     <script src="/Scripts/datatable/buttons/buttons.html5.min.js"></script>
     <script src="/Scripts/datatable/buttons/jszip.min.js"></script>
     <script src="/Scripts/moment.min.js"></script>
-    <script src="/Scripts/numeral.min.js"></script><script src="/Scripts/jquery.gritter.min.js"></script>
+    <script src="/Scripts/numeral.min.js"></script>
+    <script src="/Scripts/jquery.gritter.min.js"></script>
     <script src="/Scripts/App/Common.min.js"></script>
-    <script src="/Scripts/client/ClientShippingCarsManager.min.js?v=1.0"></script>
+    <script src="/Scripts/client/ClientShippingCarsManager.js?v=1.0"></script>
 </asp:Content>

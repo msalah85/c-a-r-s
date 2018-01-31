@@ -104,11 +104,11 @@ var _id = commonManger.getQueryStrs()['id'],
         commonManger.showMessage('تم الاضافة بنجاح:', 'تمت عملية الاضافة بنجاح.');
     },
     setSalariesTotal = function () {
-        var ttal = ($('#Commission').val() * 1),
-            _vat = ttal * 0.05;
+        var commValue = $('#Commission').val() * 1,
+            _vat = commValue * 0.05,
+            ttal = (commValue + _vat);
 
         $('#VAT').val(_vat);
-
 
         $('#' + gridId + ' tbody tr').find('td:nth-child(2)').each(function () {
             ttal += numeral().unformat($(this).text());
@@ -116,7 +116,7 @@ var _id = commonManger.getQueryStrs()['id'],
 
         $('#TotalAmount').val(numeral(ttal).format('0,0.00'));
 
-        if (ttal > 100) // show save button
+        if (ttal > (commValue + _vat)) // show save button
             $('#SaveAll').removeClass('hidden');
         else
             $('#SaveAll').addClass('hidden');

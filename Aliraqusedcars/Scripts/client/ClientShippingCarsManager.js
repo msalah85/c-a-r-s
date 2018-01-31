@@ -26,14 +26,14 @@
                         commonManger.setData2Grid(data, aoData.sEcho, fnCallback);
                     }, commonManger.errorException);
                 },
-                "footerCallback": function (tfoot, data, start, end, display) {
-                    var api = this.api(), _data = api.column(4).data();
-                    if (_data.length > 0) {
-                        var ttal = _data.reduce(function (a, b) { return (a * 1) + (b * 1); });
-                        $('.total').text(
-                            numeral(ttal).format('0,0')
-                        );
-                    }
+                "drawCallback": function () {
+                    var api = this.api(), rows = api.rows({ page: 'current' }).nodes(), last = null;
+                    api.column(6, { page: 'current' }).data().each(function (group, i) { // show invoice info
+                        if (last !== group) {
+                            $(rows).eq(i).before('<tr class="alert alert-success"><td colspan="100%"><strong>نقطة الشحن: </strong>' + group + '</td></tr>');
+                            last = group;
+                        }
+                    });
                 },
                 iDisplayLength: 50,
                 aaSorting: [],
@@ -73,7 +73,16 @@
                         "bSortable": false
                     },
                     {// arrive date
-                        "mData": function (d) { return d.ArrivalDate ? moment(d.ArrivalDate).format('D/M/YYYY') : ''; },
+                        "mData": function (d) { return d.ArrivalDate ? moment(d.ArrivalDate).format('D/M/YYYY') : 'قيد التحميل'; },
+                        "bSortable": false
+                    },
+                    {// car location
+                        "mData": function (d) {
+                            // America flag 
+                            // Point name (NY, TX, ..)
+                            return ('<img src= "/App_Themes/iraq/images/USA.jpg" width= "25" />') +
+                                (d.ShipCompanyNameEn ? ' ' + d.ShipCompanyNameEn.split('-')[1] : '');
+                        },
                         "bSortable": false
                     },
                     { // view in site

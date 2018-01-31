@@ -39,7 +39,7 @@
     <meta name="ROBOTS" content="INDEX,NOFOLLOW" />
     <meta name="GOOGLEBOT" content="NOARCHIVE" />
     <link rel="stylesheet" href="//fonts.googleapis.com/earlyaccess/droidarabickufi.css" />
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
     <asp:PlaceHolder runat="server">
         <link href="<%:Settings.Config.CDN%>/Content/iraq/iraq-styles.min.css?v=1.5" rel="stylesheet" />
         <script src="<%:Settings.Config.CDN%>/Scripts/app.min.js?v=1.7"></script>

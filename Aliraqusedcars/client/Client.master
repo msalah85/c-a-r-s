@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
     <title><%: Page.Title %> شركة العراق لتجارة السيارات</title>
     <link rel="stylesheet" href="//fonts.googleapis.com/earlyaccess/droidarabickufi.css" />
-    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
     <asp:PlaceHolder runat="server">
         <link href="<%: Settings.Config.CDN%>/Content/iraq/iraq-styles.min.css?v=1.5" rel="stylesheet" />
         <link href="<%: Settings.Config.CDN%>/App_Themes/client/css/main.min.css" rel="stylesheet" />

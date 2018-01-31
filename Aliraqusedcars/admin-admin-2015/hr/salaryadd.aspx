@@ -257,5 +257,5 @@
             </div>
         </div>
     </div>
-    <script src="/Scripts/hr/salaries-add.min.js?v=1.2"></script>
+    <script src="/Scripts/hr/salaries-add.min.js?v=1.3"></script>
 </asp:Content>

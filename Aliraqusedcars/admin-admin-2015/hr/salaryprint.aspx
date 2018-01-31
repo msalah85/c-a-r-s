@@ -3,11 +3,15 @@
     EnableEventValidation="false" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
-   <style type="text/css">
+    <style type="text/css">
         .control-group {
             margin-bottom: 10px !important;
         }
-        table thead th,td.cell-bg {background-color:#f1eee9!important}
+
+        table thead th, td.cell-bg {
+            background-color: #f1eee9 !important
+        }
+
         @media print {
             .table th, .table td {
                 padding: 7px;
@@ -15,7 +19,10 @@
                 text-align: right;
                 font-size: 14px;
             }
-            table thead th,td.cell-bg {background-color:#f1eee9!important}
+
+            table thead th, td.cell-bg {
+                background-color: #f1eee9 !important
+            }
         }
     </style>
 </asp:Content>
@@ -34,8 +41,7 @@
                 <div class="span10 offset1">
                     <div class="widget-box transparent invoice-box">
                         <div class="widget-header widget-header-large">
-                            <h3 class="position-relative">
-                                تقرير الرواتب لشهر: <span id="Month"></span>&nbsp;-&nbsp;<span id="Year"></span>
+                            <h3 class="position-relative">تقرير الرواتب لشهر: <span id="Month"></span>&nbsp;-&nbsp;<span id="Year"></span>
                             </h3>
                             <div class="widget-toolbar no-border invoice-info">
                                 <span class="invoice-info-label">الكود:</span> <span class="red" id="divNo"></span>
@@ -92,6 +98,11 @@
                                                 <td></td>
                                             </tr>
                                             <tr>
+                                                <td colspan="10"><span class="pull-left">ضريبة 5% على العمولة</span></td>
+                                                <td class="cell-bg"><span id="VAT"></span></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
                                                 <td colspan="10"><span class="bolder pull-left">الإجمالى</span></td>
                                                 <td class="cell-bg"><span class="bolder" id="NetAmount"></span></td>
                                                 <td><sub>درهم</sub></td>
@@ -114,14 +125,17 @@
             </div>
         </div>
     </div>
-    <script src="/Scripts/hr/salary-print.min.js?v=1.6"></script>
+    <script src="/Scripts/hr/salary-print.min.js?v=1.7"></script>
     <style type="text/css" media="print">
-        @media print{
+        @media print {
             .row-fluid .well.span6 {
-                width: 47%;float: right;
-                margin-right: 10px;display:inline-block;
+                width: 47%;
+                float: right;
+                margin-right: 10px;
+                display: inline-block;
             }
         }
+
         @page {
             @bottom-center {
                 content: counter(page) " / " counter(pages);
