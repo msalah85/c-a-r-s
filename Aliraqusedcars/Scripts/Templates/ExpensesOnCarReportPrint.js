@@ -99,8 +99,10 @@
                         var tot = 0, totalProfit = 0, totalSalePrices = 0;
                         for (var i = 0; i < aData.length; i++) {
                             tot += aData[i]["TotalOnCar"] * 1;
-                            totalSalePrices += aData[i]["SalePrice"] * 1;
-                            totalProfit += ((aData[i]["SalePrice"] * 1) - (aData[i]["TotalOnCar"] * 1));
+                            var carPrice = (aData[i]["SalePrice"] * 1) + (aData[i]["CarExtras"] * 1);
+
+                            totalSalePrices += carPrice;
+                            totalProfit += (carPrice - (aData[i]["TotalOnCar"] * 1));
                         }
 
                         // total
@@ -216,18 +218,18 @@
                         {
                             "bSortable": false,
                             "mData": function (d) {
-                                return numeral(d.SalePrice).format('0,0.00');
+                                return '<span title="سعر البيع: ' + numeral(d.SalePrice).format('0,0.00') + ' + الزيادة: ' + numeral(d.CarExtras).format('0,0.00') + '">' + numeral((d.SalePrice * 1) + (d.CarExtras * 1)).format('0,0.00') + '</span>';
                             }
                         },
                         {
                             "bSortable": false,
                             "mData": function (d) {
-                                return numeral((d.SalePrice * 1) - (d.TotalOnCar * 1)).format('0,0.00');
+                                return numeral((d.SalePrice * 1) + (d.CarExtras * 1) - (d.TotalOnCar * 1)).format('0,0.00');
                             }
                         }
                     ]
                 });
-                commonManger.searchData(pTable);
+                //commonManger.searchData(pTable);
             };
 
         return {
