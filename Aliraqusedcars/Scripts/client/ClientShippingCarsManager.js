@@ -81,7 +81,7 @@
                             // America flag 
                             // Point name (NY, TX, ..)
                             return ('<img src= "/App_Themes/iraq/images/USA.jpg" width= "25" />') +
-                                (d.ShipCompanyNameEn ? ' ' + d.ShipCompanyNameEn.split('-')[1] : '');
+                                (d.ShipCompanyNameEn ? (' ' + d.ShipCompanyNameEn.split('-')[1]) : '');
                         },
                         "bSortable": false
                     },
@@ -96,7 +96,7 @@
                 ]
             });
 
-        searchDataTables(oTable);
+        //searchDataTables(oTable);
     };
 
 filllistItems();

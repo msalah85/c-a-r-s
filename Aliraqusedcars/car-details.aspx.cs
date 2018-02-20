@@ -70,8 +70,7 @@ public partial class car_details : Page
             chassisno.InnerHtml = string.Format("{0}", dtCar.Rows[0]["ChassisNo"]);
             status.InnerHtml = string.Format("{0}", dtCar.Rows[0]["WorkingStatusName"]);
             transmi.InnerHtml = string.Format("{0}", dtCar.Rows[0]["TransmissionNameEn"]);
-
-            arrive.InnerHtml = dtCar.Rows[0]["Arrived"].Equals("True") || parseDate(dtCar.Rows[0]["ArrivalDate"]).Subtract(DateTime.Now).TotalDays <= 0 ?
+            arrive.InnerHtml = dtCar.Rows[0]["Arrived"].Equals("True") ? // || parseDate(dtCar.Rows[0]["ArrivalDate"]).Subtract(DateTime.Now).TotalDays <= 0
                 "واصـــله" : string.Format("قيد الشحن {0} {1}", dtCar.Rows[0]["ArrivalDate"],
                 (dtCar.Rows[0]["ShipCompanyNameEn"] != null && !string.IsNullOrEmpty(Convert.ToString(dtCar.Rows[0]["ShipCompanyNameEn"])) ? dtCar.Rows[0]["ShipCompanyNameEn"].ToString().Split('-')[1] : ""));
 

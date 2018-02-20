@@ -2,7 +2,7 @@
 //#region iraq-home-cars
 var pageIndex = 1, pageCount = 0, prm = [], vl = [], sort = 0, dir = 'desc', $carsHome = $('#cars-search-result'), $loader = $(".loadmoree"), $maker = $('#carMakerFilter'),
     //  data-interval="4000" data-ride="carousel"
-carBlock = '<div class="item-car-box col-lg-4 col-md-6 col-xs-12 animated fadeInUp">\
+    carBlock = '<div class="item-car-box col-lg-4 col-md-6 col-xs-12 animated fadeInUp">\
                         <div class="carousel slide items-cars-slider" id="car-box">\
                             <ol class="carousel-indicators">\
                                 <li data-target="#car-box" data-slide-to="0"></li>\
@@ -49,95 +49,95 @@ carBlock = '<div class="item-car-box col-lg-4 col-md-6 col-xs-12 animated fadeIn
                             <li><a class="btn btn-default call-btn car-detls pull-left" data-toggle="tooltip" role="button"><span class="glyphicon glyphicon glyphicon-menu-left"></span> التفاصيل</a></li>\
                         </ul>\
                     </div>',//methods
-scrollToCars = function () {
-    $('html,body').animate({ scrollTop: $("#cars-type-filter").offset().top - 27 }, 'slow');
-},
-//region home cars
-OnSuccess = function (data) {
-    var cdata = LZString.decompressFromUTF16(data.d), xml = $.parseXML(cdata), carslist = $.xml2json(xml).list, jsnCount = $.xml2json(xml).PageCount, carImages = $.xml2json(xml).list1;
-    pageCount = parseInt(jsnCount.PageCount);
-    $(carslist).each(function (i, item) {
-        var carblk = $(carBlock).clone(true), carId = item.CarID, boxID = 'slides_car_' + carId;
-        $(".CarID", carblk).html(carId);
-        if (item.OwnerID === 2) { // سيارة عميل
-            $("ul.item-car-ul", carblk).addClass('car-client');
-            $(".CarID", carblk).append(' <i class="fa fa-info-circle fa-2x" data-toggle="tooltip" title="هذه السيارة معروضه لعميل شركة العراق"></i>');
-        }
-        $(".items-cars-slider", carblk).attr('id', boxID).children('.carousel-control').attr('href', '#' + boxID);
-        // imgs
-        $(".ChassisNo", carblk).html(item.ChassisNo).attr('title', item.ChassisNo);
-        $(".LotNo", carblk).html(item.LotNo);
-        $(".Year", carblk).html(item.Year);
-        $(".Status", carblk).html(item.WorkingStatusName);
-        var url = '/car/' + carId + '-' + item.MakerNameEn + '-' + item.TypeNameEn + '-' + item.Year, title = item.MakerNameEn + ' - ' + item.TypeNameEn;
-        url = url.replace(/[_\W]+/g, "-");
-        $(".CarType", carblk).html('<i class="fa fa-external-link fa-small"></i> ' + title).attr('href', url).attr('title', title);
-        $(".car-detls", carblk).attr('href', url);
-        $(".Color", carblk).html(item.ColorNameAr);
-        $(".pricetxt", carblk).html(numeral(item.WesitePrice).format('0,0') + ' $');
-        if (item.ArrivalDate) {
-            if (moment().diff(item.ArrivalDate, 'days') > 0) // today > arriveDate
+    scrollToCars = function () {
+        $('html,body').animate({ scrollTop: $("#cars-type-filter").offset().top - 27 }, 'slow');
+    },
+    //region home cars
+    OnSuccess = function (data) {
+        var cdata = LZString.decompressFromUTF16(data.d), xml = $.parseXML(cdata), carslist = $.xml2json(xml).list, jsnCount = $.xml2json(xml).PageCount, carImages = $.xml2json(xml).list1;
+        pageCount = parseInt(jsnCount.PageCount);
+        $(carslist).each(function (i, item) {
+            var carblk = $(carBlock).clone(true), carId = item.CarID, boxID = 'slides_car_' + carId;
+            $(".CarID", carblk).html(carId);
+            if (item.OwnerID === 2) { // سيارة عميل
+                $("ul.item-car-ul", carblk).addClass('car-client');
+                $(".CarID", carblk).append(' <i class="fa fa-info-circle fa-2x" data-toggle="tooltip" title="هذه السيارة معروضه لعميل شركة العراق"></i>');
+            }
+            $(".items-cars-slider", carblk).attr('id', boxID).children('.carousel-control').attr('href', '#' + boxID);
+            // imgs
+            $(".ChassisNo", carblk).html(item.ChassisNo).attr('title', item.ChassisNo);
+            $(".LotNo", carblk).html(item.LotNo);
+            $(".Year", carblk).html(item.Year);
+            $(".Status", carblk).html(item.WorkingStatusName);
+            var url = '/car/' + carId + '-' + item.MakerNameEn + '-' + item.TypeNameEn + '-' + item.Year, title = item.MakerNameEn + ' - ' + item.TypeNameEn;
+            url = url.replace(/[_\W]+/g, "-");
+            $(".CarType", carblk).html('<i class="fa fa-external-link fa-small"></i> ' + title).attr('href', url).attr('title', title);
+            $(".car-detls", carblk).attr('href', url);
+            $(".Color", carblk).html(item.ColorNameAr);
+            $(".pricetxt", carblk).html(numeral(item.WesitePrice).format('0,0') + ' $');
+            if (item.ArrivalDate)
+                //if (moment().diff(item.ArrivalDate, 'days') > 0) // today > arriveDate
                 $(".ArrivalDate", carblk).html('واصــــــلة');
             else
                 $(".ArrivalDate", carblk).html(item.ArrivalDate);
-        }
-        $(".contact-phone", carblk).html(item.phone).attr('title', item.OwnerName);
-        $(".car-detls", carblk).attr('title', title);
-        $carsHome.animate({ opacity: 1 }).append(carblk);
 
-        // bind car images
-        if (carImages) {
-            // filter images
-            var _carImages = $.grep(carImages, function (v, i) {
-                return v.CarID == carId;
-            });
-            GetImages2(carId, _carImages, item.MainPicture); // car images
-        }
+            $(".contact-phone", carblk).html(item.phone).attr('title', item.OwnerName);
+            $(".car-detls", carblk).attr('title', title);
+            $carsHome.animate({ opacity: 1 }).append(carblk);
 
-    }).promise().done(function () { // fire sorting & filter
-        IRAQCARS.toolTip();
-        // page info
-        if (pageCount > 1)
-            $('#back-to-top span').text(pageIndex - 1 + '/' + pageCount);
-        else
-            $('#back-to-top span').text('');
-        // show empty message
-        if ($carsHome.is(':empty')) {
-            $carsHome.append('<li class="col-md-12 col-sm-12 scroll_effect animated fadeInUp"><div class="alert alert-warning fade in"><a class="close" data-dismiss="alert" href="#remove">×</a> <strong>عفواً!</strong> ' + messagesAr.noDataFound + '</div></li>');
-        }
-        // hide loading
-        $(".waiting").hide();
+            // bind car images
+            if (carImages) {
+                // filter images
+                var _carImages = $.grep(carImages, function (v, i) {
+                    return v.CarID == carId;
+                });
+                GetImages2(carId, _carImages, item.MainPicture); // car images
+            }
+
+        }).promise().done(function () { // fire sorting & filter
+            IRAQCARS.toolTip();
+            // page info
+            if (pageCount > 1)
+                $('#back-to-top span').text(pageIndex - 1 + '/' + pageCount);
+            else
+                $('#back-to-top span').text('');
+            // show empty message
+            if ($carsHome.is(':empty')) {
+                $carsHome.append('<li class="col-md-12 col-sm-12 scroll_effect animated fadeInUp"><div class="alert alert-warning fade in"><a class="close" data-dismiss="alert" href="#remove">×</a> <strong>عفواً!</strong> ' + messagesAr.noDataFound + '</div></li>');
+            }
+            // hide loading
+            $(".waiting").hide();
+            $loader.hide();
+
+            //apply view type
+            var savedViewType = $.cookie("homeview");
+            savedViewType = (savedViewType !== undefined && savedViewType !== null) ? savedViewType : false;
+            gridListViewHome(savedViewType);
+
+        });
         $loader.hide();
-
-        //apply view type
-        var savedViewType = $.cookie("homeview");        
-        savedViewType = (savedViewType !== undefined && savedViewType !== null) ? savedViewType : false;
-        gridListViewHome(savedViewType);
-
-    });
-    $loader.hide();
-    $(".waiting").hide();
-},
-GetRecords = function () {
-    if (pageIndex == 1 || pageIndex <= pageCount) {
-        var _url = sURL + "GetCarsList", data = { 'param': prm, 'values': vl };
-        $loader.show(); $(".waiting").fadeIn();
-        dataService.callAjax('Post', JSON.stringify(data), _url, OnSuccess, errorException);
-    }
-    pageIndex++;
-},
-startGetResult = function (sorting, direction) {
-    sort = sorting; dir = direction;
-    pageIndex = 1; pageCount = 0;
-    $carsHome.empty(); // reset
-    if (prm.indexOf('sort') == -1) {
-        prm.push('sort', 'dir');
-        vl.push(sort, dir);
-    } else {
-        vl[prm.indexOf('sort')] = sort;
-        vl[prm.indexOf('dir')] = dir;
-    }
-};
+        $(".waiting").hide();
+    },
+    GetRecords = function () {
+        if (pageIndex == 1 || pageIndex <= pageCount) {
+            var _url = sURL + "GetCarsList", data = { 'param': prm, 'values': vl };
+            $loader.show(); $(".waiting").fadeIn();
+            dataService.callAjax('Post', JSON.stringify(data), _url, OnSuccess, errorException);
+        }
+        pageIndex++;
+    },
+    startGetResult = function (sorting, direction) {
+        sort = sorting; dir = direction;
+        pageIndex = 1; pageCount = 0;
+        $carsHome.empty(); // reset
+        if (prm.indexOf('sort') == -1) {
+            prm.push('sort', 'dir');
+            vl.push(sort, dir);
+        } else {
+            vl[prm.indexOf('sort')] = sort;
+            vl[prm.indexOf('dir')] = dir;
+        }
+    };
 homeCarsFilter = function (typ) {
     $carsHome.empty(); pageIndex = 1; // reset
     // prepare paramters
@@ -171,50 +171,50 @@ homeCarsFilter = function (typ) {
     }
     GetRecords(); // get cars
 },
-//endregion
-//region car images
-OnImagesSuccess = function (data, cid, mainPic) {
-    var imgID = '#slides_car_' + cid, $img = $(imgID);
-    if (data.length > 0) // reset gallery
-        $img.children('.carousel-inner').html(''); $img.children('.carousel-indicators').html('');
-    $(data).each(function (i, item) {
-        var pointer = '<li data-target="' + imgID + '" data-slide-to="' + i + '" class="' + (((mainPic !== null && mainPic !== '' && item == mainPic) || (mainPic == null && i == 0)) ? ' active' : '') + '"></li>';
-        //var img = '<div class="item' + (i == 0 ? ' active' : '') + '"><a href="/public/cars/' + cid + '/' + item + '" data-rel="prettyPhoto[car_' + cid + ']" class="itemm-img-a"><img src="/public/cars/' + cid + '/_thumb/' + item + '" class="itemm-img" alt=""></a></div>';
-        var img = '<div class="item' + (((mainPic !== null && mainPic !== '' && item == mainPic) || (mainPic == null && i == 0)) ? ' active' : '') + '"><a href="/public/cars/' + cid + '/' + item + '" data-rel="prettyPhoto[car_' + cid + ']" class="itemm-img-a"><img src="/public/cars/' + cid + '/_thumb/' + item + '" class="itemm-img" alt=""></a></div>';
-        $img.children('div.carousel-inner').append(img); $img.children('ol.carousel-indicators').append(pointer);
-        $img.find('a[href="#carousel-id"]').attr('href', imgID);
-    }).promise().done(function () { // fire sorting & filter
-        //$('a.right[data-slide="next"]').trigger('click');
-        IRAQCARS.PrettyPhoto();
-        // hide loading
-        $(".waiting").hide();
-        $loader.hide();
-    });
-},
-
-GetImages2 = function (cid, pics, mainPic) {
-    var imgID = '#slides_car_' + cid, $img = $(imgID);
-    if (pics.length > 0) {
-        $img.find('.carousel-inner').html(''); $img.find('.carousel-indicators').html('');
-        $(pics).each(function (i, value) {
-            var item = value.URL, pointer = '<li data-target="' + imgID + '" data-slide-to="' + i + '" class="' + (((mainPic !== null && mainPic !== '' && item == mainPic) || (mainPic == null && i == 0)) ? ' active' : '') + '"></li>',
-            img = '<div class="item' + (((mainPic !== null && mainPic !== '' && item == mainPic) || (mainPic == null && i == 0)) ? ' active' : '') + '"><a href="/public/cars/' + cid + '/' + item + '" data-rel="prettyPhoto[car_' + cid + ']" class="itemm-img-a"><img src="/public/cars/' + cid + '/_thumb/' + item + '" class="itemm-img" alt=""></a></div>';
+    //endregion
+    //region car images
+    OnImagesSuccess = function (data, cid, mainPic) {
+        var imgID = '#slides_car_' + cid, $img = $(imgID);
+        if (data.length > 0) // reset gallery
+            $img.children('.carousel-inner').html(''); $img.children('.carousel-indicators').html('');
+        $(data).each(function (i, item) {
+            var pointer = '<li data-target="' + imgID + '" data-slide-to="' + i + '" class="' + (((mainPic !== null && mainPic !== '' && item == mainPic) || (mainPic == null && i == 0)) ? ' active' : '') + '"></li>';
+            //var img = '<div class="item' + (i == 0 ? ' active' : '') + '"><a href="/public/cars/' + cid + '/' + item + '" data-rel="prettyPhoto[car_' + cid + ']" class="itemm-img-a"><img src="/public/cars/' + cid + '/_thumb/' + item + '" class="itemm-img" alt=""></a></div>';
+            var img = '<div class="item' + (((mainPic !== null && mainPic !== '' && item == mainPic) || (mainPic == null && i == 0)) ? ' active' : '') + '"><a href="/public/cars/' + cid + '/' + item + '" data-rel="prettyPhoto[car_' + cid + ']" class="itemm-img-a"><img src="/public/cars/' + cid + '/_thumb/' + item + '" class="itemm-img" alt=""></a></div>';
             $img.children('div.carousel-inner').append(img); $img.children('ol.carousel-indicators').append(pointer);
             $img.find('a[href="#carousel-id"]').attr('href', imgID);
-
-        }).promise().done(function () {
+        }).promise().done(function () { // fire sorting & filter
             //$('a.right[data-slide="next"]').trigger('click');
             IRAQCARS.PrettyPhoto();
             // hide loading
             $(".waiting").hide();
             $loader.hide();
         });
-    }
-},
-GetImages = function (id, mainPicture) {
-    var _url = sURL + "ShowCarImages", data = { 'id': id };
-    dataService.callAjax('Post', JSON.stringify(data), _url, success = function (data) { OnImagesSuccess(data.d, id, mainPicture) }, errorException);
-};
+    },
+
+    GetImages2 = function (cid, pics, mainPic) {
+        var imgID = '#slides_car_' + cid, $img = $(imgID);
+        if (pics.length > 0) {
+            $img.find('.carousel-inner').html(''); $img.find('.carousel-indicators').html('');
+            $(pics).each(function (i, value) {
+                var item = value.URL, pointer = '<li data-target="' + imgID + '" data-slide-to="' + i + '" class="' + (((mainPic !== null && mainPic !== '' && item == mainPic) || (mainPic == null && i == 0)) ? ' active' : '') + '"></li>',
+                    img = '<div class="item' + (((mainPic !== null && mainPic !== '' && item == mainPic) || (mainPic == null && i == 0)) ? ' active' : '') + '"><a href="/public/cars/' + cid + '/' + item + '" data-rel="prettyPhoto[car_' + cid + ']" class="itemm-img-a"><img src="/public/cars/' + cid + '/_thumb/' + item + '" class="itemm-img" alt=""></a></div>';
+                $img.children('div.carousel-inner').append(img); $img.children('ol.carousel-indicators').append(pointer);
+                $img.find('a[href="#carousel-id"]').attr('href', imgID);
+
+            }).promise().done(function () {
+                //$('a.right[data-slide="next"]').trigger('click');
+                IRAQCARS.PrettyPhoto();
+                // hide loading
+                $(".waiting").hide();
+                $loader.hide();
+            });
+        }
+    },
+    GetImages = function (id, mainPicture) {
+        var _url = sURL + "ShowCarImages", data = { 'id': id };
+        dataService.callAjax('Post', JSON.stringify(data), _url, success = function (data) { OnImagesSuccess(data.d, id, mainPicture) }, errorException);
+    };
 //endregion
 // initialize data & event.
 $(function () {
