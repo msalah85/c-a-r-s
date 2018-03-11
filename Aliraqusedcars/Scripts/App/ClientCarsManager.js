@@ -481,8 +481,7 @@
                                     iTotalRecords: jsn1[0],
                                     iTotalDisplayRecords: jsn1[0],
                                     aaData: carsList
-                                }
-
+                                };
 
                                 // bind DT data
                                 fnCallback(objDT);
@@ -602,7 +601,7 @@
                                 "mDataProp": 'SalePrice',
                                 "bSortable": false,
                                 "mData": function (d) {
-                                    return '<span class="red" data-rel="tooltip" title="سعر الشراء:  ' + numeral(d.PayPrice).format('0,0') + '$،\nالعمولة: ' + numeral(d.SalePrice - d.PayPrice).format('0,0') + '$">' + numeral(d.SalePrice).format('0,0') + '</span> '; // + commissionDiscount;
+                                    return '<span class="red" data-rel="tooltip" title="سعر الشراء:  ' + numeral(d.PayPrice).format('0,0') + '$،\nالعمولة: ' + numeral(d.SalePrice - d.PayPrice).format('0,0') + '$' + ((d.CommiDiscount * 1) > 0 ? ', خصم مع الفاتورة: ' + numeral(d.CommiDiscount).format('0,0') + '$' : '') + '">' + numeral(d.SalePrice).format('0,0') + '</span> '; // + commissionDiscount;
                                 }
                             },
                             { // العربون
@@ -690,7 +689,7 @@
                                                 + '" title="إلغاء VAT عن العميل" href="javascript:void(0);" class="cancel-vat"><i class="icon-remove orange bigger-120"></i></a>';
 
                                         if (!isRequiredToPayVat)
-                                            return '<strong data-rel="tooltip" class="text-fade" title="غير مفعل للسداد: يرجي سداد كل المطلوب على السيارة أولاً.">' + numeral(row["VAT"]).format('0,0') + '</strong>' + cancelVatLink;
+                                            return '<strong data-rel="tooltip" class="text-fade text-hide" title="غير مفعل للسداد: يرجي سداد كل المطلوب على السيارة أولاً.">' + numeral(row["VAT"]).format('0,0') + '</strong>' + cancelVatLink;
                                         else
                                             return '<a href="javascript:void(0);" data-rel="tooltip" title="سداد الضريبة" class="pay"><strong class="text-black">' + numeral(row.VAT).format('0,0') + '</strong></a>' + cancelVatLink;
                                     }

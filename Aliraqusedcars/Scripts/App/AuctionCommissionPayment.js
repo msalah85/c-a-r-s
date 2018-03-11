@@ -1,5 +1,5 @@
 ﻿// www.iraqusedcars.ae
-// Update: 10-10-2016
+// Update: 27-02-2018
 
 
 //#region Auctions Commissions
@@ -22,11 +22,22 @@ var
                 $('#' + controlId).trigger('chosen:updated').trigger("liszt:updated");
             },
             gridTotalAmount = function () {
-                var Amount = $('#CommAmount').val(), rate = $('#ExchangeCompanyID').find('option:selected').text().split(':')[1];
-                rate = (rate !== undefined && rate != null && rate > 0) ? rate : 3.674;
+                var Amount = $('#CommAmount').val(),
+                    rate = $('#ExchangeCompanyID').find('option:selected').text().split(':')[1],
+                    vat = ($('#VAT').val() !== '' ? ($('#VAT').val() * 1) : 0);
+
+
+                rate = (rate !== undefined && rate !== null && rate > 0) ? rate : 3.674;
                 Amount = Amount ? Amount : 0;
+
                 var invTotal = parseFloat(Amount) * parseFloat(rate); // dirhamss
                 invTotal += parseFloat($('#Convertamount').val());   // dirhamss
+
+                if (vat > 0) {
+                    invTotal += vat;
+                }
+
+
                 $('#CommAmountDhs').val(invTotal.toFixed(2));
             },
             loadLists = function () {
@@ -38,8 +49,6 @@ var
                             jsn = jsnData.list,
                             jsn1 = jsnData.list1,
                             jsn2 = jsnData.list2;
-
-                        console.log(jsn, jsn1, jsn2); // test
 
                         if (jsn) {
                             populateLists('ExchangeCompanyID', jsn);
@@ -56,14 +65,19 @@ var
                     successBindLists, commonManger.errorException);
             },
             sumInvoiceTotal = function () {
-                var tot = 0, $extraAmount = $extra.val();
+                var tot = 0,
+                    $extraAmount = $extra.val();
+
                 oaTable.find('tbody tr').each(function () {
                     var itmVal = $(this).find('td:nth-child(9)').text();
                     tot += parseFloat(itmVal);
                 });
+
+
                 if (($extraAmount * 1) > 0) {
                     tot += ($extraAmount * 1);
                 }
+
                 if (tot > 0) { // show final save button
                     $('#CommAmount').val(tot);
                     $('#AuctionCommTotal').text(tot);
@@ -108,7 +122,7 @@ var
 
                             "bSortable": true,
                             "mData": function (oObj) {
-                                return '<a title="تفاصيل السيارة" href="CarDetailsPrint.aspx?id=' + oObj["CarID"] + '">' + oObj["MakerNameEn"] + ' - ' + oObj["TypeNameEn"] + ' - ' + oObj["Year"] + (oObj['PayInvTypeID'] == 3 ? ' - Relist' : '') + '</a>';
+                                return '<a title="تفاصيل السيارة" href="CarDetailsPrint.aspx?id=' + oObj["CarID"] + '">' + oObj["MakerNameEn"] + ' - ' + oObj["TypeNameEn"] + ' - ' + oObj["Year"] + (oObj['PayInvTypeID'] === 3 ? ' - Relist' : '') + '</a>';
                             }
                         },
                         {
@@ -155,7 +169,11 @@ var
 
             },
             savePaymentInvice = function (scParam, scParamVal) {
-                var actionName = "AuctionCommPayments_Save", DTO = { 'values': scParamVal, 'actionName': actionName, 'Parm_names': scParam };
+                var
+                    actionName = "AuctionCommPayments_Save",
+                    DTO = { 'values': scParamVal, 'actionName': actionName, 'Parm_names': scParam };
+
+
                 dataService.callAjax('Post', JSON.stringify(DTO), mainServiceUrl + 'saveDefaultData',
                     function (data) {
                         if (data.d.Status) // show success message if done.
@@ -174,7 +192,6 @@ var
                     }, commonManger.errorException);
             },
             invoiceSaveSuccess = function (data) { // go to print page                
-                console.log(data);
                 if (data.d.ID > 0) {
                     commonManger.showMessage('تم الحفظ بنجاح:', data.d.message);
                     document.location.href = "AuctionCommissionPrint.aspx?id=" + data.d.ID;
@@ -236,7 +253,8 @@ var
                     $('#CommAmountDhs').val(), $('#Notes').val(),
                     commonManger.dateFormat($from.val()),
                     commonManger.dateFormat($to.val()),
-                    $extra.val(), $('#CommissionExtraNoteID').val()];
+                    $extra.val(), $('#CommissionExtraNoteID').val(),
+                    $('#VAT').val()];
 
                     // get child array
                     var valuesDetails = [];
@@ -253,7 +271,7 @@ var
 
                     // start save data
                     if (valuesDetails.length > 0) {
-                        if (($extra.val() * 1) === 0 || (($extra.val() * 1) > 0 && $('#CommissionExtraNoteID').val() !== '' && $('#ExchangeCompanyID').val() != '')) {
+                        if (($extra.val() * 1) === 0 || (($extra.val() * 1) > 0 && $('#CommissionExtraNoteID').val() !== '' && $('#ExchangeCompanyID').val() !== '')) {
 
                             var DTO = { 'masterValues': masterValues, 'detailsValues': valuesDetails },
                                 _sUrl = 'AuctionCommissionAdd.aspx/SaveDataMasterDetails';
@@ -282,6 +300,9 @@ var
                     filllistItems();
                 });
 
+                $('#VAT').change(function () {
+                    gridTotalAmount();
+                });
 
                 // get invoice value.
                 $auction.change(function (e) {

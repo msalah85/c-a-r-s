@@ -61,16 +61,15 @@ var
                     latTotal: numeral().unformat($('.latFooter').text()),
                     buyerFee: numeral().unformat($('#BuyerAnnualFee').val()),
                     rate: $('#Rate').val() * 1,
-                    auctionID: $('#AuctionID').val() * 1
+                    auctionID: $('#AuctionID').val() * 1,
+                    Convertamount: $('#Convertamount').val() * 1 // aed
                 };
 
                 obj.rate = obj.rate > 0 ? obj.rate : defaultRate;
 
-
                 $('.subFinesFooter').text(obj.storageTotal + obj.latTotal);
                 var ttl = obj.invTotal + obj.storageTotal + obj.latTotal + obj.buyerFee,
-                    tlDhs = (ttl * obj.rate) + (obj.auctionID === auctionEnum.local ? 0 : defaultAddtion);
-
+                    tlDhs = (ttl * obj.rate) + (obj.auctionID === auctionEnum.local ? 0 : obj.Convertamount);
 
                 $('#TotalAmount,#Amount').val(ttl);
                 $('#lblInvoiceTotal').text(numeral(ttl).format('0,0.0'));
@@ -167,6 +166,7 @@ var
                     $('#PayInvoicePaymentsID').val(urlIds);
                 } else {
                     $('#VAT').val('2.5000'); // set init val
+                    GetStaticData();
                 }
 
                 setDataToControlandGrid();
@@ -183,7 +183,7 @@ var
                     'values': ParamValues, 'actionName': actionName, 'Parm_names': ParamNames, 'fieldsDetails': fieldsDetails, 'valuesDetails': valuesDetails,
                     'fieldsDetails2': fieldsDetails2, 'valuesDetails2': valuesDetails2, 'flage': flage
                 };
-                
+
                 dataService.callAjax('Post', JSON.stringify(DTO), 'PayInvoicePaymentDetails.aspx/SaveDataMasterDetails', success, commonManger.errorException);
             },
             doMyWork = function () {
@@ -264,6 +264,10 @@ var
                         commonManger.disableControl('SaveAll', false);
                         commonManger.showMessage('حقول مطلوبة:', '<p>- برجاء التأكد من مطابقة إجمالى الفواتير مع إجمالى الحوالة $ </p><p>- برجاء ادخال جميع الحقول الاجبارية ذات العلامة (*)</p>');
                     }
+                });
+
+                $('#Convertamount').on('change', function () {
+                    SumAll();
                 });
 
                 $cars.on('change', function () {
@@ -615,6 +619,18 @@ var
 
                     dt.row.add(row).draw();
                 });
+            },
+
+            GetStaticData = function () {
+                var _bindData = function (data) {
+                    var selectList = JSON.parse(data.d);
+                    $.each(selectList, function (index, Basicdata) {
+                        $('#Convertamount').val(Basicdata.Convertamount);
+                    });
+                };
+
+                dataService.callAjax('Post', JSON.stringify({ 'value': '' }),
+                    mainServiceUrl + 'GetConvetAmount', _bindData, commonManger.errorException);
             };
 
 

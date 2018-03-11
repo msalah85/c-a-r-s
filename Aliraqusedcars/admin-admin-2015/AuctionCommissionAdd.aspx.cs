@@ -50,7 +50,9 @@ public partial class AuctionCommissionPayment : FactshMasterPage
     [ScriptMethod(UseHttpGet = false)]
     public static object SaveDataMasterDetails(string[] masterValues, string[] detailsValues)
     {
-        string[] Parm_names = { "AuctionCommID", "AuctionTypeID", "ExchangeCompanyID", "InvoiceDate", "CommAmount", "ConvertAmount", "CommAmountDhs", "Notes", "DateFrom", "DateTo", "ExtraAmount", "CommissionExtraNoteID" }, fieldsDetails = { "AuctionCommDetailsID", "AuctionCommID", "CarID", "BuyerFee", "AuctionCommCost", "ACDetailsTotal" };
+        string[] Parm_names = { "AuctionCommID", "AuctionTypeID", "ExchangeCompanyID", "InvoiceDate", "CommAmount",
+            "ConvertAmount", "CommAmountDhs", "Notes", "DateFrom", "DateTo", "ExtraAmount", "CommissionExtraNoteID", "VAT" }, 
+            fieldsDetails = { "AuctionCommDetailsID", "AuctionCommID", "CarID", "BuyerFee", "AuctionCommCost", "ACDetailsTotal" };
 
         var xmldoc = new XmlDocument();
         XmlElement doc = xmldoc.CreateElement("doc");

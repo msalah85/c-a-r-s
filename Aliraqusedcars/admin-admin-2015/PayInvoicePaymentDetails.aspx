@@ -56,6 +56,7 @@
                                     <option value="3.6740">3.674</option>
                                     <option value="3.6735">3.6735</option>
                                     <option value="3.6670">3.667</option>
+                                    <option value="3.6750">3.675</option>
                                 </select>
                             </div>
                         </div>
@@ -80,6 +81,12 @@
                             <label class="control-label" for="TotalAmount">إجمالى الحوالة <sub class="text-warning">$</sub></label>
                             <div class="controls">
                                 <input type="text" class="money" id="TotalAmount" readonly value="0" />
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="Convertamount">مصاريف حوالة <sub class="text-warning">درهم</sub></label>
+                            <div class="controls">
+                                <input type="text" id="Convertamount" value="0" class="required money" />
                             </div>
                         </div>
                         <div class="control-group">
@@ -202,7 +209,7 @@
                                             <label class="control-label" for="LatPayment"><span>غرامات تأخير الدفع</span></label>
                                             <div class="controls">
                                                 <div class="span12">
-                                                    <label>
+                                                    <div>
                                                         <label style="display: inline">
                                                             <input class="ace ace-switch ace-switch-6 notsave notneed" type="checkbox" />
                                                             <span class="lbl"></span>
@@ -211,7 +218,7 @@
                                                             <input type="text" id="LatPayment" class="money" style="width: 30px;" readonly="readonly" value="0" />
                                                             <button class="btn btn-danger" id="Savetemp2" style="padding: 0 10px; border: 0;">+ أضف غرامه</button>
                                                         </label>
-                                                        <label>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -267,7 +274,7 @@
         </div>
     </div>
     <script src="/Scripts/select2/select2-optinal.min.js?v=1.1"></script>
-    <script src="/Scripts/Templates/PayInvoicePaymentDetails.min.js?v=2.9"></script>
+    <script src="/Scripts/Templates/PayInvoicePaymentDetails.js?v=3.0"></script>
     <style>
         .widget-body .table thead:first-child tr {
             background: #F5F5F5;

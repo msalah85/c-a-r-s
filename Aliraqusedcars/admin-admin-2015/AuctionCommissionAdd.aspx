@@ -94,6 +94,12 @@
                             </div>
                         </div>
                         <div class="control-group">
+                            <label class="control-label" for="VAT">ضريبة 5% <sub class="text-warning">درهم</sub></label>
+                            <div class="controls">
+                                <input type="number" class="required money" name="VAT" id="VAT" required value="0" />
+                            </div>
+                        </div>
+                        <div class="control-group">
                             <label class="control-label" for="CommAmountDhs">قيمة الحوالة <sub class="text-warning">درهم</sub></label>
                             <div class="controls">
                                 <input type="text" class="required no-border money" readonly name="CommAmountDhs" id="CommAmountDhs" required value="0" />
@@ -163,7 +169,7 @@
                                 <tbody></tbody>
                             </table>
                             <div class="hr hr8 hr-double hr-dotted"></div>
-                            <table class="table table-striped table-bordered">
+                            <table class="table table-striped table-bordered">                                
                                 <tr>
                                     <td width="90%"><strong class="pull-left">إجمالى الحوالة :</strong></td>
                                     <td width="10%"><strong class="CommAmount" id="AuctionCommTotal">0</strong> $</td>
