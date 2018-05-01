@@ -1,4 +1,4 @@
-﻿var
+﻿var isShipped = 1,
     filllistItems = function () {
         var
             oTable = $('#listItems').DataTable({
@@ -18,7 +18,7 @@
                 "sAjaxSource": sURL + "ClientDT",
                 "fnServerParams": function (aoData) {
                     aoData.push(
-                        { name: 'names', value: '' }, { name: 'values', value: '' },
+                        { name: 'names', value: 'IsShipped' }, { name: 'values', value: isShipped },
                         { name: "funName", value: 'ClientCars_ShippingList' });
                 },
                 "fnServerData": function (sSource, aoData, fnCallback) {
@@ -97,6 +97,20 @@
             });
 
         //searchDataTables(oTable);
+    },
+    eventHandler = function () {
+        $('#myTabs li[role="presentation"]:eq(0)').addClass('active');
+        $('#myTabs li[role="presentation"] a').click(function (e) {
+            e.preventDefault();
+            var _isShipped = $(this).closest('li').attr('data-isshipped');
+
+            if (_isShipped && (_isShipped != isShipped)) {
+                isShipped = _isShipped;
+                var oTable = $('#listItems').DataTable();
+                oTable.draw(); // refresh
+            }
+        });
     };
 
 filllistItems();
+eventHandler();

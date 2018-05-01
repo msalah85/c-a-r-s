@@ -83,19 +83,21 @@ public partial class TransactionAddEdit : FactshMasterPage
             ToSaleClientID.SelectedValue = string.Format("{0}", result.ToSaleClientID);
             if (ddlShipper.Items.Count > 0)
                 ddlShipper.SelectedValue = string.Format("{0}", result.ShipperID);
-            
+
             // enable controls
-            bool isCarPaid = (result.PayInvoicePaymentsID != null); // true = disable theses controls.
-            if (isCarPaid)
+            bool isCarPaid = (result.PayInvoicePaymentsID != null // paid by IRAQ
+                || (result.Sold == true && result.PayTypeID == 2)); // Paid by client and Sold
+
+            if (isCarPaid)// true = disable theses controls.
             {
                 txtPayPrice.Enabled = ddlSupplier.Enabled = ddlBuyer.Enabled = txtChassisNo.Enabled = false;
                 IsGulfOldCars.Attributes.Add("disabled", "disabled");
             }
-            
+
             bool isCarShippingPaid = (result.IsShippingCarPaid != null); // true = disable theses controls.
             if (isCarShippingPaid)
                 ddlRegion.Enabled = ddlDistination.Enabled = ddlShipper.Enabled = false;
-            
+
             if (result.WorkingStatusID == 3)
             {
                 divAccidentStatusID.Attributes.Add("class", "control-group");
@@ -115,7 +117,7 @@ public partial class TransactionAddEdit : FactshMasterPage
                     }
                 }
             }
-            
+
             // disable editing client
             ToSaleClientID.Enabled = !((bool)result.Sold);
 

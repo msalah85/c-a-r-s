@@ -1,5 +1,4 @@
 ﻿var
-    ClientsPayments = ClientsPayments || {},
     ClientsPayments = function () {
         var
             preventUpdateDhsAmount = false,
@@ -165,7 +164,7 @@
                         updateChosen();
                     } // سداد الرواتب الشهري
                 }
-                    // سداد حوالة عمولة البيرات
+                // سداد حوالة عمولة البيرات
                 else if (qs && qs.acmount) {
                     var ids = qs.ids, AuctionCommAmount = qs.acmount;
 
@@ -309,44 +308,44 @@
                     DTO = { 'actionName': functionName, 'value': receiptID };
 
                 dataService.callAjax('Post', JSON.stringify(DTO), sUrl + 'GetData',
-                  function (data) {
-                      var jsnData = commonManger.comp2json(data.d), jsn = jsnData.list;
+                    function (data) {
+                        var jsnData = commonManger.comp2json(data.d), jsn = jsnData.list;
 
-                      if (jsn) {
-                          // show/hide client
-                          if (jsn.ReceiptTypeID > 1) {
-                              $("input[name='ReceiptTypeID'][value='" + jsn.ReceiptTypeID + "']").prop("checked", true).change();
-                          }
+                        if (jsn) {
+                            // show/hide client
+                            if (jsn.ReceiptTypeID > 1) {
+                                $("input[name='ReceiptTypeID'][value='" + jsn.ReceiptTypeID + "']").prop("checked", true).change();
+                            }
 
-                          // show/hide check no.
-                          $("input[name='PayTypeID'][value='" + jsn.PayTypeID + "']").prop("checked", true).change();
+                            // show/hide check no.
+                            $("input[name='PayTypeID'][value='" + jsn.PayTypeID + "']").prop("checked", true).change();
 
-                          // revised receipt
-                          $("input[name='Revised'][value='" + jsn.Revised + "']").prop("checked", true);
+                            // revised receipt
+                            $("input[name='Revised'][value='" + jsn.Revised + "']").prop("checked", true);
 
-                          // assign old values to update
-                          $.each(jsn, function (k, v) {
-                              $('#masterForm #' + k).val(v);
-                          });
+                            // assign old values to update
+                            $.each(jsn, function (k, v) {
+                                $('#masterForm #' + k).val(v);
+                            });
 
-                          // update money format
-                          $('#Amount,#AmountDhs').val(function () {
-                              return numeral($(this).val()).format('0.0');
-                          });
+                            // update money format
+                            $('#Amount,#AmountDhs').val(function () {
+                                return numeral($(this).val()).format('0.0');
+                            });
 
-                          // update date format
-                          $('.date-picker').val(function () {
-                              return commonManger.formatJSONDateCal($(this).val());
-                          });
+                            // update date format
+                            $('.date-picker').val(function () {
+                                return commonManger.formatJSONDateCal($(this).val());
+                            });
 
-                          // bind employee id.
-                          $('#EmpID').val(jsn.UserID);
+                            // bind employee id.
+                            $('#EmpID').val(jsn.UserID);
 
-                          // update chosen select
-                          updateChosen();
-                      }
+                            // update chosen select
+                            updateChosen();
+                        }
 
-                  }, commonManger.errorException);
+                    }, commonManger.errorException);
             },
             getRentDetails = function (rentID) {
                 var funName = "RentDetails_One", dto = { 'actionName': funName, value: rentID },

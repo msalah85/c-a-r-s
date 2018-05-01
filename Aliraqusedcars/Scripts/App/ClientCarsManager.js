@@ -52,12 +52,7 @@
                     if (!_this.closest('li').hasClass('active')) {
                         _done.val(_this.data('id'));
 
-                        if (_done.val() < 2) {
-                            updateGrid();
-                        }
-                        else {
-                            updateGrid2();
-                        }
+                        updateGrid();
                     }
                 });
 
@@ -308,9 +303,7 @@
                 $('div[id$=Modal].modal').modal('hide');
                 btnProceessing($('div[id$=Modal].modal.fade.in .modal-footer .btn[type="submit"]'), false);
 
-
                 commonManger.showMessage('تم تنفيذ الإجراء:', data.Message || data.message);
-
 
                 if (data.Status) {
                     updateGrid();
@@ -405,9 +398,6 @@
             },
             updateGrid = function () {
                 $('#listItems').DataTable().draw();
-            },
-            updateGrid2 = function () {
-                $('#listItems2').DataTable().draw();
             },
             checkSelectedCarExistInCarsListArray = function (carsListArr, selectedCarID) {
                 var existBefore = false;
@@ -601,7 +591,8 @@
                                 "mDataProp": 'SalePrice',
                                 "bSortable": false,
                                 "mData": function (d) {
-                                    return '<span class="red" data-rel="tooltip" title="سعر الشراء:  ' + numeral(d.PayPrice).format('0,0') + '$،\nالعمولة: ' + numeral(d.SalePrice - d.PayPrice).format('0,0') + '$' + ((d.CommiDiscount * 1) > 0 ? ', خصم مع الفاتورة: ' + numeral(d.CommiDiscount).format('0,0') + '$' : '') + '">' + numeral(d.SalePrice).format('0,0') + '</span> '; // + commissionDiscount;
+                                    var discountOnSaleBill = ((d.CommiDiscount * 1) > 0 ? ', خصم مع الفاتورة: ' + numeral(d.CommiDiscount).format('0,0') + '$' : '');
+                                    return '<span class="red" data-rel="tooltip" title="سعر الشراء:  ' + numeral(d.PayPrice).format('0,0') + '$،\nالعمولة: ' + numeral(d.SalePrice - d.PayPrice).format('0,0') + '$' + discountOnSaleBill + '">' + numeral(d.SalePrice).format('0,0') + (discountOnSaleBill !== '' ? ' <i class="fa fa-info-circle green"></i>' : '') + '</span> '; // + commissionDiscount;
                                 }
                             },
                             { // العربون
@@ -683,8 +674,7 @@
                                             return '<s class="red ace-tooltip" data-rel="tooltip" title="تم السداد">' + numeral(row.VAT).format('0,0') + '</s> ' + undoLink;
 
                                         // pay VAT after finish all other fees required on the car.
-                                        var isRequiredToPayVat = (row.CarRetainerDone * 1 > 0 && row.CarDelayedDone * 1 > 0 && row.TotalCarShippExpensesDone * 1 > 0 &&
-                                            row.TotalCarShopExpensesDone * 1 > 0 && row.ClientExtraOnCarPaid * 1 > 0),
+                                        var isRequiredToPayVat = (row.CarRetainerDone * 1 > 0 && row.CarDelayedDone * 1 > 0),
                                             cancelVatLink = ' <a data-rel="tooltip" data-carid="' + row.CarID + '" data-vatvalue="' + row.VAT
                                                 + '" title="إلغاء VAT عن العميل" href="javascript:void(0);" class="cancel-vat"><i class="icon-remove orange bigger-120"></i></a>';
 
@@ -735,7 +725,7 @@
                                             : ''),
                                         extraOnCarPaid = (rowData.ClientExtraOnCar * 1 === 0 && rowData.ClientExtraOnCarPaid * 1 > 0 ? // extra amount was paid.
                                             sadFace + '<s data-rel="tooltip" title="تم السداد"  class="red ace-tooltip inline">' + numeral(rowData.ClientExtraOnCarPaid).format('0,0') + '</s>' : extraOnCar);
-
+                                    
                                     return '<strong data-rel="tooltip" class="carRequired" title="المطلوب على السيارة">' + numeral(__total).format('0,0') + '</strong> &nbsp;' + discountOnCar + ' ' + extraOnCarPaid;
                                 }
                             },

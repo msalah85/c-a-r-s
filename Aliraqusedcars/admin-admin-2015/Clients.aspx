@@ -175,6 +175,7 @@
                                                 <option value="00965">الكويت (00965)</option>
                                                 <option value="00974">قطر (00974)</option>
                                                 <option value="0020">مصر (0020)</option>
+                                                <option value="001">أمريكا (001)</option>
                                             </select>
                                         </div>
                                     </div>
@@ -193,6 +194,7 @@
                                                 <option value="00965">الكويت (00965)</option>
                                                 <option value="00974">قطر (00974)</option>
                                                 <option value="0020">مصر (0020)</option>
+                                                <option value="001">أمريكا (001)</option>
                                             </select>
                                         </div>
                                     </div>

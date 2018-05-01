@@ -1,5 +1,4 @@
 ﻿var
-    pageManager = pageManager || {},
     pageManager = function () {
         var
             Init = function () {

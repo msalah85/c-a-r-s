@@ -17,20 +17,30 @@
     <div class="row">
         <div class="col-md-12 col-sm-12">
             <h1 class="page-header">السيارات قيد الشحن</h1>
-            <table id="listItems" class="table table-striped table-bordered table-hover" width="100%">
-                <thead>
-                    <tr>
-                        <th width="60">#رقم</th>
-                        <th width="75">صورة</th>
-                        <th width="20%">السيارة</th>
-                        <th>سعر البيع</th>
-                        <th>تاريخ الشراء</th>
-                        <th>تاريخ الوصول</th>
-                        <th>موقع الشحن</th>
-                        <th width="30" class="hidden-print" title="عرض السيارة بالموقع">عرض</th>
-                    </tr>
-                </thead>
-            </table>
+            <div class="bs-example bs-example-tabs" data-example-id="togglable-tabs">
+                <ul class="nav nav-tabs" id="myTabs" role="tablist">
+                    <li role="presentation" class="" data-isshipped="1"><a href="#tab-body" id="tab1" role="tab" data-toggle="tab" aria-controls="tab-body">سيارات بالطريق</a></li>
+                    <li role="presentation" class="" data-isshipped="0"><a href="#tab-body" id="tab2" role="tab" data-toggle="tab" aria-controls="tab-body">قيد التحميل</a></li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade active in" role="tabpanel" id="tab-body">
+                        <table id="listItems" class="table table-bordered table-hover" width="100%">
+                            <thead>
+                                <tr>
+                                    <th width="60">#رقم</th>
+                                    <th width="75">صورة</th>
+                                    <th width="20%">السيارة</th>
+                                    <th>سعر البيع</th>
+                                    <th>تاريخ الشراء</th>
+                                    <th>تاريخ الوصول</th>
+                                    <th>موقع الشحن</th>
+                                    <th width="30" class="hidden-print" title="عرض السيارة بالموقع">عرض</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <script src="/Scripts/datatable/jquery.dataTables.min.js" type="text/javascript"></script>

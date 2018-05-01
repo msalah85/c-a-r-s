@@ -73,7 +73,8 @@
                     "mDataProp": 'SalePrice',
                     "bSortable": false,
                     "mData": function (d) {
-                        return '<span class="red" data-rel="tooltip" title="سعر الشراء:  ' + d.PayPrice + '$  -  عمولة الشركة: ' + (d.SalePrice - d.PayPrice) + '$">' + numeral(d.SalePrice).format('0,0') + '</span>';
+                        var discountOnSaleBill = ((d.CommiDiscount * 1) > 0 ? ', خصم مع الفاتورة: ' + numeral(d.CommiDiscount).format('0,0') + '$' : '');
+                        return '<span class="red" data-rel="tooltip" title="سعر الشراء:  ' + numeral(d.PayPrice).format('0,0') + '$،\nالعمولة: ' + numeral(d.SalePrice - d.PayPrice).format('0,0') + '$' + discountOnSaleBill + '">' + numeral(d.SalePrice).format('0,0') + (discountOnSaleBill !== '' ? ' <i class="fa fa-info-circle text-success"></i>' : '') + '</span> '; // + commissionDiscount;
                     }
                 },
                 {

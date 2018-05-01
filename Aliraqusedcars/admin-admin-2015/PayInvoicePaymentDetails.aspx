@@ -56,6 +56,7 @@
                                     <option value="3.6740">3.674</option>
                                     <option value="3.6735">3.6735</option>
                                     <option value="3.6670">3.667</option>
+                                    <option value="3.6700">3.67</option>
                                     <option value="3.6750">3.675</option>
                                 </select>
                             </div>

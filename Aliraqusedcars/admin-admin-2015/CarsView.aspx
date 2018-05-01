@@ -12,7 +12,7 @@
             height: 25px;
         }
     </style>
-    <script src="/Scripts/App/CarsViewManager.min.js?v=2.1"></script>
+    <script src="/Scripts/App/CarsViewManager.js?v=2.2"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div id="breadcrumbs" class="hidden-print">
