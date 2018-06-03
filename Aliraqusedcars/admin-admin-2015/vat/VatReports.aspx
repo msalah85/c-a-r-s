@@ -105,13 +105,19 @@
                                                 <th>#</th>
                                                 <th>التاريخ</th>
                                                 <th>تصنيف</th>
-                                                <th>المبلغ <sub>درهم</sub></th>
+                                                <th>العميل</th>
+                                                <th>سعر البيع <sub>درهم</sub></th>
+                                                <th>الضريبة <sub>درهم</sub></th>
                                             </tr>
                                         </thead>
                                         <tfoot>
                                             <tr>
-                                                <td colspan="3"><strong class="pull-left">الإجمالى <sub>درهم</sub></strong></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
                                                 <td class="bolder _total"></td>
+                                                <td class="bolder _totalVat"></td>
                                             </tr>
                                         </tfoot>
                                     </table>

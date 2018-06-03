@@ -314,14 +314,13 @@ var
                         saveInvoice(car);
                 });
 
-
                 var withOutShippCheck = $('#WithoutShipping'),
                     oldCarCheck = $('#IsGulfOldCars'),
                     // show / hide region based on destination
                     showHideRegion = function () {
                         var isWithoutShipping = withOutShippCheck.is(':checked') ? true : false,
                             isGulfauto = $dist.val() !== '4';
-                        
+
                         if (isWithoutShipping && isGulfauto) {
                             $region.val('').closest('div.region').addClass('hidden');
                         } else {
@@ -335,8 +334,8 @@ var
                     var checked = $(this).is(':checked'); //, withShipping = withOutShippCheck.is(':checked');
 
                     //if (withShipping === false) {
-                        $buyer.closest('div.control-group').removeClass('hidden');
-                        $auction.closest('div.control-group').removeClass('hidden');
+                    $buyer.closest('div.control-group').removeClass('hidden');
+                    $auction.closest('div.control-group').removeClass('hidden');
                     //}
 
 
@@ -401,7 +400,8 @@ var
         return {
             Init: init,
             $auctionElement: $auction
-        }
+        };
+
     }();
 
 //#endregion

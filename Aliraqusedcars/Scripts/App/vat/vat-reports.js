@@ -170,11 +170,13 @@ var
                         }, commonManger.errorException);
                     },
                     "fnFooterCallback": function (nFoot, aData, iStart, iEnd, aiDisplay) {
-                        var tot = 0;
+                        var totVat = 0, totalSalePrice = 0;
                         for (var i = 0; i < aData.length; i++) {
-                            tot += (parseFloat(aData[i]["VAT"]) * 1);
+                            totVat += (parseFloat(aData[i]["VAT"]) * 1);
+                            totalSalePrice += (parseFloat(aData[i]["SalePrice"]) * 3.667);
                         }
-                        $('._total').text(numeral(tot).format('0,0'));
+                        $('._totalVat').text(numeral(totVat).format('0,0'));
+                        $('._total').text(numeral(totalSalePrice).format('0,0'));
                     },
                     "iDisplayLength": 50,
                     "aaSorting": [],
@@ -198,6 +200,19 @@ var
                             "bSortable": true,
                             "mData": function (d) {
                                 return d.VatTypeName ? d.VatTypeName : '';
+                            }
+                        },
+                        {
+                            "bSortable": false,
+                            "mData": function (row) { // client name
+                                return row.full_name ? row.full_name : '';
+                            }
+                        },
+                        {
+                            "bSortable": false,
+                            //"sClass": "hidden",
+                            "mData": function (row) {
+                                return row.SalePrice ? numeral(row.SalePrice * 3.667).format('0,0.00') : 0;
                             }
                         },
                         {

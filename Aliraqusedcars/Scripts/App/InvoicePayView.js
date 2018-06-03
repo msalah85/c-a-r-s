@@ -30,7 +30,7 @@ var pageManager = function () {
                 commonManger.showOptionPrintTitle($('#Paid option:selected').text());
                 updateGrid();
             });
-            
+
             // cancel invoice
             $('#cancelModal .modal-footer .btn-danger').on('click', function (e) {
                 e.preventDefault();
@@ -198,7 +198,10 @@ var pageManager = function () {
                         "bSortable": false
                     },
                     {
-                        "mData": function (d) { return d.ShipCompanyNameEn ? d.ShipCompanyNameEn : ''; },
+                        "mData": function (d) {
+                            return (d.RegionEn ? d.RegionEn : '') +
+                                (d.ShipCompanyNameEn ?  ' <i class="fa fa-arrow-right"></i> ' +d.ShipCompanyNameEn : '');
+                        },
                         "bSortable": false
                     },
                     {
@@ -217,8 +220,7 @@ var pageManager = function () {
                                 return '<div class="tools pull-left hidden-print"><a href="pay/' + oObj["CarID"] + '/InvoicePayAdd.aspx" class="hidden-print btn btn-mini btn-info" data-rel="tooltip" data-placement="top" title="تعــديل" data-original-title="تعــديل"><i class="icon-edit icon-only"></i></a> ' + (deleteMe ? _delBtn : '') + '</div>';
                             else { return '---'; }
                         }
-                    }
-                ]
+                    }]
             });
 
             $("#listItems tbody").delegate("tr button", "click", function (e) {
@@ -246,7 +248,9 @@ var pageManager = function () {
                 }
             });
         };
+
     return {
         Init: Init
     };
+
 }();

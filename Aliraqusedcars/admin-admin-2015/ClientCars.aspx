@@ -122,7 +122,26 @@
                                                         </ul>
                                                     </div>
                                                 </th>
-                                                <th colspan="6"></th>
+                                                <th colspan="2"></th>
+                                                <th>
+                                                    <div class="btn-group dropup">
+                                                        <button data-toggle="dropdown" class="btn btn-small dropdown-toggle">
+                                                            <span class="caret"></span>&nbsp;
+                                                        </button>
+                                                        <ul class="dropdown-menu dropdown-default pull-right">
+                                                            <li>
+                                                                <a>واصل: <span class="arrived-vat"></span></a>
+                                                            </li>
+                                                            <li>
+                                                                <a>غير واصل: <span class="not-arrived-vat"></span></a>
+                                                            </li>
+                                                            <li>
+                                                                <a>الاجمالى: <span class="total-vat"></span></a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </th>
+                                                <th colspan="3"></th>
                                                 <th></th>
                                             </tr>
                                         </tfoot>

@@ -522,7 +522,8 @@
                             }
                         },
                         "fnFooterCallback": function (nFoot, aData, iStart, iEnd, aiDisplay) {
-                            var totRetainer = 0, totDelayed = 0, totActiveDelayed = 0, totNonActiveDelayed = 0, salePrices = 0;
+                            var totRetainer = 0, totDelayed = 0, totActiveDelayed = 0, totNonActiveDelayed = 0, salePrices = 0,
+                                totVAT = 0, totArrivedVAT = 0, totNotArrivedVAT = 0;
 
                             for (var i = 0; i < aData.length; i++) {
                                 var _arrived = (aData[i].Arrived == 'true' || aData[i].WithoutShipping == 'true'),
@@ -536,20 +537,33 @@
 
 
                                 // all of arrived cars or (demand cashed invoices).
-                                if (_arrived || delayedCheck)
+                                if (_arrived || delayedCheck) {
                                     totActiveDelayed += ((aData[i].CarDelayedDone * 1 > 0) ? 0 : (aData[i].DelayedAfterDisc * 1)); // total delayed amount for arrived cars (Active)
 
-                                if (!_arrived && !delayedCheck) // Total of not arrived cars
+                                    console.log(aData[i].VAT)
+                                    totArrivedVAT += (aData[i].VAT * 1) - (aData[i].VATDone * 1);
+                                }
+
+                                if (!_arrived && !delayedCheck) { // Total of not arrived cars
                                     totNonActiveDelayed += ((aData[i].CarDelayedDone * 1 > 0) ? 0 : (aData[i].DelayedAfterDisc * 1)); // total of not Active delayed amount (cars not arrived)
+                                    totNotArrivedVAT += (aData[i].VAT * 1) - (aData[i].VATDone * 1);
+                                }
                             }
 
 
                             // 
                             $(nFoot).find('th:eq(1)').html(numeral(salePrices).format('0,0'));
                             $(nFoot).find('th:eq(2)').html(numeral(totRetainer).format('0,0'));
-                            $('.total-delayed').text(numeral(totDelayed).format('0,0'));
 
-                            // 
+
+
+                            totVAT = totNotArrivedVAT + totArrivedVAT;
+                            $('.total-vat').text(numeral(totVAT).format('0,0'));
+                            $('.not-arrived-vat').text(numeral(totNotArrivedVAT).format('0,0'));
+                            $('.arrived-vat').text(numeral(totArrivedVAT).format('0,0'));
+
+
+                            $('.total-delayed').text(numeral(totDelayed).format('0,0'));
                             $('.arrived-delayed').text(numeral(totActiveDelayed).format('0,0'));
                             $('.not-arrived-delayed').text(numeral(totNonActiveDelayed).format('0,0'));
 
@@ -725,7 +739,7 @@
                                             : ''),
                                         extraOnCarPaid = (rowData.ClientExtraOnCar * 1 === 0 && rowData.ClientExtraOnCarPaid * 1 > 0 ? // extra amount was paid.
                                             sadFace + '<s data-rel="tooltip" title="تم السداد"  class="red ace-tooltip inline">' + numeral(rowData.ClientExtraOnCarPaid).format('0,0') + '</s>' : extraOnCar);
-                                    
+
                                     return '<strong data-rel="tooltip" class="carRequired" title="المطلوب على السيارة">' + numeral(__total).format('0,0') + '</strong> &nbsp;' + discountOnCar + ' ' + extraOnCarPaid;
                                 }
                             },

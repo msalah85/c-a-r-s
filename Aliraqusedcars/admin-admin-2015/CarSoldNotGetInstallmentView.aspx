@@ -13,7 +13,6 @@
         <div class="page-header position-relative">
             <h1>سيارات لم يسدد عربونها</h1>
         </div>
-        <!--/.page-header-->
         <div class="row-fulid">
             <div class="table-header">
                 عرض سيارات لم يسدد عربونها

@@ -60,11 +60,10 @@ public partial class TransactionAddEdit : FactshMasterPage
             if (result.ClientBuyerID != null)
                 buyerSelectID = string.Format("{0}|{1} - {2}", result.ClientBuyerID, result.BuyerName, result.full_name);
             ddlCarStatus.SelectedValue = string.Format("{0}", result.WorkingStatusID);
-            ddlModel.SelectedValue = string.Format("{0}", result.ModelID);
             ddlColor.SelectedValue = string.Format("{0}", result.ColorID);
             ddlDocTypes.SelectedValue = string.Format("{0}", result.PayTypeID);
-            ddlModel.SelectedValue = string.Format("{0}", result.ModelID);
             ddlMaker.SelectedValue = string.Format("{0}", result.MakerID);
+            ddlModel.SelectedValue = string.Format("{0}", result.ModelID);
             ddlYear.SelectedValue = string.Format("{0}", result.Year);
             ddlDistination.SelectedValue = string.Format("{0}", result.DistinationID);
             ddlOwnerID.SelectedValue = string.Format("{0}", result.OwnerID);
@@ -158,16 +157,15 @@ public partial class TransactionAddEdit : FactshMasterPage
         _car.IP = SessionManager.Current.IP;
         _car.UserID = Convert.ToInt32(SessionManager.Current.ID);
 
+        if (string.IsNullOrEmpty(_car.ModelID.ToString()))
+            return new { Status = false, ID = 0, Message = Resources.AdminResources_ar.CarModelRequired };
+        
         var result = new CarsDataManager().SaveItem(_car);
-
-
-        if (result > 0)
-            return new { Status = true, ID = result, Message = Resources.AdminResources_ar.SuccessSave };
-
+        
         if (result < 0)
             return new { Status = false, ID = -1, Message = Resources.AdminResources_ar.CarExistBefore };
-
-        return new { Status = false, ID = 0, Message = Resources.AdminResources_ar.ErrorSave };
+        
+        return new { Status = true, ID = result, Message = Resources.AdminResources_ar.SuccessSave };
     }
     #endregion
 }

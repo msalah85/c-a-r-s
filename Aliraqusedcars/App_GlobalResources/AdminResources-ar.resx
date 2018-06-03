@@ -126,6 +126,9 @@
   <data name="CarExistBefore" xml:space="preserve">
     <value>عفواً لم يتم الحفظ ، رقم الشاصي للسيارة تم اضافته من قبل .</value>
   </data>
+  <data name="CarModelRequired" xml:space="preserve">
+    <value>يرجي التأكد من اختيار موديل السيارة.</value>
+  </data>
   <data name="ChooseOne" xml:space="preserve">
     <value>يرجى اختيار بيان واحد على الأقل لتصفية الحسابات.</value>
   </data>

@@ -4,7 +4,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <link href="/Scripts/select2/select2.min.css?v=1.5" rel="stylesheet" />
     <link href="/App_Themes/iraq/cars-list.min.css?v=1.1" rel="stylesheet" />
-    <script src="<%: Settings.Config.CDN%>/Scripts/App/InvoicePayView.min.js?v=4.7"></script>
+    <script src="<%: Settings.Config.CDN%>/Scripts/App/InvoicePayView.min.js?v=4.8"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div id="breadcrumbs" class="hidden-print">
