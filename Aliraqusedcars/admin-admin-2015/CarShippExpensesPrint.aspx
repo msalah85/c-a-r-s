@@ -2,7 +2,6 @@
     AutoEventWireup="true" CodeFile="CarShippExpensesPrint.aspx.cs" Inherits="CarShippExpensesPrint"
     EnableEventValidation="false" %>
 
-
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <style type="text/css">
         .control-group {

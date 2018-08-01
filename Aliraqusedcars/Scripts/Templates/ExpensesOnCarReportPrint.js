@@ -2,7 +2,7 @@
     pageManager = function () {
         var
             buyer = null, shipper = null, chassis = null,
-            from = null, to = null, auction = null, client = null,
+            from = null, to = null, auction = null, client = null, DistinationID = null,
 
             Init = function () {
                 filllistItems();
@@ -15,6 +15,7 @@
                         from = commonManger.dateFormat($('#From').val()),
                         to = commonManger.dateFormat($('#To').val()),
                         auction = $('#Auction').val(),
+                        DistinationID = $('#DistinationID').val(),
                         client = $('#Client').val();
 
                     updateGrid();
@@ -68,7 +69,7 @@
                     "fnServerParams": function (aoData) {
                         aoData.push({ "name": "buyer", "value": buyer }, { "name": "Client", "value": client },
                             { "name": "auction", "value": auction }, { "name": "chassis", "value": chassis },
-                            { "name": "from", "value": from }, { "name": "to", "value": to });
+                            { "name": "from", "value": from }, { "name": "to", "value": to }, { "name": "DistinationID", "value": DistinationID });
                     },
                     "fnServerData": function (sSource, aoData, fnCallback) {
                         var bindGird = function (data) {

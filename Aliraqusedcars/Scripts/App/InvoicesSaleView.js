@@ -1,6 +1,6 @@
 ﻿var
     pageManager = function () {
-        var client = '',
+        var client = '', destination = '',
             from = '',
             to = '',
             _link = document.createElement('a'),
@@ -77,9 +77,9 @@
                     e.preventDefault();
 
                     client = $('#client').val(),
+                        destination = $('#destination').val(),
                         from = commonManger.dateFormat($('#From').val()),
                         to = commonManger.dateFormat($('#To').val());
-
 
                     updareGrid();
                 });
@@ -339,8 +339,8 @@
                     "sAjaxSource": sUrl + 'LoadDataTablesXML',
                     "fnServerParams": function (aoData) {
                         aoData.push({ name: "funName", value: 'InvoicesSale_SelectList' },
-                            { name: "names", value: 'Client~From~To' },
-                            { name: "values", value: `${client}~${from}~${to}` });
+                            { name: "names", value: 'Client~Destination~From~To' },
+                            { name: "values", value: `${client}~${destination}~${from}~${to}` });
                     },
                     "fnServerData": function (sSource, aoData, fnCallback) {
                         dataService.callAjax('GET', aoData, sSource, function (data) {

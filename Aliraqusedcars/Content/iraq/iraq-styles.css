@@ -18296,3 +18296,6 @@ img.atlantic-express {
 a.callus-top img {
     height: 30px !important;
 }
+table tr.downloadme-flag-tr td {
+    background-color: rgba(238, 250, 204, 0.83) !important;
+}

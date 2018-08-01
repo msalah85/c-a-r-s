@@ -1,6 +1,5 @@
-﻿$.fn.editable.defaults.mode = 'popup';
-
-var
+﻿var
+    sUrl = '/api/data.aspx/',
     CarsLateShipping = function () {
         var shipper = '',
             distination = '',
@@ -20,46 +19,11 @@ var
             },
 
             workPerform = function () {
-                // save arrival date
-                $('#carArrive .modal-footer button.btn-success').live('click', function (e) {
-                    e.preventDefault();
-
-                    $(this).prop('disabled', true).addClass('disabled');
-
-                    startSaveDate();
-                });
-
-                // print invoice
-                $('#printedModal .modal-footer button.btn-success').live('click', function (e) {
-                    e.preventDefault();
-                    startSavePrinted();
-                });
-
-                // download container
-                $('#downloadMeModal .modal-footer button.btn-success').live('click', function (e) {
-                    e.preventDefault();
-                    downloadContainer();
-                });
-
                 // start search
                 $('#btnSearchAll').click(function (e) {
                     e.preventDefault();
                     shipper = $('#Shipper').val(), distination = $('#Distin').val();
                     updateGrid();
-                });
-
-
-                $('.test').click(function () {
-                    $('#listItems .bol-cell').each(function (k, v) {
-                        var $itm = $(v);
-                        console.log($itm.text())
-                        if ($itm.text() === '958979529') {
-                            $itm.closest('tr').find('td:eq(5)').text('Mohamed Salah');
-                            var $dateCell = $itm.closest('tr').find('td:eq(5)').text();
-                            console.log($dateCell)
-                            return false;
-                        }
-                    });
                 });
             },
 
@@ -91,7 +55,7 @@ var
                         }
                         else {
                             // send sms to every client
-                            //sendSMS(data);
+                            sendSMS(data);
 
                             // refresh containers list.
                             updateGrid();
@@ -166,42 +130,11 @@ var
                 }
             },
 
-            downloadContainer = function () {
-                var invoiceId = $('#InvID').val(),
-                    downloadContainer = $('input[name="DownloadContainer"]:checked').val() || '';
-
-                if (invoiceId !== '' && downloadContainer !== '') {
-                    var
-                        dto = {
-                            actionName: 'Container_DownloadMe',
-                            names: ['id', 'DownloadContainer'],
-                            values: [invoiceId, downloadContainer]
-                        },
-                        orderDownloadContainer = function (data) {
-                            data = data.d;
-                            if (data.Status) {
-                                updateGrid();
-                                $('.modal').modal('hide');
-                                commonManger.showMessage('تم بنجاح:', 'تم اعتماد تنزيل الحاوية فى مقر الشركة.');
-                            } else {
-                                $('.modal').modal('hide');
-                                commonManger.showMessage('خطأ بالحفظ:', 'لم يتم اعتماد تنزيل الحاوية.');
-                            }
-                        };
-
-                    dataService.callAjax('Post', JSON.stringify(dto), sUrl + 'saveData',
-                        orderDownloadContainer, commonManger.errorException);
-                }
-                else {
-                    commonManger.showMessage('خطأ بالحفظ:', 'لم يتم اعتماد تنزيل الحاوية.');
-                }
-            },
-
             filllistItems = function () {
                 allContriners = (allContriners > 0 ? allContriners : '0'); // default show all=0
 
                 var oaTable = $('#listItems').DataTable({
-                    "sDom": "<'row-fluid'<'span6'l><'span6 lft-pane'BTf>r>t<'row-fluid'<'span6'i><'span6'p>>",
+                    "sDom": "<'row'<'col-sm-6'l><'col-sm-6'BTf>r>t<'row'<'col-sm-6'i><'col-sm-6'p>>",
                     buttons: [{ extend: 'csv', text: 'تصدير إكسيل' },
                     { extend: 'copy', text: 'نسـخ', },
                     {
@@ -227,7 +160,7 @@ var
                     "rowsGroup": [6, 0, 4, 5, 7],
                     "sAjaxSource": sUrl + "LoadDataTablesXML",
                     "fnServerParams": function (aoData) {
-                        aoData.push({ "name": "funName", "value": 'Containers_SelectListToCome' }, { "name": "names", "value": 'NeerPort~Shipper~Distin' }, { "name": "values", "value": allContriners + '~' + shipper + '~' + distination });
+                        aoData.push({ "name": "funName", "value": 'Containers_SelectListToCome' }, { "name": "names", "value": 'NeerPort~Shipper~Distin' }, { "name": "values", "value": allContriners + '~' + shipper + '~2' });
                     },
                     "fnServerData": function (sSource, aoData, fnCallback) {
                         dataService.callAjax('GET', aoData, sSource, function (data) {
@@ -251,23 +184,19 @@ var
                             if (jsn1) {
                                 $('.allContainersCount').text(jsn1.ContCount);
                             }
-
                         }, commonManger.errorException);
                     },
                     "iDisplayLength": 50,
                     "fnFooterCallback": function (nFoot, aData, iStart, iEnd, aiDisplay) {
                         var api = this.api(), last = null, containersCount = 0;
 
-                        console.log('footer...');
-
                         // loop containers column
-                        api.column(6, { page: 'current' })
-                            .data().each(function (group, i) {
-                                if (last !== group) {
-                                    last = group;
-                                    containersCount++;
-                                }
-                            });
+                        api.column(6, { page: 'current' }).data().each(function (group, i) {
+                            if (last !== group) {
+                                last = group;
+                                containersCount++;
+                            }
+                        });
 
                         // show page containers count.
                         $('.containersNum').text(containersCount);
@@ -277,9 +206,7 @@ var
                             rows = api.rows({ page: 'current' }).nodes(),
                             last = null,
                             invHeader = $('#listItems thead').html(),
-                            lastIndex = 0,
-                            groupValToCheck = '';
-
+                            lastIndex = 0, groupValToCheck = '';
 
                         // sub total after every group
                         api.rows().every(function (rowIdx, tableLoop, rowLoop) {
@@ -288,53 +215,19 @@ var
                             if (groupValToCheck !== '' && data.ContainerNo !== groupValToCheck) {
                                 $(rows).eq(lastIndex).addClass('groupSeparator');
                             }
+                            groupValToCheck = data.ContainerNo; lastIndex = rowIdx;
 
-                            groupValToCheck = data.ContainerNo;
-                            lastIndex = rowIdx;
+                            // colored containers that has 
+                            $('.download-me').closest('tr').addClass('downloadme-flag-tr');
+                        });
 
-                            $('.downloadme-flag').closest('tr').addClass('downloadme-flag-tr');
-                        });
-                        
-                        // editable containers notes
-                        $('a.editable').editable({
-                            emptytext: '+ ملاحظة',
-                            validate: function (value) {
-                                if ($.trim(value) === '') {
-                                    return 'مطلوب.';
-                                }
-                            },
-                            url: function (params) {
-                                params.table = $(this).data('table'); params.id = $(this).data('id');
-                                return $.ajax({
-                                    type: 'POST',
-                                    url: sUrl + 'InlineEdit',
-                                    data: JSON.stringify(params),
-                                    contentType: 'application/json; charset=utf-8',
-                                    dataType: 'json',
-                                    async: true,
-                                    cache: false,
-                                    timeout: 10000,
-                                    success: function () {
-                                        commonManger.showMessage('تم الحفظ:', 'تم حفظ الملاحظه بنجاح.');
-                                    },
-                                    error: function () {
-                                        commonManger.showMessage('خطأ:', 'لقد حدث خطأ فى تنفيذ الإجراء.');
-                                    }
-                                });
-                            },
-                            display: function (value, sourceData) {
-                                if (value) {
-                                    $(this).html('<i class="icon-warning-sign orange"></i>');
-                                }
-                            }
-                        });
                     },
                     "aoColumns": [
                         {
                             "bSortable": false,
                             "mData": function (d) {
-                                return d.ShipCompanyNameEn +
-                                    '<a class="hidden-print pull-left" href="javascript:printSaleCarsBill.printBolCars(\'' + d.Bol + '\');" title="طباعة فواتير البيع للسيارات بالحاوية"><i class="icon-print bigger-150"></i></a>';
+                                return d.ShipCompanyNameEn
+                                //'<a class="hidden-print pull-left" href="javascript:printSaleCarsBill.printBolCars(\'' + d.Bol + '\');" title="طباعة فواتير البيع للسيارات بالحاوية"><i class="fa fa-print bigger-150"></i></a>';
                             },
                             "sClass": "v-middle",
 
@@ -342,7 +235,7 @@ var
                         {
                             "bSortable": false,
                             "mData": function (data) {
-                                return `<a href="CarDetailsPrint.aspx?id=${data.CarID}" class="" data-rel="tooltip" title="وصول السيارة">${data.MakerNameEn}-${data.TypeNameEn}-${data.Year}</a>`;
+                                return `<a href="car.aspx?id=${data.CarID}" class="" data-rel="tooltip" title="وصول السيارة">${data.MakerNameEn}-${data.TypeNameEn}-${data.Year}</a>`;
                             }
                         },
                         {
@@ -369,106 +262,52 @@ var
                             "bSortable": false,
                             "sClass": "v-middle",
                             "mData": function (d) {
-                                return (d.InvoicePrinted === 'false' ? d.ContainerNo + '<a class="btn btn-mini hidden-print printMe" title="اعتمد طباعة الفاتورة الآن" data-id="' + d.ShippInvoiceID + '" href="#printedModal"><i class="icon-print"></i></a>' : '<span title="تمت طباعة الفاتورة" class="red">' + d.ContainerNo + '</span>' + (!d.InvoiceNo ? ' <a title="انشاء فاتورة شحن" href="InvoiceShippingAdd.aspx?id=' + d.ShippInvoiceID + '">+فاتورة</a>' : '')) + ' <p title="شركة الملاحة">' + (d.NavigationCoName ? d.NavigationCoName : '') + '</p>';
+                                return d.ContainerNo + ' - <span title="شركة الملاحة">' + (d.NavigationCoName ? d.NavigationCoName : '') + '</span>';
                             },
                         },
                         {
-                            "mDataProp": "Bol",
-                            "sClass": "v-middle",
-                            "bSortable": true,
                             "mData": function (d) {
-                                var addContNotes = '<a title="اضف ملاحظة على الحاوية" data-placement="right" data-type="textarea" data-id="ShippInvoiceID" data-pk="' + d.ShippInvoiceID + '" data-table="ShippInvoices" data-name="ContainersNotes" class="editable tooltip-warning" href="#" data-placeholder="اضافة ملاحظه">' + (d.ContainersNotes ? d.ContainersNotes : '') + '</a>';
-                                return '<div class="pull-left options hidden-print"><a href="javascript:void(0);" class="btn btn-minier btn-grey change-date" data-rel="tooltip" data-placement="top" title="تعديل تاريخ الوصول">تعديل تاريخ الوصول</a>' +
-                                    /*for Jordan containers only*/((d.Arrived === 'true') ? '<a href="javascript:void(0);" class="btn btn-minier btn-danger download-me' + (d.DownloadMe === 'true' ? ' downloadme-flag' : '') + '" data-id="' + d.ShippInvoiceID + '" data-rel="tooltip" data-placement="top" title="تنــــــــــزيل الحــــــــاوية؟">تنـــــــزيل الحــــــــاوية؟</a>' : '') +
-                                    '<a href="javascript:void(0);" class="btn btn-minier btn-success container-come" data-rel="tooltip" data-placement="top" title="توصيل الحاوية">توصيــــل الحـاوية <i class="icon-anchor"></i></a> ' + addContNotes + '</div><div class="bol-cell">' + d.Bol + '</div>';
-                            }
+                                return d.Bol +
+                                    // download the container
+                                    // d.DownloadMe === "true"
+                                    (d.DownloadMe === 'true' ? ' <a title="تم تنزيل/تفريغ الحاوية" href="javascript:void(0);" class="btn btn-primary btn-sm download-me"><i class="fa fa-check"></i></a>' : '')
+                            },
+                            "sClass": "v-middle",
+                            "bSortable": true
                         }]
                 });
-                //commonManger.searchData(oaTable);
 
-                $("#listItems tbody").delegate("tr a.change-date", "click", function (e) {
-                    e.preventDefault();
-                    var self = $(this), pos = self.closest('tr'), aData;
-                    if (pos !== null) {
-                        aData = oaTable.row(pos).data();
-                        var cont = aData.ContainerNo,
-                            Bol = aData.Bol,
-                            title = "تاريخ وصول الحاوية رقم: " + cont,
-                            operation = 'insert',
-                            modalDialog = 'carArrive';
-
-                        $('#ArrivalDate').val(commonManger.formatJSONDateCal(aData.ArrivalDate));
-                        $('#No').val(cont); // container No
-                        $('#Bol').val(Bol); // Bol
-                        $('#Type').val(0); // Change arrival date
-                        $('#aspnetForm .alert').text('برجاء تأكيد تغيير تاريخ وصول الحاوية.');
-                        $('#carArrive .btn-success').text('تغيير تاريخ الوصول');
-
-                        // show modal
-                        commonManger.showPopUpDialog(title, operation, modalDialog);
-                    }
-                });
-
-                $("#listItems tbody").delegate("tr a.container-come", "click", function (e) {
-                    e.preventDefault();
-                    var self = $(this), pos = self.closest('tr'), aData;
-                    if (pos !== null) {
-
-                        aData = oaTable.row(pos).data();
-                        var cont = aData.ContainerNo,
-                            Bol = aData.Bol,
-                            title = "توصيل الحاوية رقم: " + cont,
-                            operation = 'insert',
-                            modalDialog = 'carArrive';
-
-                        $('#ArrivalDate').val(commonManger.formatJSONDateCal(new Date()));
-                        $('#No').val(cont); // Container no
-                        $('#Bol').val(Bol); // Bol
-                        $('#Type').val(1); // Container Arrived
-                        $('#aspnetForm .alert').text('برجاء تأكيد توصيل الحاوية.');
-                        $('#carArrive .btn-success').text('توصيل الحاوية');
-
-                        commonManger.showPopUpDialog(title, operation, modalDialog);
-                    }
-                });
-
-                $("#listItems tbody").delegate("tr a.printMe", "click", function (e) {
-                    e.preventDefault();
-
-                    var self = $(this), pos = self.closest('tr'), aData;
-                    if (pos !== null) {
-                        aData = oaTable.row(pos).data();
-                        var cont = aData.ContainerNo, title = "طباعة الفاتورة: ", operation = 'insert', modalDialog = 'printedModal';
-
-                        $('#InvoiceID').val(self.attr('data-id')); // Container no
-                        $('#containerNoo').text(cont); // invoice id
-
-                        commonManger.showPopUpDialog(title, operation, modalDialog);
-                    }
-                });
-
+                // confirm downloaded container and remove it from grid.
                 $("#listItems tbody").delegate("tr a.download-me", "click", function (e) {
                     e.preventDefault();
 
                     var self = $(this),
-                        pos = self.closest('tr'),
-                        aData;
+                        pos = self.closest('tr');
 
                     if (pos !== null) {
-                        aData = oaTable.row(pos).data();
+                        var aData = oaTable.row(pos).data(),
+                            cont = aData.ContainerNo,
+                            Bol = aData.Bol;
 
-                        var cont = aData.ContainerNo,
-                            title = "تنزيل/تفريغ الحاوية: ",
-                            operation = 'insert',
-                            modalDialog = 'downloadMeModal';
+                        // 
+                        var
+                            savedDataCallBack = function (dta) {
+                                if (dta.list.Done === '1') {
+                                    // refresh grid
+                                    updateGrid();
+                                    alert('تم تنزيل الحاوية ' + cont + ' فى النظام');
+                                }
+                            },
+                            dataObj = {
+                                actionName: 'Containers_Download',
+                                names: ['Bol', 'DownloadMe'],
+                                values: [Bol, 1]
+                            };
+                        
+                        if (confirm('هل أنت متأكد من تنزيل الحاوية؟'))
+                            commonManger.callData(dataObj, savedDataCallBack);
 
-
-                        $('#InvID').val(self.attr('data-id')); // Invoice id
-                        $('#contNo').text(cont); // Container no
-
-                        commonManger.showPopUpDialog(title, operation, modalDialog);
-                    }
-
+                    } // end if
                 });
             },
 
@@ -558,3 +397,5 @@ var
         };
 
     }();
+
+CarsLateShipping.Init();

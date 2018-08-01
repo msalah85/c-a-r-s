@@ -188,6 +188,53 @@
             <button class="btn btn-small" data-dismiss="modal" aria-hidden="true">إلغاء</button>
         </div>
     </div>
+    <div id="downloadMeModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="downloadModalLabel"
+        aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="downloadModalLabel"><i class="icon-location"></i>تنزيل/تفريغ الحاوية</h3>
+        </div>
+        <div class="modal-body">
+            <form id="aspnetForm3">
+                <p class="alert alert-success">برجاء تأكيد تنزيل/تفريغ الحاوية فى مقر الشركة.</p>
+                <fieldset class="form-horizontal">
+                    <div class="control-group">
+                        <input type="hidden" id="InvID" value="0" />
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="contNo">رقم الحاوية</label>
+                        <div class="controls">
+                            <span class="warning" id="contNo"></span>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="contNo">تنزيل الحاوية</label>
+                        <div class="controls">
+                            <div class="control-group">
+                                <label class="bolder blue">هل تود تفريع/تنزيل الحاوية عند مقر الشركة؟</label>
+                                <div class="radio">
+                                    <label>
+                                        <input name="DownloadContainer" type="radio" class="ace" value="1" />
+                                        <span class="lbl">نعم قم بتنزيل/تفريغ الحاوية</span>
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input name="DownloadContainer" type="radio" class="ace" value="0" />
+                                        <span class="lbl">لا تقم بتحميل/تفريغ الحاوية</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-small btn-success" aria-hidden="true">تأكيد</button>
+            <button class="btn btn-small" data-dismiss="modal" aria-hidden="true">إلغاء</button>
+        </div>
+    </div>
     <script src="/Scripts/DataTables/media/js/dataTables.rowsGroup.min.js?v=1.6"></script>
     <script>CarsLateShipping.Init();</script>
 </asp:Content>

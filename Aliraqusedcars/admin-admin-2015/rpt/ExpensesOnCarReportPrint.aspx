@@ -59,6 +59,12 @@
                 </div>
                 <div class="span6">
                     <div class="control-group">
+                        <label class="control-label" for="DistinationID"><span>جهة الوصول</span></label>
+                        <div class="controls">
+                            <input id="DistinationID" name="DistinationID" class="form-control select2" data-fn-name="Distinations_GetNames" type="text" data-placeholder="اختر جهة الوصول" />
+                        </div>
+                    </div>
+                    <div class="control-group">
                         <label class="control-label" for="From">تاريخ الشراء</label>
                         <div class="controls">
                             <span class="filter_column filter_date_range">من 

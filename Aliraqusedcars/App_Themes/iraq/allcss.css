@@ -22794,3 +22794,6 @@ table.dataTable tbody > tr.selected-car {
     padding: 0 9px;
 }
 td.legendLabel{padding-right:2px;}
+table tr.downloadme-flag-tr td {
+    background-color: rgba(238, 250, 204, 0.83) !important;
+}

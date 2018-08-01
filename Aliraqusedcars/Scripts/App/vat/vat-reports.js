@@ -24,9 +24,17 @@ var
                         return;
                     }
 
-                    var typeID = $(this).attr('data-id') * 1;
+                    var typeID = $(this).attr('data-id') * 1; // (1,VatOut/Sales), (2, VatIn)
                     if (typeID)
                         fillGrid(typeID);
+
+
+                    //=============================================
+                    // show/hide client search
+                    showHideClientFilterControl(typeID);
+                    //=============================================
+
+
                 });
 
 
@@ -44,6 +52,12 @@ var
 
                         // refresh list
                         fillGrid(_typeId);
+
+                        //=============================================
+                        // show/hide client search
+                        showHideClientFilterControl(_typeId);
+                        //=============================================
+
                     }
                 });
 
@@ -54,6 +68,14 @@ var
                     var typeId = $('#vatTabs li.active a').attr('data-id');
                     fillGrid(typeId);
                 });
+            },
+            showHideClientFilterControl = function (type) {
+                var $client = $('#ClientID');
+                if (type === 1) { // Vat In/Sales Invoices
+                    $client.prev('div').removeClass('hide');
+                } else {
+                    $client.prev('div').addClass('hide');
+                }
             },
             setDataToControlandGrid = function () {
                 var
@@ -153,15 +175,15 @@ var
                         var searchObj = {
                             typeId: $('#VatTypeID').val(),
                             from: $('#From').val() !== '' ? commonManger.dateFormat($('#From').val()) : '',
-                            to: $('#To').val() !== '' ? commonManger.dateFormat($('#From').val()) : ''
+                            to: $('#To').val() !== '' ? commonManger.dateFormat($('#To').val()) : ''
                         };
 
                         aoData.push({
                             name: "names",
-                            value: ['VatTypeID~From~To']
+                            value: ['VatTypeID~From~To' + (searchObj.typeId === 1 ? 'ClientID' : '')]
                         }, {
                                 name: "values",
-                                value: [searchObj.typeId + '~' + searchObj.from + '~' + searchObj.to]
+                                value: [searchObj.typeId + '~' + searchObj.from + '~' + searchObj.to + (searchObj.typeId === 1 ? '~' + $('#ClientID').val() : '')]
                             });
                     },
                     "fnServerData": function (sSource, aoData, fnCallback) {
@@ -173,7 +195,9 @@ var
                         var totVat = 0, totalSalePrice = 0;
                         for (var i = 0; i < aData.length; i++) {
                             totVat += (parseFloat(aData[i]["VAT"]) * 1);
-                            totalSalePrice += (parseFloat(aData[i]["SalePrice"]) * 3.667);
+
+                            if (aData[i]["SalePrice"])
+                                totalSalePrice += (parseFloat(aData[i]["SalePrice"]) * 3.667);
                         }
                         $('._totalVat').text(numeral(totVat).format('0,0'));
                         $('._total').text(numeral(totalSalePrice).format('0,0'));

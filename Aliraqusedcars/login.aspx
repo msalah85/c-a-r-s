@@ -27,7 +27,7 @@
                                 <div class="form-group">
                                     <label class="control-label">كلمة المرور<span class="red-txt">*</span></label>
                                     <div class="col-sm-8">
-                                        <asp:TextBox runat="server" ID="password" class="form-control" placeholder="كلمـة المرور" />
+                                        <asp:TextBox runat="server" TextMode="Password" ID="password" class="form-control" placeholder="كلمـة المرور" />
                                         <asp:RequiredFieldValidator ValidationGroup="login"
                                             SetFocusOnError="true" ForeColor="Red" ID="RequiredFieldValidator2" runat="server"
                                             ErrorMessage="مطلـــــــــوب كلمــــــة المــــرور!." ControlToValidate="password"></asp:RequiredFieldValidator>

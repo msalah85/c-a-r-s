@@ -26,12 +26,13 @@ public partial class InvoicePrint : System.Web.UI.Page
     private void ShowSaleDetails(long _Id)
     {
         var result = new CarsSaleInvoiceManager().GetCarSaleInvoiceToPrint(_Id);
-        if (result != null && result.ClientID == Convert.ToInt32(SessionManager.Current.ID))
+        // for client or jordan permission
+        if (result != null && (result.ClientID == Convert.ToInt32(SessionManager.Current.ID) || SessionManager.Current.PermID.Equals("5")))
         {
             divVatRegistrationNumber.InnerText = result.VatRegisterNo;
             VAT.InnerText = string.Format("{0:0,0}", result.VAT ?? 0);
             toDay.InnerHtml = string.Format("{0:dd/MM/yyyy}", result.InvoiceDate);
-            CarID.InnerHtml =string.Format("<a>{0}</a>", result.CarID.ToString());
+            CarID.InnerHtml = string.Format("<a>{0}</a>", result.CarID.ToString());
             divColor.InnerHtml = result.ColorNameEn;
             divChassis.InnerHtml = result.ChassisNo;
             divLotNo.InnerHtml = result.LotNo;

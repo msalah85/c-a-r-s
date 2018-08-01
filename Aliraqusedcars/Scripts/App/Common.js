@@ -597,11 +597,11 @@ var
                 });
 
                 return myTable;
-            }
-        seoUrl = function (sourceString) {
-            var outString = sourceString.replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '');
-            return outString;
-        },
+            },
+            seoUrl = function (sourceString) {
+                var outString = sourceString.replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '');
+                return outString;
+            },
             //isNumeric=function (n) {
             //    return !isNaN(parseFloat(n)) && isFinite(n);
             //},
@@ -658,6 +658,21 @@ var
                     xml = $.parseXML(cdata), // xml format
                     jsn = $.xml2json(xml); // json format
                 return jsn;
+            },
+
+            //dataObject = {actionName = '', names: [], values: []}
+            callData = function (dataObject, successCall, funcName, inputType) {
+                inputType = inputType ? inputType : 'POST';
+                funcName = funcName ? funcName : 'GetDataList';
+
+                dataService.callAjax(inputType, JSON.stringify(dataObject), sUrl + funcName,
+                    function (data) {
+                        var cdata = LZString.decompressFromUTF16(data.d), // decompress data
+                            xml = $.parseXML(cdata), // xml format
+                            jsn = $.xml2json(xml); // json format
+
+                        successCall(jsn);
+                    }, errorException);
             };
 
         return {
@@ -701,7 +716,8 @@ var
             setData2Grid: prepareData2Grid,
             saveEditable: editableSave,
             fullRoles: fullRoles,
-            comp2json: comp2Json
+            comp2json: comp2Json,
+            callData: callData
         };
     }();
 

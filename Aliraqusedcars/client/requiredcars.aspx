@@ -35,14 +35,11 @@
             <table id="listItems" class="table table-striped table-bordered table-hover" width="100%">
                 <thead>
                     <tr>
-                        <th width="60">#رقم
-                        </th>
+                        <th width="60">#رقم</th>
                         <th width="75">صورة</th>
-                        <th width="20%">السيارة
-                        </th>
+                        <th width="20%">السيارة</th>
                         <th>سعر البيع</th>
-                        <th>العربون
-                        </th>
+                        <th>العربون</th>
                         <th>المتبقي
                         </th>
                         <th>الشحن

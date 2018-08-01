@@ -1,5 +1,6 @@
 ﻿<%@ Page Title=" عــرض فواتير البيع " Language="C#" EnableSessionState="ReadOnly" MasterPageFile="~/admin-admin-2015/master.master"
     AutoEventWireup="true" CodeFile="InvoicesSaleView.aspx.cs" Inherits="InvoicesSaleView" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <script src="/Scripts/App/InvoicesSaleView.min.js?v=2.1"></script>
     <link href="/Scripts/select2/select2.min.css?v=1.5" rel="stylesheet" />
@@ -19,7 +20,7 @@
         </div>
         <div class="row-fluid">
             <div class="form-horizontal" id="masterForm">
-                <div class="span4">
+                <div class="span3">
                     <div class="control-group">
                         <label class="control-label" for="client"><span>بحث بالعميل</span></label>
                         <div class="controls">
@@ -27,7 +28,16 @@
                         </div>
                     </div>
                 </div>
-                <div class="span6">
+                <div class="span3">
+                    <div class="control-group">
+                        <label class="control-label" for="client">جهة الوصول</label>
+                        <div class="controls">
+                            <input type="text" id="destination" name="client" class="select2 form-control"
+                                data-fn-name="Distinations_GetNames" />
+                        </div>
+                    </div>
+                </div>
+                <div class="span4">
                     <div class="control-group">
                         <label class="control-label" for="From"><span>تاريخ الفاتورة</span></label>
                         <div class="controls">
@@ -68,11 +78,16 @@
                         </th>
                         <th>سعر البيع$
                         </th>
-                        <th><input type="checkbox" class="select-all" data-rel="tooltip" title="اختر الفواتير للطباعه" /></th>
+                        <th>
+                            <input type="checkbox" class="select-all" data-rel="tooltip" title="اختر الفواتير للطباعه" /></th>
                         <th width="70">خيارات</th>
                     </tr>
                 </thead>
-                <tbody><tr><td colspan="100%">جاري تحميل البيانات...</td></tr></tbody>
+                <tbody>
+                    <tr>
+                        <td colspan="100%">جاري تحميل البيانات...</td>
+                    </tr>
+                </tbody>
                 <tfoot>
                     <tr>
                         <th colspan="7"><span class="pull-left">إجمالى الفواتير:</span></th>

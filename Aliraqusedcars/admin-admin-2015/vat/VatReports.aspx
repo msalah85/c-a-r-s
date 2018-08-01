@@ -25,6 +25,9 @@
             opacity: 1 !important;
             position: relative !important;
         }
+        .search-form{
+            margin:10px;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
@@ -73,40 +76,31 @@
                     <div class="widget-body">
                         <div class="widget-main no-padding">
                             <div class="tab-content no-padding">
-                                <div id="paymentsPanel" class="tab-pane in active">
-                                    <br />
-                                    <div class="row-fluid">
-                                        <div class="form-horizontal">
-                                            <div class="span4">
-                                                <div class="control-group">
-                                                    <label class="control-label" for="VatTypeID">نوع الضريبة VAT</label>
-                                                    <div class="controls">
-                                                        <input type="text" id="VatTypeID" name="VatTypeID" class="select2 form-control" data-fn-name="VatTypes_Names" />
-                                                    </div>
+                                <div id="paymentsPanel" class="tab-pane in active">                                    
+                                        <div class="form-inline search-form">
+                                            بحيث بـ
+                                            <input type="text" id="VatTypeID" name="VatTypeID" class="select2 form-control" data-fn-name="VatTypes_Names" data-placeholder="نوع الضريبة VAT" />
+                                            <input type="text" id="ClientID" name="ClientID" class="select2 form-control" data-fn-name="Clients_SelectNames3" data-placeholder="العميل" />
+                                            <span class="filter_column filter_date_range">
+                                                <div class="input-prepend">
+                                                    <span class="add-on"><i class="icon-calendar"></i></span>
+                                                    <input type="text" dir="ltr" data-date-format="dd/mm/yyyy" class="date_range_filter date-picker form-control" id="From" placeholder="الوصول من" />
                                                 </div>
-                                            </div>
-                                            <div class="span6">
-                                                <div class="control-group">
-                                                    <label class="control-label" for="From"><span>التاريخ</span></label>
-                                                    <div class="controls">
-                                                        <span class="filter_column filter_date_range">من 
-                                    <input type="text" dir="ltr" data-date-format="dd/mm/yyyy" class="date_range_filter date-picker form-control" id="From" />
-                                                            إلى
-                                    <input type="text" dir="ltr" data-date-format="dd/mm/yyyy" class="date_range_filter date-picker form-control" id="To" /></span>
-                                                        <button tabindex="4" id="btnSearchAll" class="btn btn-info btn-mini"><i class="icon-search"></i>بحـــث</button>
-                                                    </div>
+                                                <div class="input-prepend">
+                                                    <input type="text" dir="ltr" data-date-format="dd/mm/yyyy" class="date_range_filter date-picker form-control" id="To" placeholder="الوصول إلى" />
                                                 </div>
-                                            </div>
+                                            </span>
+                                            <button tabindex="4" id="btnSearchAll" class="btn btn-info btn-mini"><i class="icon-search"></i>بحـــث</button>
                                         </div>
-                                    </div>
+                                    
                                     <table id="listItems" class="table table-striped table-bordered table-hover" width="100%">
                                         <thead>
                                             <tr>
                                                 <th>#</th>
                                                 <th>التاريخ</th>
-                                                <th>تصنيف</th>
-                                                <th>العميل</th>
-                                                <th>سعر البيع <sub>درهم</sub></th>
+                                                <th>التصنيف</th>
+                                                <th>العميل/الشركة</th>
+                                                <th>السعر <sub>درهم</sub></th>
                                                 <th>الضريبة <sub>درهم</sub></th>
                                             </tr>
                                         </thead>

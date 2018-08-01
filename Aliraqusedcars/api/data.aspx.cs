@@ -19,7 +19,6 @@ using Aliraqusedcars;
 public partial class api_data : System.Web.UI.Page
 {
     #region "Get General Data"
-
     [WebMethod]
     public static string GetPagedList(string pageIndex, string pageSize, string actionName) // create filter parameters
     {
@@ -148,8 +147,7 @@ public partial class api_data : System.Web.UI.Page
 
         return data;
     }
-
-
+    
     [WebMethod]
     [ScriptMethod(UseHttpGet = false)]
     public static object saveDataByUser(string actionName, string[] names, string[] values, bool setUserIP = false) //, string ipPrefix = "")
@@ -181,11 +179,9 @@ public partial class api_data : System.Web.UI.Page
 
         return saved;
     }
-
     #endregion
 
     #region "Profile"
-
     [WebMethod]
     public static object GetProfile()
     {
@@ -194,11 +190,9 @@ public partial class api_data : System.Web.UI.Page
         string compressedXML = TrimmerUtil.RemoveSpaces(_ds.GetXml());
         return LZStringUpdated.compressToUTF16(compressedXML);
     }
-
     #endregion
 
     #region "Clients Login"
-
     [WebMethod(EnableSession = true)]
     public static object login(string text1, string text2)
     {
@@ -314,11 +308,9 @@ public partial class api_data : System.Web.UI.Page
 
         return strBody;
     }
-
     #endregion
 
     #region "Home Methods"
-
     [WebMethod]
     public static string GetHomeList(string pageIndex, string maker, string type)
     {
@@ -331,11 +323,9 @@ public partial class api_data : System.Web.UI.Page
         string compressedXML = TrimmerUtil.RemoveSpaces(_ds.GetXml());
         return LZStringUpdated.compressToUTF16(compressedXML);
     }
-
     #endregion
 
     #region "Payments"
-
     [WebMethod]
     [ScriptMethod(UseHttpGet = true)]
     public static object LoadPayments()
@@ -437,7 +427,6 @@ public partial class api_data : System.Web.UI.Page
 
         return data;
     }
-
     #endregion
 
     #region "Car Images"
@@ -474,7 +463,6 @@ public partial class api_data : System.Web.UI.Page
     #endregion
 
     #region "Decrypt pass"
-
     [WebMethod]
     public static string decryptPassword(string value)
     {
@@ -484,7 +472,6 @@ public partial class api_data : System.Web.UI.Page
     #endregion
 
     #region "In-line edit"
-
     [WebMethod]
     public static String InlineEdit(string name, string value, string pk, string table, string id)
     {
@@ -503,11 +490,9 @@ public partial class api_data : System.Web.UI.Page
         //access params here
         return "تم الحفظ بنجاح.";
     }
-
     #endregion
 
     #region "Change money number to Ar words"
-
     [WebMethod]
     public static string Money2Arabic(decimal amount, int dollarDirham)
     {
@@ -517,11 +502,9 @@ public partial class api_data : System.Web.UI.Page
         var toWord = new ToWord(amount, dollarType);
         return toWord.ConvertToArabic();
     }
-
     #endregion
 
     #region "instance search select2"
-
     [WebMethod]
     [ScriptMethod(UseHttpGet = false)]
     public static object getSelect2(string fnName, string pageNum, string pageSize, string searchTerm, string names, string values)
@@ -545,7 +528,6 @@ public partial class api_data : System.Web.UI.Page
         string compressedXML = TrimmerUtil.RemoveSpaces(_ds.GetXml());
         return LZStringUpdated.compressToUTF16(compressedXML);
     }
-
 
     [WebMethod]
     [ScriptMethod(UseHttpGet = false)]
@@ -571,7 +553,6 @@ public partial class api_data : System.Web.UI.Page
 
         #endregion
     }
-    #endregion
 
     [WebMethod]
     [ScriptMethod(UseHttpGet = true)]
@@ -606,4 +587,5 @@ public partial class api_data : System.Web.UI.Page
         string compressedXML = TrimmerUtil.RemoveSpaces(_ds.GetXml());
         return LZStringUpdated.compressToUTF16(compressedXML);
     }
+    #endregion
 }

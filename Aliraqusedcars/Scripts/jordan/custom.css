@@ -1,0 +1,182 @@
+﻿.container-padding {
+    margin: 32px 25px 0 25px;
+    padding: 20px;
+    color: #777;
+    background: #fff;
+}
+
+.myheader, .navbar-default, .myfooter, .navbar-default .container {
+    background-color: #494e50;
+    min-height: 87.99px;
+}
+
+.table > tbody > tr > td {
+    padding: 3px;
+    vertical-align: middle !important;
+}
+
+.dataTable td img {
+    max-width: 35px;
+}
+
+.page-header a, .page-header a span.small {
+    color: #fff; /*#caa239*/
+}
+
+input.date_range_filter {
+    width: 107px !important;
+}
+
+.advanced-search {
+    background: #f9f9f9;
+    text-align: center;
+    padding: 10px 0;
+}
+
+.select2-container .select2-choice {
+    height: 34px !important;
+    padding: 6px 12px;
+    background-color: #fff;
+    text-align: right;
+    line-height: 30px !important;
+}
+
+    .select2-container .select2-choice abbr {
+        top: 9px !important;
+    }
+
+html[dir="rtl"] .select2-container .select2-choice .select2-arrow b {
+    background-position: 2px 3px !important;
+}
+
+.dropdown-menu.datepicker-dropdown {
+    right: auto !important;
+}
+
+tr.detail-row.open td, tr.detail-row.open td:hover, tr.detail-row.open td:focus, tr.detail-row.open td:active {
+    background: antiquewhite !important;
+}
+
+tr.detail-row {
+    display: none;
+}
+
+    tr.detail-row.open {
+        display: contents;
+        background: antiquewhite !important;
+    }
+/*containers*/
+.dataTable.containers-list tbody {
+    background: #fff
+}
+
+.v-middle, .groupSeparator, .groupSeparator td, #listItems > tbody > tr:last-child td {
+    border-bottom: 2px solid #caccd2 !important;
+}
+
+@media print {
+    .table th:nth-child(8) {
+        width: 3% !important;
+    }
+}
+
+.editable-empty, .editable-empty:hover, .editable-empty:focus {
+    color: #dd11b1;
+}
+
+.editable-click, a.editable-click, a.editable-click:hover {
+    border-bottom: none;
+    margin-top: 10px;
+}
+
+    a.editable-click:before {
+        content: "\a";
+        white-space: pre;
+    }
+
+td.recent-saved {
+    animation: recent-saved 1s steps(5, start) 2;
+    -webkit-animation: recent-saved 1s steps(5, start) 2;
+    background-color: cornsilk;
+}
+
+@keyframes recent-saved {
+    to {
+        background-color: #fae98f;
+    }
+}
+
+@-webkit-keyframes recent-saved {
+    to {
+        background-color: #f7e169;
+    }
+}
+/*containers*/
+/*client cars*/
+.text-fade {
+    color: #d3d1d1;
+}
+
+.red {
+    color: #dd5a43 !important;
+}
+
+s, strike, del {
+    text-decoration: line-through;
+}
+
+.orange {
+    color: #ff892a;
+}
+
+.alert-summary {
+    margin-bottom: 0 !important;
+    padding: 5px 10px;
+}
+
+    .alert-summary span {
+        margin: 0 20px;
+    }
+/*client cars*/
+.bill-left-info p {
+    margin: 0 !important;
+}
+
+#masterForm .alert {
+    padding: 0 !important
+}
+
+.cel-bg {
+    background-color: #f1eee9 !important;
+}
+
+.tile-gray {
+    background: #f5f5f5
+}
+
+    .tile-gray h3 {
+        color: #494e50
+    }
+
+.tile-stats.tile-gray {
+    overflow: visible !important;
+}
+
+table.dataTable tbody > tr.selected-car {
+    background-color: #d8e687;
+}
+
+.ace-thumbnails {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+    .ace-thumbnails > li {
+        float: right;
+        display: block;
+        position: relative;
+        overflow: hidden;
+        margin: 2px;
+        border: 2px solid #333;
+    }
